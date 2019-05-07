@@ -1,0 +1,118 @@
+<resources>
+    <string name="app_name">HK News</string>
+    <string name="app_description">An aggregated news app containing news from 10+ local news publishers in Hong Kong. Made with ❤</string>
+    <string name="app_version">Version %s</string>
+    <string name="app_website">Visit project website</string>
+    <string name="app_website_uri" translatable="false">https://github.com/ayltai/Newspaper</string>
+    <string name="app_issue">Report an issue</string>
+    <string name="app_issue_uri" translatable="false">https://github.com/ayltai/Newspaper/issues</string>
+
+    <string name="contact_us">Contact Us</string>
+    <string name="search_hint">Search news</string>
+    <string name="view_on_web">View On Web</string>
+    <string name="share_via">Share Via</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+
+    <!--region Screen titles-->
+    <string name="title_news">News</string>
+    <string name="title_histories">Histories</string>
+    <string name="title_bookmarks">Bookmarks</string>
+    <string name="title_about">About</string>
+    <string name="title_settings">Settings</string>
+    <!--endregion-->
+
+    <!-- region Placeholders -->
+    <string name="empty_news_title">We\'ve got no news for you today!</string>
+    <string name="empty_news_description">Try browsing other news categories and publishers</string>
+    <string name="empty_news_action">Open settings</string>
+    <!-- endregion -->
+
+    <!-- region Preferences -->
+    <string name="pref_category_theme">Theme</string>
+    <string name="pref_category_news_sources">News Sources</string>
+    <string name="pref_theme">Dark Theme</string>
+    <string name="pref_style">Compact Style</string>
+    <string name="pref_publishers">Publishers</string>
+    <string name="pref_categories">Categories</string>
+    <string-array name="publisher_entries">
+        <item>蘋果日報</item>
+        <item>東方日報</item>
+        <item>星島日報</item>
+        <item>經濟日報</item>
+        <item>成報</item>
+        <item>明報</item>
+        <item>頭條日報</item>
+        <item>晴報</item>
+        <item>信報</item>
+        <item>香港電台</item>
+        <item>南華早報</item>
+        <item>英文虎報</item>
+        <item>文匯報</item>
+    </string-array>
+    <string-array name="publisher_values">
+        <item>蘋果日報</item>
+        <item>東方日報</item>
+        <item>星島日報</item>
+        <item>經濟日報</item>
+        <item>成報</item>
+        <item>明報</item>
+        <item>頭條日報</item>
+        <item>晴報</item>
+        <item>信報</item>
+        <item>香港電台</item>
+        <item>南華早報</item>
+        <item>英文虎報</item>
+        <item>文匯報</item>
+    </string-array>
+    <string-array name="category_entries">
+        <item>港聞</item>
+        <item>兩岸</item>
+        <item>國際</item>
+        <item>經濟</item>
+        <item>地產</item>
+        <item>娛樂</item>
+        <item>體育</item>
+        <item>副刊</item>
+        <item>教育</item>
+    </string-array>
+    <string-array name="category_values">
+        <item>港聞</item>
+        <item>兩岸</item>
+        <item>國際</item>
+        <item>經濟</item>
+        <item>地產</item>
+        <item>娛樂</item>
+        <item>體育</item>
+        <item>副刊</item>
+        <item>教育</item>
+    </string-array>
+    <!-- endregion -->
+
+    <!-- region Menu items -->
+    <string name="action_search">Search</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_settings">Settings</string>
+    <!-- endregion -->
+
+    <!-- region Buttons -->
+    <string name="action_bookmark">Bookmark</string>
+    <string name="action_view_on_web">View on web</string>
+    <string name="action_share">Share</string>
+    <!-- endregion -->
+
+    <!-- region Time -->
+    <string name="time_ago_now">Just now</string>
+    <string name="time_ago_minute">A minute ago</string>
+    <string name="time_ago_minutes">%s minutes ago</string>
+    <string name="time_ago_hour">An hour ago</string>
+    <string name="time_ago_hours">%s hours ago</string>
+    <string name="time_ago_day">Yesterday</string>
+    <string name="time_ago_days">%s days ago</string>
+    <string name="time_ago_month">A month ago</string>
+    <string name="time_ago_months">%s months ago</string>
+    <string name="time_ago_year">A year ago</string>
+    <string name="time_ago_years">%s years ago</string>
+    <!-- endregion -->
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory app:title="@string/pref_category_theme">
+        <SwitchPreferenceCompat
+            app:key="IS_DARK_THEME"
+            app:title="@string/pref_theme"
+            app:defaultValue="false" />
+        <SwitchPreferenceCompat
+            app:key="IS_COMPACT_STYLE"
+            app:title="@string/pref_style"
+            app:defaultValue="false" />
+    </PreferenceCategory>
+    <PreferenceCategory app:title="@string/pref_category_news_sources">
+        <MultiSelectListPreference
+            app:key="SOURCE_NAMES"
+            app:title="@string/pref_publishers"
+            app:entries="@array/publisher_entries"
+            app:entryValues="@array/publisher_values"
+            app:defaultValue="@array/publisher_values" />
+        <MultiSelectListPreference
+            app:key="CATEGORY_NAMES"
+            app:title="@string/pref_categories"
+            app:entries="@array/category_entries"
+            app:entryValues="@array/category_values"
+            app:defaultValue="@array/category_values" />
+    </PreferenceCategory>
+</androidx.preference.PreferenceScreen>

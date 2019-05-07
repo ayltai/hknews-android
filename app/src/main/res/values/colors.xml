@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryColorLight">@color/deep_orange_500</color>
+    <color name="primaryColorDark">@color/deep_orange_800</color>
+    <color name="primaryColorDarkLight">@color/deep_orange_700</color>
+    <color name="primaryColorDarkDark">@color/deep_orange_900</color>
+    <color name="primaryColorVariantLight">@color/primaryColorLight</color>
+    <color name="primaryColorVariantDark">@color/primaryColorDark</color>
+    <color name="secondaryColorLight">@color/primaryColorLight</color>
+    <color name="secondaryColorDark">@color/primaryColorDark</color>
+    <color name="accentColorLight">@color/blue_a200</color>
+    <color name="accentColorDark">@color/blue_700</color>
+    <color name="textColorLight">@color/grey_900</color>
+    <color name="textColorDark">@color/grey_100</color>
+    <color name="textColorHintLight">@color/grey_600</color>
+    <color name="textColorHintDark">@color/grey_600</color>
+    <color name="textColorInverseLight">@color/textColorDark</color>
+    <color name="textColorInverseDark">@color/textColorDark</color>
+    <color name="windowBackgroundLight">@color/grey_50</color>
+    <color name="windowBackgroundDark">@color/grey_900</color>
+    <color name="cardBackgroundLight">@color/white</color>
+    <color name="cardBackgroundDark">@color/grey_900</color>
+    <color name="searchBarBackgroundLight">@color/blue_grey_50</color>
+    <color name="searchBarBackgroundDark">@color/grey_800</color>
+    <color name="listBackgroundLight">@color/blue_grey_50</color>
+    <color name="listBackgroundDark">@color/black</color>
+    <color name="placeholderTextColorLight">#aab2bd</color>
+    <color name="placeholderTextColorDark">#656d78</color>
+    <color name="splashStartLight">@color/deep_orange_400</color>
+    <color name="splashStartDark">@color/deep_orange_800</color>
+    <color name="splashEndLight">@color/deep_orange_600</color>
+    <color name="splashEndDark">@color/deep_orange_900</color>
+    <color name="shadowStart">#001f242c</color>
+    <color name="shadowEnd">#ff1f242c</color>
+</resources>
