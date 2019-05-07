@@ -27,6 +27,17 @@ references:
       TERM: dumb
       _JAVA_OPTIONS: "-Dfile.encoding=UTF8 -Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
 
+    # Android Key Store
+
+    export_android_key: &export_android_key
+      run:
+        name: Export Android key store environment variable
+        command: echo 'export ANDROID_KEY_STORE="$ANDROID_KEY_STORE"' >> $BASH_ENV
+    decode_android_key: &decode_android_key
+      run:
+        name: Decode Android key store
+        command: echo $ANDROID_KEY_STORE | base64 -di > key-store.jks
+
 jobs:
 
   assemble:
@@ -94,6 +105,8 @@ jobs:
     steps:
       - checkout
       - *restore_cache
+      - *export_android_key
+      - *decode_android_key
       - run:
           name: Generate artifact
           command: ./gradlew assembleRelease
@@ -101,6 +114,9 @@ jobs:
       - store_artifacts:
           path: build/outputs/apk/release
           destination: /apk/
+      - store_artifacts:
+          path: build/outputs/mapping/release
+          destination: /mapping/
 
 workflows:
   version: 2
