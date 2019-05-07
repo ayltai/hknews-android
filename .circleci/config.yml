@@ -51,14 +51,14 @@ jobs:
           name: Execute unit tests
           command: ./gradlew testDebugUnitTest
       - store_artifacts:
-          path: build/reports/tests/test
+          path: build/reports/tests/testDebugUnitTest
           destination: /test/
       - *save_cache
       - run:
           name: Generate coverage report
           command: ./gradlew jacocoTestReport
       - store_artifacts:
-          path: build/reports/jacoco/test
+          path: build/reports/jacoco/jacocoTestReport
           destination: /coverage/
       - run:
           name: Upload coverage report to Codacy
