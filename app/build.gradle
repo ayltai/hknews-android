@@ -284,7 +284,7 @@ task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
     group       = 'Reporting'
 
     classDirectories = fileTree(
-        dir      : 'build/intermediates/classes/debug',
+        dir      : 'build/intermediates/javac/debug/compileDebugJavaWithJavac',
         excludes : [
             '**/R.class',
             '**/R$*.class',
@@ -310,7 +310,7 @@ task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
     )
 
     doFirst {
-        files('build/intermediates/classes/debug').getFiles().each { file ->
+        files('build/intermediates/javac/debug/compileDebugJavaWithJavac').getFiles().each { file ->
             if (file.name.contains('$$')) {
                 file.renameTo(file.path.replace('$$', '$'))
             }
