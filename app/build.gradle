@@ -122,6 +122,7 @@ dependencies {
 
     // Multi-dex support
     debugImplementation       'androidx.multidex:multidex:2.0.1'
+    testImplementation        'androidx.multidex:multidex:2.0.1'
     androidTestImplementation 'androidx.multidex:multidex-instrumentation:2.0.0'
 
     // Android Architecture libraries
