@@ -22,6 +22,7 @@ import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.SettingsActivity;
 import com.github.ayltai.hknews.util.Cacheable;
 import com.github.ayltai.hknews.util.Irrelevant;
+import com.github.ayltai.hknews.util.MediaUtils;
 import com.github.ayltai.hknews.view.ListPresenter;
 import com.github.ayltai.hknews.view.MultiStatePresenter;
 
@@ -151,11 +152,15 @@ public abstract class ListView extends BaseView implements ListPresenter.View, C
     public void update() {
         this.hideLoadingView();
 
+        MediaUtils.resetFaceDetector();
+
         this.recyclerView.setAdapter(this.adapter = new ListAdapter((ListPresenter)this.presenter, this.isCompactStyle()));
     }
 
     @Override
     public void clear() {
+        MediaUtils.resetFaceDetector();
+
         this.adapter.notifyDataSetChanged();
     }
 

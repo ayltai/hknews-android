@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>min_face_size</key>
+        <value>0.05</value>
+    </entry>
+    <entry>
+        <key>accuracy_for_face_detection</key>
+        <value>1</value>
+    </entry>
+    <entry>
+        <key>max_image_size_for_face_detection</key>
+        <value>640000</value>
+    </entry>
+    <entry>
+        <key>pref_monitor_enabled</key>
+        <value>true</value>
+    </entry>
+</defaultsMap>

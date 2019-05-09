@@ -5,6 +5,8 @@ import javax.inject.Inject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import androidx.annotation.CallSuper;
@@ -14,19 +16,25 @@ import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.github.ayltai.hknews.media.FrescoImageLoader;
-import com.github.ayltai.hknews.view.DaggerRouterComponent;
+import com.github.ayltai.hknews.net.NetworkStateListener;
+import com.github.ayltai.hknews.net.NetworkStateReceiver;
 import com.github.ayltai.hknews.view.Router;
-import com.github.ayltai.hknews.view.RouterModule;
+import com.google.android.material.snackbar.Snackbar;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
-public final class MainActivity extends ThemedActivity {
+public final class MainActivity extends ThemedActivity implements NetworkStateListener {
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
     @Inject
     Router router;
+
+    private Snackbar             snackbar;
+    private NetworkStateReceiver networkStateReceiver;
+
+    //region Lifecycle management
 
     @CallSuper
     @Override
@@ -40,13 +48,43 @@ public final class MainActivity extends ThemedActivity {
 
     @CallSuper
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        this.networkStateReceiver = new NetworkStateReceiver();
+        this.networkStateReceiver.addListener(this);
+
+        this.registerReceiver(this.networkStateReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @CallSuper
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (this.networkStateReceiver != null) {
+            this.networkStateReceiver.removeListener(this);
+
+            this.unregisterReceiver(this.networkStateReceiver);
+        }
+    }
+
+    @CallSuper
+    @Override
     protected void onDestroy() {
         super.onDestroy();
 
         this.getLifecycle().removeObserver(FrescoImageLoader.getInstance());
 
+        Components.getInstance()
+            .getMediaComponent()
+            .faceCenterFinder()
+            .dispose();
+
         if (!this.router.isDisposed()) this.router.dispose();
     }
+
+    //endregion
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
@@ -60,10 +98,24 @@ public final class MainActivity extends ThemedActivity {
     }
 
     @Override
+    public void onNetworkStateChange(final boolean isOnline) {
+        if (isOnline) {
+            if (this.snackbar != null) {
+                this.snackbar.dismiss();
+                this.snackbar = null;
+            }
+        } else {
+            if (this.snackbar == null) {
+                this.snackbar = Snackbar.make(this.findViewById(android.R.id.content), R.string.error_network, Snackbar.LENGTH_INDEFINITE);
+                this.snackbar.show();
+            }
+        }
+    }
+
+    @Override
     protected void attachBaseContext(@Nonnull @NonNull @lombok.NonNull final Context newBase) {
-        if (this.router == null) DaggerRouterComponent.builder()
-            .routerModule(new RouterModule(this))
-            .build()
+        if (this.router == null) Components.getInstance()
+            .getRouterComponent(this)
             .inject(this);
 
         super.attachBaseContext(this.router.attachNewBase(ViewPumpContextWrapper.wrap(newBase)));

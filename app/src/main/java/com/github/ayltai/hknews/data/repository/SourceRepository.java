@@ -8,10 +8,8 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.github.ayltai.hknews.data.DaggerDataComponent;
-import com.github.ayltai.hknews.data.DataModule;
+import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Source;
-import com.github.ayltai.hknews.net.DaggerNetComponent;
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.util.RxUtils;
 
@@ -23,9 +21,8 @@ public final class SourceRepository extends Repository {
     @Nonnull
     @NonNull
     public static Single<SourceRepository> create(@Nonnull @NonNull @lombok.NonNull final Context context) {
-        return Single.defer(() -> Single.just(SourceRepository.create(DaggerDataComponent.builder()
-            .dataModule(new DataModule(context))
-            .build()
+        return Single.defer(() -> Single.just(SourceRepository.create(Components.getInstance()
+            .getDataComponent(context)
             .realm()))
             .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER)));
     }
@@ -48,7 +45,8 @@ public final class SourceRepository extends Repository {
                 .where(Source.class)
                 .findAll();
 
-            if (records.isEmpty()) return DaggerNetComponent.create()
+            if (records.isEmpty()) return Components.getInstance()
+                .getNetComponent()
                 .apiService()
                 .sources()
                 .doOnSuccess(this::put);

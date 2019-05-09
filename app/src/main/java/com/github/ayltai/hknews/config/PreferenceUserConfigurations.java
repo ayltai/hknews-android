@@ -17,8 +17,6 @@ import androidx.preference.PreferenceManager;
 
 import com.github.ayltai.hknews.data.model.Category;
 import com.github.ayltai.hknews.data.model.Source;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 @Singleton
 public final class PreferenceUserConfigurations implements UserConfigurations {
@@ -28,7 +26,6 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
     private static final String KEY_IS_COMPACT_STYLE = "IS_COMPACT_STYLE";
     private static final String KEY_SOURCE_NAMES     = "SOURCE_NAMES";
     private static final String KEY_CATEGORY_NAMES   = "CATEGORY_NAMES";
-    private static final String KEY_SEARCH_HISTORIES = "SEARCH_HISTORIES";
 
     //endregion
 
@@ -111,23 +108,6 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
         this.preferences
             .edit()
             .putStringSet(PreferenceUserConfigurations.KEY_CATEGORY_NAMES, new HashSet<>(categoryNames))
-            .commit();
-    }
-
-    @Nonnull
-    @NonNull
-    @Override
-    public List<String> getSearchHistories() {
-        final List<String> searchHistories = new Gson().fromJson(this.preferences.getString(PreferenceUserConfigurations.KEY_SEARCH_HISTORIES, null), new TypeToken<List<String>>() {}.getType());
-
-        return searchHistories == null ? Collections.emptyList() : searchHistories;
-    }
-
-    @Override
-    public void setSearchHistories(@Nonnull @NonNull @lombok.NonNull final List<String> searchHistories) {
-        this.preferences
-            .edit()
-            .putString(PreferenceUserConfigurations.KEY_SEARCH_HISTORIES, new Gson().toJson(searchHistories))
             .commit();
     }
 }

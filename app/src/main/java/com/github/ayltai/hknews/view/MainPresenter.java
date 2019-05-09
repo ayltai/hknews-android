@@ -1,7 +1,5 @@
 package com.github.ayltai.hknews.view;
 
-import java.util.List;
-
 import javax.annotation.Nonnull;
 
 import android.content.Context;
@@ -9,7 +7,6 @@ import android.content.Context;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 
-import com.github.ayltai.hknews.config.DaggerConfigComponent;
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.widget.MainView;
 
@@ -36,12 +33,6 @@ public final class MainPresenter extends BasePresenter<MainPresenter.View> {
         @Nonnull
         @NonNull
         Flowable<Irrelevant> aboutClicks();
-
-        @Nonnull
-        @NonNull
-        Flowable<List<String>> searchHistoriesChanges();
-
-        void setSearchHistories(@Nonnull @NonNull @lombok.NonNull List<String> searchHistories);
 
         void showSettings();
 
@@ -80,9 +71,6 @@ public final class MainPresenter extends BasePresenter<MainPresenter.View> {
     public void onViewAttached(@Nonnull @NonNull @lombok.NonNull final MainPresenter.View view) {
         super.onViewAttached(view);
 
-        view.setSearchHistories(DaggerConfigComponent.create().userConfigurations().getSearchHistories());
-
-        this.manageDisposable(view.searchHistoriesChanges().subscribe(searchHistories -> DaggerConfigComponent.create().userConfigurations().setSearchHistories(searchHistories)));
         this.manageDisposable(view.settingsClicks().subscribe(irrelevant -> view.showSettings()));
         this.manageDisposable(view.newsClicks().subscribe(irrelevant -> view.showNews()));
         this.manageDisposable(view.historiesClicks().subscribe(irrelevant -> view.showHistories()));

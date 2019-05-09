@@ -15,4 +15,8 @@ public interface MediaComponent {
     @Nonnull
     @NonNull
     ImageLoader imageLoader();
+
+    @Nonnull
+    @NonNull
+    FaceCenterFinder faceCenterFinder();
 }

@@ -26,10 +26,4 @@ public interface UserConfigurations {
     List<String> getCategoryNames();
 
     void setCategoryNames(@Nonnull @NonNull @lombok.NonNull List<String> categoryNames);
-
-    @Nonnull
-    @NonNull
-    List<String> getSearchHistories();
-
-    void setSearchHistories(@Nonnull @NonNull @lombok.NonNull List<String> searchHistories);
 }

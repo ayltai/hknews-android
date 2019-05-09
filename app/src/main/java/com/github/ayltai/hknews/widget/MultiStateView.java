@@ -13,8 +13,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
+import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.R;
-import com.github.ayltai.hknews.config.DaggerConfigComponent;
 import com.github.ayltai.hknews.util.AnimationUtils;
 import com.github.ayltai.hknews.util.Cacheable;
 import com.github.ayltai.hknews.view.MultiStatePresenter;
@@ -34,7 +34,7 @@ public final class MultiStateView extends BaseView implements MultiStatePresente
     public MultiStateView(@Nonnull @NonNull @lombok.NonNull final Context context) {
         super(context);
 
-        final View view = LayoutInflater.from(context).inflate(DaggerConfigComponent.create().userConfigurations().isCompactStyle() ? R.layout.view_multi_state_compact : R.layout.view_multi_state_cozy, this, false);
+        final View view = LayoutInflater.from(context).inflate(Components.getInstance().getConfigComponent().userConfigurations().isCompactStyle() ? R.layout.view_multi_state_compact : R.layout.view_multi_state_cozy, this, false);
 
         this.loading     = view.findViewById(R.id.loading);
         this.empty       = view.findViewById(R.id.empty);

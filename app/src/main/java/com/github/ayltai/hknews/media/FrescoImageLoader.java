@@ -123,7 +123,7 @@ public final class FrescoImageLoader implements ImageLoader, Closeable, Lifecycl
                 callback.onProgress(0);
             }
 
-            final ImagePipeline pipeline = Fresco.getImagePipeline();
+            final ImagePipeline                                    pipeline = Fresco.getImagePipeline();
             final DataSource<CloseableReference<PooledByteBuffer>> source   = pipeline.fetchEncodedImage(request, Boolean.TRUE);
 
             source.subscribe(new FileDataSubscriber(this.context) {

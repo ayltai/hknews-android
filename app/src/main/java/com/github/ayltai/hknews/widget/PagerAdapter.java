@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.collection.ArrayMap;
 import androidx.collection.SparseArrayCompat;
 
-import com.github.ayltai.hknews.config.DaggerConfigComponent;
+import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.view.ListPresenter;
 import com.github.ayltai.hknews.view.PagerPresenter;
@@ -56,7 +56,7 @@ class PagerAdapter extends androidx.viewpager.widget.PagerAdapter {
         if (this.views.containsKey(position)) return this.views.get(position);
 
         final ListPresenter presenter = this.createListPresenter(this.presenter.getModel().get(position));
-        final ListView      view      = DaggerConfigComponent.create().userConfigurations().isCompactStyle() ? new CompactListView(container.getContext()) : new CozyListView(container.getContext());
+        final ListView      view      = Components.getInstance().getConfigComponent().userConfigurations().isCompactStyle() ? new CompactListView(container.getContext()) : new CozyListView(container.getContext());
 
         container.addView(view);
 

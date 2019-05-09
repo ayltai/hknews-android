@@ -18,11 +18,10 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
 import com.facebook.imagepipeline.listener.RequestLoggingListener;
 import com.github.ayltai.hknews.config.ConfigModule;
-import com.github.ayltai.hknews.media.DaggerMediaComponent;
 import com.github.ayltai.hknews.media.FrescoImageLoader;
-import com.github.ayltai.hknews.net.DaggerNetComponent;
 import com.github.ayltai.hknews.util.DevUtils;
 import com.github.piasy.biv.BigImageViewer;
+import com.google.firebase.perf.FirebasePerformance;
 import com.squareup.leakcanary.LeakCanary;
 
 import io.fabric.sdk.android.Fabric;
@@ -46,6 +45,12 @@ public final class MainApplication extends BaseApplication {
         this.initFresco();
         this.initBigImageViewer();
         this.initCalligraphy();
+
+        FirebasePerformance.getInstance()
+            .setPerformanceCollectionEnabled(Components.getInstance()
+                .getConfigComponent()
+                .remoteConfigurations()
+                .isPerformanceMonitoringEnabled());
     }
 
     private void applyDevMode() {
@@ -73,7 +78,8 @@ public final class MainApplication extends BaseApplication {
 
         ImagePipelineConfig.getDefaultImageRequestConfig().setProgressiveRenderingEnabled(true);
 
-        if (!DevUtils.isRunningUnitTest()) Fresco.initialize(this, OkHttpImagePipelineConfigFactory.newBuilder(this, DaggerNetComponent.create()
+        if (!DevUtils.isRunningUnitTest()) Fresco.initialize(this, OkHttpImagePipelineConfigFactory.newBuilder(this, Components.getInstance()
+            .getNetComponent()
             .okHttpClient())
             .setDownsampleEnabled(true)
             .setResizeAndRotateEnabledForNetwork(true)
@@ -85,7 +91,7 @@ public final class MainApplication extends BaseApplication {
 
     private void initBigImageViewer() {
         FrescoImageLoader.init(this);
-        BigImageViewer.initialize(DaggerMediaComponent.create().imageLoader());
+        BigImageViewer.initialize(Components.getInstance().getMediaComponent().imageLoader());
     }
 
     private void initCalligraphy() {

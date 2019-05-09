@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -21,14 +22,11 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.data.model.Image;
-import com.github.ayltai.hknews.media.BaseImageLoaderCallback;
 import com.github.ayltai.hknews.util.DateUtils;
 import com.github.ayltai.hknews.util.MediaUtils;
 import com.github.piasy.biv.view.BigImageView;
 
 public final class CompactItemView extends ItemView {
-    private static final float ALPHA = 0.85f;
-
     //region Variables
 
     private final SimpleDraweeView icon;
@@ -60,14 +58,9 @@ public final class CompactItemView extends ItemView {
         this.description.setOnClickListener(listener);
         this.source.setOnClickListener(listener);
         this.publishDate.setOnClickListener(listener);
-
         this.image.setOnClickListener(listener);
-        this.image.setImageLoaderCallback(new BaseImageLoaderCallback() {
-            @Override
-            public void onFinish() {
-                MediaUtils.configure(CompactItemView.this.image);
-            }
-        });
+
+        MediaUtils.setAutoCenter(this.image);
 
         this.addView(view);
     }
@@ -128,14 +121,22 @@ public final class CompactItemView extends ItemView {
 
     @Override
     public void setIsRead(final boolean isRead) {
-        this.container.setAlpha(isRead ? CompactItemView.ALPHA : 1f);
-        this.icon.setAlpha(isRead ? CompactItemView.ALPHA : 1f);
-        this.title.setAlpha(isRead ? CompactItemView.ALPHA : 1f);
-        this.description.setAlpha(isRead ? CompactItemView.ALPHA : 1f);
-        this.source.setAlpha(isRead ? CompactItemView.ALPHA : 1f);
-        this.publishDate.setAlpha(isRead ? CompactItemView.ALPHA : 1f);
-        this.image.setAlpha(isRead ? CompactItemView.ALPHA : 1f);
+        this.container.setAlpha(isRead ? Constants.ITEM_ALPHA : 1f);
+        this.icon.setAlpha(isRead ? Constants.ITEM_ALPHA : 1f);
+        this.title.setAlpha(isRead ? Constants.ITEM_ALPHA : 1f);
+        this.description.setAlpha(isRead ? Constants.ITEM_ALPHA : 1f);
+        this.source.setAlpha(isRead ? Constants.ITEM_ALPHA : 1f);
+        this.publishDate.setAlpha(isRead ? Constants.ITEM_ALPHA : 1f);
+        this.image.setAlpha(isRead ? Constants.ITEM_ALPHA : 1f);
     }
 
     //endregion
+
+    @CallSuper
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+
+        this.image.cancel();
+    }
 }

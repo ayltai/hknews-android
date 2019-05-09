@@ -18,6 +18,7 @@ Serves aggregated news from 10+ local news publishers in Hong Kong. Made with ‚ù
 * Read news from 10 local news publishers
 * Support video news
 * Bookmarks and reading history
+* Smart image cropping
 * No ads. We hate ads as much as you do
 
 ## News Publishers
@@ -63,8 +64,9 @@ This app is made with the support of open source projects:
 * [ExoPlayer](https://github.com/google/ExoPlayer)
 * [ShimmerLayout](https://github.com/team-supercharge/ShimmerLayout)
 * [SmallBang](https://github.com/hanks-zyh/SmallBang)
+* [Android About Page](https://github.com/medyo/android-about-page)
+* [Retrofit](https://github.com/square/retrofit)
 * [OkHttp](https://github.com/square/okhttp)
-* [FlowLayout](https://github.com/nex3z/FlowLayout)
 * [Calligraphy](https://github.com/InflationX/Calligraphy)
 * [AutoValue](https://github.com/google/auto/tree/master/value)
 * [Gson](https://github.com/google/gson)
@@ -74,8 +76,13 @@ This app is made with the support of open source projects:
 * [PowerMock](https://github.com/powermock/powermock)
 * [Robolectric](http://robolectric.org)
 * [LeakCanary](https://github.com/square/leakcanary)
+* [Dexcount Gradle Plugin](https://github.com/KeepSafe/dexcount-gradle-plugin)
 
 ‚Ä¶ and closed source services:
 
+* [ML Kit for Firebase](https://firebase.google.com/docs/ml-kit)
+* [Firebase Remote Config](https://firebase.google.com/docs/remote-config)
+* [Firebase Performance Monitoring](https://firebase.google.com/docs/perf-mon)
+* [Google Analytics for Firebase](https://firebase.google.com/docs/analytics)
 * [CircleCI](https://circleci.com)
 * [Fabric Crashlytics](https://fabric.io/kits/android/crashlytics)

@@ -27,16 +27,40 @@ references:
       TERM: dumb
       _JAVA_OPTIONS: "-Dfile.encoding=UTF8 -Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
 
-    # Android Key Store
+  ## Keys
 
-    export_android_key: &export_android_key
-      run:
-        name: Export Android key store environment variable
-        command: echo 'export ANDROID_KEY_STORE="$ANDROID_KEY_STORE"' >> $BASH_ENV
-    decode_android_key: &decode_android_key
-      run:
-        name: Decode Android key store
-        command: echo $ANDROID_KEY_STORE | base64 -di > key-store.jks
+  # Google Services
+
+  export_gservices_key: &export_gservices_key
+    run:
+      name: Export Google Services key environment variable
+      command: echo 'export GOOGLE_SERVICES_KEY="$GOOGLE_SERVICES_KEY"' >> $BASH_ENV
+  decode_gservices_key: &decode_gservices_key
+    run:
+      name: Decode Google Services key
+      command: echo $GOOGLE_SERVICES_KEY | base64 -di > app/google-services.json
+
+  # Android Key Store
+
+  export_android_key: &export_android_key
+    run:
+      name: Export Android key store environment variable
+      command: echo 'export ANDROID_KEY_STORE="$ANDROID_KEY_STORE"' >> $BASH_ENV
+  decode_android_key: &decode_android_key
+    run:
+      name: Decode Android key store
+      command: echo $ANDROID_KEY_STORE | base64 -di > key-store.jks
+
+  # Fabric
+
+  export_fabric_key: &export_fabric_key
+    run:
+      name: Export Fabric key
+      command: echo 'export FABRIC_KEY="$FABRIC_KEY"' >> $BASH_ENV
+  decode_fabric_key: &decode_fabric_key
+    run:
+      name: Decode Fabric key
+      command: echo $FABRIC_KEY | base64 -di > app/fabric.properties
 
 jobs:
 
@@ -45,6 +69,8 @@ jobs:
     steps:
       - checkout
       - *restore_cache
+      - *export_gservices_key
+      - *decode_gservices_key
       - run:
           name: Compile
           command: ./gradlew assembleDebug
@@ -58,6 +84,8 @@ jobs:
     steps:
       - checkout
       - *restore_cache
+      - *export_gservices_key
+      - *decode_gservices_key
       - run:
           name: Execute unit tests
           command: ./gradlew testDebugUnitTest
@@ -83,6 +111,8 @@ jobs:
     steps:
       - checkout
       - *restore_cache
+      - *export_gservices_key
+      - *decode_gservices_key
       - run:
           name: Check code quality
           command: ./gradlew check
@@ -105,8 +135,12 @@ jobs:
     steps:
       - checkout
       - *restore_cache
+      - *export_gservices_key
+      - *decode_gservices_key
       - *export_android_key
       - *decode_android_key
+      - *export_fabric_key
+      - *decode_fabric_key
       - run:
           name: Generate artifact
           command: ./gradlew assembleRelease

@@ -8,9 +8,9 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Source;
 import com.github.ayltai.hknews.data.repository.SourceRepository;
-import com.github.ayltai.hknews.net.DaggerNetComponent;
 
 import io.reactivex.Single;
 import io.reactivex.functions.Consumer;
@@ -28,7 +28,8 @@ public final class SourceLoader extends Loader<List<Source>> {
     @NonNull
     @Override
     protected Single<List<Source>> loadRemotely(@Nonnull @NonNull @lombok.NonNull final Context context) {
-        return DaggerNetComponent.create()
+        return Components.getInstance()
+            .getNetComponent()
             .apiService()
             .sources();
     }

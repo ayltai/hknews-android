@@ -14,13 +14,17 @@
     <string name="play">Play</string>
     <string name="pause">Pause</string>
 
-    <!--region Screen titles-->
+    <!-- region Error messages -->
+    <string name="error_network">Failed to connect to the internet</string>
+    <!-- endregion -->
+
+    <!-- region Screen titles -->
     <string name="title_news">News</string>
     <string name="title_histories">Histories</string>
     <string name="title_bookmarks">Bookmarks</string>
     <string name="title_about">About</string>
     <string name="title_settings">Settings</string>
-    <!--endregion-->
+    <!-- endregion -->
 
     <!-- region Placeholders -->
     <string name="empty_news_title">We\'ve got no news for you today!</string>

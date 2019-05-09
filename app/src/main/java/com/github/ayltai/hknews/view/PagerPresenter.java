@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 
-import com.github.ayltai.hknews.config.DaggerConfigComponent;
+import com.github.ayltai.hknews.Components;
 
 public final class PagerPresenter extends ModelPresenter<List<String>, PagerPresenter.View> {
     public interface View extends Presenter.View {
@@ -50,7 +50,8 @@ public final class PagerPresenter extends ModelPresenter<List<String>, PagerPres
         if (!this.isInitialized) {
             this.isInitialized = true;
 
-            this.setModel(DaggerConfigComponent.create()
+            this.setModel(Components.getInstance()
+                .getConfigComponent()
                 .userConfigurations()
                 .getCategoryNames());
 

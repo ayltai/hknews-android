@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 
+import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.Constants;
-import com.github.ayltai.hknews.config.DaggerConfigComponent;
 import com.github.ayltai.hknews.data.loader.ItemLoader;
 import com.github.ayltai.hknews.data.loader.Loader;
 import com.github.ayltai.hknews.data.model.Category;
@@ -53,7 +53,8 @@ public class ListPresenter extends ModelPresenter<List<Item>, ListPresenter.View
     private final String       categoryName;
 
     public ListPresenter(@Nonnull @NonNull @lombok.NonNull final String categoryName) {
-        this.sourceNames = DaggerConfigComponent.create()
+        this.sourceNames = Components.getInstance()
+            .getConfigComponent()
             .userConfigurations()
             .getSourceNames();
 

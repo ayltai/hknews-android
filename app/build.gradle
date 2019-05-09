@@ -3,8 +3,10 @@ plugins {
     id 'io.fabric'
     id 'realm-android'
     id 'com.akaita.android.easylauncher'
+    id 'com.google.firebase.firebase-perf'
     id 'checkstyle'
     id 'jacoco'
+    id 'com.getkeepsafe.dexcount'
     id 'org.owasp.dependencycheck'     version '4.0.2'
     id 'com.github.ben-manes.versions' version '0.21.0'
 }
@@ -42,6 +44,10 @@ android {
 
     buildTypes {
         debug {
+            ndk {
+                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            }
+
             multiDexEnabled     true
             testCoverageEnabled true
 
@@ -49,6 +55,10 @@ android {
         }
 
         release {
+            ndk {
+                abiFilters 'armeabi-v7a', 'arm64-v8a'
+            }
+
             minifyEnabled   true
             shrinkResources true
             signingConfig   signingConfigs.release
@@ -95,20 +105,21 @@ configurations {
 
 ext {
     supportLibraryVersion = '28.0.0'
-    architectureVersion   = '2.1.0-alpha04'
+    architectureVersion   = '2.2.0-alpha01'
     androidXVersion       = '1.0.0'
+    firebaseVersion       = '17.0.0'
     daggerVersion         = '2.22.1'
     okHttpVersion         = '3.12.2'
     retrofitVersion       = '2.5.0'
     frescoVersion         = '1.13.0'
     bigImageViewerVersion = '1.5.7'
-    exoPlayerVersion      = '2.9.6'
+    exoPlayerVersion      = '2.10.0'
     autoValueVersion      = '1.6.5'
     lombokVersion         = '1.18.8'
     leakCanaryVersion     = '1.6.3'
     robolectricVersion    = '4.2.1'
     powerMockVersion      = '2.0.2'
-    espressoVersion       = '3.2.0-alpha05'
+    espressoVersion       = '3.2.0-beta01'
 }
 
 repositories {
@@ -136,9 +147,16 @@ dependencies {
 
     // Android Support libraries
     implementation "androidx.browser:browser:$androidXVersion"
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha04'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha05'
     implementation 'com.google.android.material:material:1.1.0-alpha06'
     implementation "com.takisoft.preferencex:preferencex:$androidXVersion"
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.firebase:firebase-ml-vision:20.0.0'
+    implementation 'com.google.firebase:firebase-ml-vision-face-model:17.0.2'
+    implementation "com.google.firebase:firebase-perf:$firebaseVersion"
+    implementation "com.google.firebase:firebase-config:$firebaseVersion"
 
     // Reactive programming
     implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
@@ -224,7 +242,7 @@ dependencies {
     androidTestImplementation ("androidx.test.espresso:espresso-intents:$espressoVersion") {
         exclude group : 'com.android.support'
     }
-    androidTestUtil 'androidx.test:orchestrator:1.2.0-alpha05'
+    androidTestUtil 'androidx.test:orchestrator:1.2.0-beta01'
 
     codacy 'com.codacy:codacy-coverage-reporter:6.0.0'
 }
@@ -233,6 +251,7 @@ configurations.all {
     resolutionStrategy {
         force "com.android.support:support-v4:$supportLibraryVersion"
         force "com.android.support:support-media-compat:$supportLibraryVersion"
+        force "com.google.auto.value:auto-value-annotations:$autoValueVersion"
     }
 }
 
@@ -375,3 +394,14 @@ task (codacyLocs) {
 }
 
 //endregion
+
+//region DexCount configurations
+
+dexcount {
+    includeTotalMethodCount = true
+    orderByMethodCount      = true
+}
+
+//endregion
+
+apply plugin: 'com.google.gms.google-services'

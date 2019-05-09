@@ -7,15 +7,13 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.github.ayltai.hknews.config.DaggerConfigComponent;
-
 public abstract class ThemedActivity extends AppCompatActivity {
     @CallSuper
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.setTheme(DaggerConfigComponent.create().userConfigurations().isDarkTheme() ? this.getDarkTheme() : this.getLightTheme());
+        this.setTheme(Components.getInstance().getConfigComponent().userConfigurations().isDarkTheme() ? this.getDarkTheme() : this.getLightTheme());
     }
 
     @StyleRes

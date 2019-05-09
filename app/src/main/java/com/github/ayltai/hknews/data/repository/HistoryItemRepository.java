@@ -9,8 +9,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.github.ayltai.hknews.data.DaggerDataComponent;
-import com.github.ayltai.hknews.data.DataModule;
+import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.util.RxUtils;
 
@@ -23,9 +22,8 @@ public final class HistoryItemRepository extends ItemRepository {
     @Nonnull
     @NonNull
     public static Single<ItemRepository> create(@Nonnull @NonNull @lombok.NonNull final Context context) {
-        return Single.defer(() -> Single.just(HistoryItemRepository.create(DaggerDataComponent.builder()
-            .dataModule(new DataModule(context))
-            .build()
+        return Single.defer(() -> Single.just(HistoryItemRepository.create(Components.getInstance()
+            .getDataComponent(context)
             .realm()))
             .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER)));
     }

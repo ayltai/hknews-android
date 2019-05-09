@@ -1,7 +1,5 @@
 package com.github.ayltai.hknews.widget;
 
-import java.util.List;
-
 import javax.annotation.Nonnull;
 
 import android.app.Activity;
@@ -54,12 +52,11 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
 
     //region Subscriptions
 
-    private final FlowableProcessor<Irrelevant>   settingsClicks         = PublishProcessor.create();
-    private final FlowableProcessor<Irrelevant>   newsClicks             = PublishProcessor.create();
-    private final FlowableProcessor<Irrelevant>   historiesClicks        = PublishProcessor.create();
-    private final FlowableProcessor<Irrelevant>   bookmarksClicks        = PublishProcessor.create();
-    private final FlowableProcessor<Irrelevant>   aboutClicks            = PublishProcessor.create();
-    private final FlowableProcessor<List<String>> searchHistoriesChanges = PublishProcessor.create();
+    private final FlowableProcessor<Irrelevant>   settingsClicks  = PublishProcessor.create();
+    private final FlowableProcessor<Irrelevant>   newsClicks      = PublishProcessor.create();
+    private final FlowableProcessor<Irrelevant>   historiesClicks = PublishProcessor.create();
+    private final FlowableProcessor<Irrelevant>   bookmarksClicks = PublishProcessor.create();
+    private final FlowableProcessor<Irrelevant>   aboutClicks     = PublishProcessor.create();
 
     //endregion
 
@@ -154,18 +151,6 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
         }
     }
 
-    @Nonnull
-    @NonNull
-    @Override
-    public Flowable<List<String>> searchHistoriesChanges() {
-        return this.searchHistoriesChanges;
-    }
-
-    @Override
-    public void setSearchHistories(@Nonnull @NonNull @lombok.NonNull final List<String> searchHistories) {
-        this.searchBar.setLastSuggestions(searchHistories);
-    }
-
     @Override
     public void showNews() {
         this.showView(R.id.action_news);
@@ -198,8 +183,6 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
     @CallSuper
     @Override
     public void onDetachedFromWindow() {
-        this.searchHistoriesChanges.onNext(this.searchBar.getLastSuggestions());
-
         final Pair<Presenter, Presenter.View> pair = this.findPairByView(this.container.getChildAt(0));
         pair.first.onViewDetached();
 
@@ -208,6 +191,8 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
 
     @Override
     public void onSearchStateChanged(final boolean enabled) {
+        this.searchBar.clearSuggestions();
+
         if (!enabled) this.onSearchConfirmed(null);
     }
 
@@ -229,12 +214,12 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
 
     @Override
     public void onTextChanged(@Nullable final CharSequence text, final int start, final int before, final int count) {
-        // Does nothing
+        this.onSearchConfirmed(text);
     }
 
     @Override
     public void afterTextChanged(@Nullable final Editable editable) {
-        this.onSearchConfirmed(editable);
+        // Does nothing
     }
 
     @Override

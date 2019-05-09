@@ -13,6 +13,7 @@ import dagger.Provides;
 @Module
 public final class ConfigModule {
     public static void init(@Nonnull @NonNull @lombok.NonNull final Context context) {
+        FirebaseRemoteConfigurations.init();
         PreferenceUserConfigurations.init(context);
     }
 
@@ -22,5 +23,13 @@ public final class ConfigModule {
     @Provides
     static UserConfigurations provideUserConfigurations() {
         return PreferenceUserConfigurations.getInstance();
+    }
+
+    @Singleton
+    @Nonnull
+    @NonNull
+    @Provides
+    static RemoteConfigurations provideRemoteConfigurations() {
+        return new FirebaseRemoteConfigurations();
     }
 }

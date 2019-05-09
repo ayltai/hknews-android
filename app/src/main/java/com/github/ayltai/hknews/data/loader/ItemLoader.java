@@ -8,12 +8,10 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.github.ayltai.hknews.data.DaggerDataComponent;
-import com.github.ayltai.hknews.data.DataModule;
+import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.data.repository.ItemRepository;
 import com.github.ayltai.hknews.data.repository.Repository;
-import com.github.ayltai.hknews.net.DaggerNetComponent;
 import com.github.ayltai.hknews.util.RxUtils;
 import com.github.ayltai.hknews.util.StringUtils;
 
@@ -54,7 +52,8 @@ public class ItemLoader extends Loader<List<Item>> {
     @NonNull
     @Override
     protected Single<List<Item>> loadRemotely(@Nonnull @NonNull @lombok.NonNull final Context context) {
-        return DaggerNetComponent.create()
+        return Components.getInstance()
+            .getNetComponent()
             .apiService()
             .query(StringUtils.join(ItemLoader.DELIMITER, this.sourceNames), StringUtils.join(ItemLoader.DELIMITER, this.categoryNames), this.days);
     }
@@ -64,9 +63,8 @@ public class ItemLoader extends Loader<List<Item>> {
     @Override
     protected Consumer<? super List<Item>> onLoadRemotely(@Nonnull @NonNull @lombok.NonNull final Context context) {
         return items -> ItemRepository.create(
-            DaggerDataComponent.builder()
-                .dataModule(new DataModule(context))
-                .build()
+            Components.getInstance()
+                .getDataComponent(context)
                 .realm())
             .set(items)
             .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER))

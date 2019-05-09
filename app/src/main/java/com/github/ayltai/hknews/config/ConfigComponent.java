@@ -13,4 +13,8 @@ public interface ConfigComponent {
     @Nonnull
     @NonNull
     UserConfigurations userConfigurations();
+
+    @Nonnull
+    @NonNull
+    RemoteConfigurations remoteConfigurations();
 }
