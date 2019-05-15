@@ -42,9 +42,9 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Router implements Disposable {
-    @Getter(AccessLevel.PROTECTED)
     @Nonnull
     @NonNull
+    @Getter(AccessLevel.PROTECTED)
     private final Map<Object, Pair<SoftReference<Presenter>, SoftReference<Presenter.View>>> cache       = Collections.synchronizedMap(new ArrayMap<>());
     private final Map<Object, Disposable>                                                    disposables = new ArrayMap<>();
 

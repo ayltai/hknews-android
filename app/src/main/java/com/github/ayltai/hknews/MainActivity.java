@@ -1,7 +1,6 @@
 package com.github.ayltai.hknews;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,9 +27,7 @@ public final class MainActivity extends ThemedActivity implements NetworkStateLi
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
-    @Inject
-    Router router;
-
+    private Router               router;
     private Snackbar             snackbar;
     private NetworkStateReceiver networkStateReceiver;
 
@@ -81,7 +78,10 @@ public final class MainActivity extends ThemedActivity implements NetworkStateLi
             .faceCenterFinder()
             .dispose();
 
-        if (!this.router.isDisposed()) this.router.dispose();
+        if (!this.router.isDisposed()) {
+            this.router.dispose();
+            this.router = null;
+        }
     }
 
     //endregion
@@ -89,6 +89,8 @@ public final class MainActivity extends ThemedActivity implements NetworkStateLi
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
         this.router.handleActivityResult(requestCode, resultCode, data);
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @CallSuper
@@ -114,9 +116,9 @@ public final class MainActivity extends ThemedActivity implements NetworkStateLi
 
     @Override
     protected void attachBaseContext(@Nonnull @NonNull @lombok.NonNull final Context newBase) {
-        if (this.router == null) Components.getInstance()
+        if (this.router == null) this.router = Components.getInstance()
             .getRouterComponent(this)
-            .inject(this);
+            .router();
 
         super.attachBaseContext(this.router.attachNewBase(ViewPumpContextWrapper.wrap(newBase)));
     }

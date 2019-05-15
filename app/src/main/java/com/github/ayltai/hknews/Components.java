@@ -34,7 +34,6 @@ public final class Components {
     private DiagnosticsComponent diagnosticsComponent;
     private MediaComponent       mediaComponent;
     private NetComponent         netComponent;
-    private RouterComponent      routerComponent;
 
     //endregion
 
@@ -77,7 +76,7 @@ public final class Components {
     @Nonnull
     @NonNull
     public MediaComponent getMediaComponent() {
-        if (this.mediaComponent == null) this.mediaComponent = DaggerMediaComponent.create();
+        if (this.mediaComponent == null || this.mediaComponent.faceCenterFinder().isDisposed()) this.mediaComponent = DaggerMediaComponent.create();
 
         return this.mediaComponent;
     }
@@ -93,10 +92,8 @@ public final class Components {
     @Nonnull
     @NonNull
     public RouterComponent getRouterComponent(@Nonnull @NonNull @lombok.NonNull final Activity activity) {
-        if (this.routerComponent == null) this.routerComponent = DaggerRouterComponent.builder()
+        return DaggerRouterComponent.builder()
             .routerModule(new RouterModule(activity))
             .build();
-
-        return this.routerComponent;
     }
 }

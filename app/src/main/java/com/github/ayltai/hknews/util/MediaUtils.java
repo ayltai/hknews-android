@@ -19,7 +19,7 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class MediaUtils {
-    private static final int MAX_ZOOM = 8;
+    private final int MAX_ZOOM = 8;
 
     private final List<Disposable> DISPOSABLES = new ArrayList<>();
 
