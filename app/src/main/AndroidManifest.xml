@@ -15,16 +15,12 @@
         tools:replace="android:supportsRtl,android:allowBackup"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".SplashActivity"
-            android:screenOrientation="portrait">
+            android:name=".MainActivity"
+            android:configChanges="density|fontScale|keyboard|keyboardHidden|locale|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:configChanges="density|fontScale|keyboard|keyboardHidden|locale|orientation|screenSize">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
