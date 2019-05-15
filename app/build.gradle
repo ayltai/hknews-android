@@ -5,6 +5,7 @@ plugins {
     id 'com.akaita.android.easylauncher'
     id 'com.google.firebase.firebase-perf'
     id 'checkstyle'
+    id 'com.github.spotbugs'           version '2.0.0'
     id 'jacoco'
     id 'com.getkeepsafe.dexcount'
     id 'org.owasp.dependencycheck'     version '4.0.2'
@@ -106,10 +107,9 @@ configurations {
 ext {
     supportLibraryVersion = '28.0.0'
     architectureVersion   = '2.2.0-alpha01'
-    androidXVersion       = '1.0.0'
     firebaseVersion       = '17.0.0'
     daggerVersion         = '2.22.1'
-    okHttpVersion         = '3.12.2'
+    okHttpVersion         = '3.12.3'
     retrofitVersion       = '2.5.0'
     frescoVersion         = '1.13.0'
     bigImageViewerVersion = '1.5.7'
@@ -146,10 +146,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$architectureVersion"
 
     // Android Support libraries
-    implementation "androidx.browser:browser:$androidXVersion"
+    implementation 'androidx.browser:browser:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha05'
     implementation 'com.google.android.material:material:1.1.0-alpha06'
-    implementation "com.takisoft.preferencex:preferencex:$androidXVersion"
+    implementation 'com.takisoft.preferencex:preferencex:1.1.0-alpha05'
 
     // Firebase
     implementation 'com.google.firebase:firebase-core:16.0.9'
@@ -287,6 +287,25 @@ task checkstyle(type : Checkstyle) {
 
 //endregion
 
+//region SpotBugs configurations
+
+spotbugs {
+    toolVersion    '3.1.12'
+    effort         'max'
+    reportLevel    'medium'
+    ignoreFailures true
+    excludeFilter  rootProject.file('./spotbugs-exclude.xml')
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+    reports {
+        xml.enabled  = true == System.getenv('CI')
+        html.enabled = true == !System.getenv('CI')
+    }
+}
+
+//endregion
+
 //region JaCoCo configurations
 
 def coverageSourceDirs = [
@@ -295,7 +314,7 @@ def coverageSourceDirs = [
 ]
 
 jacoco {
-    toolVersion '0.8.3'
+    toolVersion '0.8.4'
 }
 
 task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
