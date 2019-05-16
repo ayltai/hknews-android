@@ -4,21 +4,15 @@ import android.os.Bundle;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.Nullable;
-import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public abstract class ThemedActivity extends AppCompatActivity {
     @CallSuper
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
+        AppCompatDelegate.setDefaultNightMode(Components.getInstance().getConfigComponent().userConfigurations().isDarkTheme() ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
         super.onCreate(savedInstanceState);
-
-        this.setTheme(Components.getInstance().getConfigComponent().userConfigurations().isDarkTheme() ? this.getDarkTheme() : this.getLightTheme());
     }
-
-    @StyleRes
-    protected abstract int getDarkTheme();
-
-    @StyleRes
-    protected abstract int getLightTheme();
 }

@@ -42,7 +42,7 @@
         app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         app:labelVisibilityMode="labeled"
         app:elevation="@dimen/shadow"
-        app:backgroundTint="?attr/windowBackground"
+        app:backgroundTint="?attr/bottomBarBackground"
         app:itemIconTint="@color/bottom_tab_selector"
         app:itemTextColor="@color/bottom_tab_selector"
         app:menu="@menu/bottom" />

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.github.ayltai.hknews.media.FrescoImageLoader;
@@ -121,17 +120,5 @@ public final class MainActivity extends ThemedActivity implements NetworkStateLi
             .router();
 
         super.attachBaseContext(this.router.attachNewBase(ViewPumpContextWrapper.wrap(newBase)));
-    }
-
-    @StyleRes
-    @Override
-    protected int getDarkTheme() {
-        return R.style.AppTheme_Dark;
-    }
-
-    @StyleRes
-    @Override
-    protected int getLightTheme() {
-        return R.style.AppTheme_Light;
     }
 }

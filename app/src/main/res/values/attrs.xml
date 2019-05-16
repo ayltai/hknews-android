@@ -34,7 +34,7 @@
         name="searchBarBackground"
         format="color" />
     <attr
-        name="listBackground"
+        name="bottomBarBackground"
         format="color" />
     <attr
         name="placeholderTextColor"

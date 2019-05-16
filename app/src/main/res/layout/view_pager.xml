@@ -24,19 +24,19 @@
             android:background="?attr/windowBackground"
             app:tabMode="scrollable"
             app:tabTextColor="@color/top_tab_selector"
-            app:tabIndicatorColor="?attr/textColorInverse" />
+            app:tabIndicatorColor="?attr/primaryColor" />
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/shadow"
-                android:background="@drawable/shadow" />
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/shadow"
+                android:background="@drawable/shadow" />
         </FrameLayout>
     </LinearLayout>
 </FrameLayout>

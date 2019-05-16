@@ -78,7 +78,7 @@
         <item name="android:padding">@dimen/space16</item>
         <item name="android:layout_gravity">bottom</item>
         <item name="android:textSize">@dimen/textLarge</item>
-        <item name="android:textColor">@color/textColorInverseLight</item>
+        <item name="android:textColor">#ddffffff</item>
         <item name="android:shadowDx">2.5</item>
         <item name="android:shadowDy">2.5</item>
         <item name="android:shadowRadius">2.5</item>

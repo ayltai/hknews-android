@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.browser.customtabs.CustomTabsIntent;
 
-import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.view.AboutPresenter;
 
@@ -60,7 +59,7 @@ public final class AboutView extends BaseView implements AboutPresenter.View {
             .addItem(new Element()
             .setTitle(website)
             .setIconDrawable(R.drawable.ic_github_black_24dp)
-            .setIconTint(Components.getInstance().getConfigComponent().userConfigurations().isDarkTheme() ? R.color.textColorDark : R.color.textColorLight)
+            .setIconTint(R.color.textColor)
             .setOnClickListener(view -> new CustomTabsIntent.Builder()
                 .build()
                 .launchUrl(this.getContext(), Uri.parse(uri))));
@@ -71,7 +70,7 @@ public final class AboutView extends BaseView implements AboutPresenter.View {
         this.page.addItem(new Element()
             .setTitle(issues)
             .setIconDrawable(R.drawable.ic_bug_report_black_24dp)
-            .setIconTint(Components.getInstance().getConfigComponent().userConfigurations().isDarkTheme() ? R.color.textColorDark : R.color.textColorLight)
+            .setIconTint(R.color.textColor)
             .setOnClickListener(view -> new CustomTabsIntent.Builder()
                 .build()
                 .launchUrl(this.getContext(), Uri.parse(uri))));

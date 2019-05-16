@@ -10,7 +10,6 @@ import android.os.Bundle;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StyleRes;
 import androidx.appcompat.widget.Toolbar;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
@@ -48,17 +47,5 @@ public final class SettingsActivity extends ThemedActivity {
     @Override
     protected void attachBaseContext(@Nonnull @NonNull @lombok.NonNull final Context newBase) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
-    }
-
-    @StyleRes
-    @Override
-    protected int getDarkTheme() {
-        return R.style.AppTheme_Dark;
-    }
-
-    @StyleRes
-    @Override
-    protected int getLightTheme() {
-        return R.style.AppTheme_Light;
     }
 }

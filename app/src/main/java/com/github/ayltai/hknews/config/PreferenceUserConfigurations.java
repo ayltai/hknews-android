@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
 import androidx.collection.ArraySet;
@@ -33,6 +34,10 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
 
     @Nonnull
     @NonNull
+    private final Context context;
+
+    @Nonnull
+    @NonNull
     private final SharedPreferences preferences;
 
     static void init(@Nonnull @NonNull @lombok.NonNull final Context context) {
@@ -48,11 +53,12 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
     }
 
     private PreferenceUserConfigurations(@Nonnull @NonNull @lombok.NonNull final Context context) {
+        this.context     = context;
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public boolean isDarkTheme() {
-        return this.preferences.getBoolean(PreferenceUserConfigurations.KEY_IS_DARK_THEME, false);
+        return this.preferences.getBoolean(PreferenceUserConfigurations.KEY_IS_DARK_THEME, (this.context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES);
     }
 
     public void setIsDarkTheme(final boolean isDarkTheme) {

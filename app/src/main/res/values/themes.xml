@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style
-        name="AppTheme"
-        parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+        name="BaseAppTheme"
+        parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">?attr/primaryColor</item>
         <item name="colorSecondary">?attr/secondaryColor</item>
         <item name="colorPrimaryDark">?attr/primaryColorDark</item>
@@ -15,65 +15,35 @@
         <item name="android:textColorPrimaryInverse">?attr/textColorInverse</item>
         <item name="android:windowBackground">?attr/windowBackground</item>
         <item name="android:windowTranslucentStatus" tools:targetApi="LOLLIPOP">false</item>
-    </style>
-    <style name="AppTheme.Light">
-        <item name="primaryColor">@color/primaryColorLight</item>
-        <item name="secondaryColor">@color/secondaryColorLight</item>
-        <item name="primaryColorDark">@color/primaryColorDarkLight</item>
-        <item name="primaryColorVariant">@color/primaryColorVariantLight</item>
-        <item name="accentColor">@color/accentColorLight</item>
-        <item name="textColor">@color/textColorLight</item>
-        <item name="textColorHint">@color/textColorHintLight</item>
-        <item name="textColorInverse">@color/textColorInverseLight</item>
-        <item name="windowBackground">@color/windowBackgroundLight</item>
-        <item name="placeholderTextColor">@color/placeholderTextColorLight</item>
-        <item name="cardBackground">@color/cardBackgroundLight</item>
-        <item name="searchBarBackground">@color/searchBarBackgroundLight</item>
-        <item name="listBackground">@color/listBackgroundLight</item>
         <item name="placeholderImage">@drawable/thumbnail_placeholder</item>
+        <item name="customToolbarStyle">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
+        <item name="customPopupStyle">@style/ThemeOverlay.AppCompat.DayNight</item>
+        <item name="dialogTheme">@style/DialogTheme</item>
+        <item name="alertDialogTheme">@style/DialogTheme</item>
+    </style>
+    <style
+        name="AppTheme"
+        parent="BaseAppTheme">
+        <item name="primaryColor">@color/primaryColor</item>
+        <item name="secondaryColor">@color/secondaryColor</item>
+        <item name="primaryColorDark">@color/primaryColorDark</item>
+        <item name="primaryColorVariant">@color/primaryColorVariant</item>
+        <item name="accentColor">@color/accentColor</item>
+        <item name="textColor">@color/textColor</item>
+        <item name="textColorHint">@color/textColorHint</item>
+        <item name="textColorInverse">@color/textColorInverse</item>
+        <item name="windowBackground">@color/windowBackground</item>
+        <item name="placeholderTextColor">@color/placeholderTextColor</item>
+        <item name="cardBackground">@color/cardBackground</item>
+        <item name="searchBarBackground">@color/searchBarBackground</item>
+        <item name="bottomBarBackground">@color/bottomBarBackground</item>
         <item name="customSearchBarStyle">@style/MaterialSearchBarLight</item>
-        <item name="customToolbarStyle">@style/ThemeOverlay.AppCompat.ActionBar</item>
-        <item name="customPopupStyle">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="dialogTheme">@style/DialogThemeLight</item>
-        <item name="alertDialogTheme">@style/DialogThemeLight</item>
         <item name="popupMenuStyle">@style/PopupMenuLight</item>
         <item name="android:popupMenuStyle">@style/PopupMenuLight</item>
     </style>
-    <style name="AppTheme.Dark">
-        <item name="primaryColor">@color/primaryColorDark</item>
-        <item name="secondaryColor">@color/secondaryColorDark</item>
-        <item name="primaryColorDark">@color/primaryColorDarkDark</item>
-        <item name="primaryColorVariant">@color/primaryColorVariantDark</item>
-        <item name="accentColor">@color/accentColorDark</item>
-        <item name="textColor">@color/textColorDark</item>
-        <item name="textColorHint">@color/textColorHintDark</item>
-        <item name="textColorInverse">@color/textColorInverseDark</item>
-        <item name="windowBackground">@color/windowBackgroundDark</item>
-        <item name="placeholderTextColor">@color/placeholderTextColorDark</item>
-        <item name="cardBackground">@color/cardBackgroundDark</item>
-        <item name="searchBarBackground">@color/searchBarBackgroundDark</item>
-        <item name="listBackground">@color/listBackgroundDark</item>
-        <item name="placeholderImage">@drawable/thumbnail_placeholder</item>
-        <item name="customSearchBarStyle">@style/MaterialSearchBarDark</item>
-        <item name="customToolbarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-        <item name="customPopupStyle">@style/ThemeOverlay.AppCompat.Dark</item>
-        <item name="dialogTheme">@style/DialogThemeDark</item>
-        <item name="alertDialogTheme">@style/DialogThemeDark</item>
-        <item name="popupMenuStyle">@style/PopupMenuDark</item>
-        <item name="android:popupMenuStyle">@style/PopupMenuDark</item>
-    </style>
     <style
-        name="SplashTheme"
-        parent="@style/Theme.MaterialComponents.NoActionBar" />
-    <style name="SplashTheme.Light">
-        <item name="android:windowBackground">@drawable/splash_light</item>
-    </style>
-    <style name="SplashTheme.Dark">
-        <item name="android:windowBackground">@drawable/splash_dark</item>
-    </style>
-    <style
-        name="DialogThemeLight"
-        parent="@style/Theme.MaterialComponents.Light.Dialog">
+        name="BaseDialogTheme"
+        parent="@style/Theme.MaterialComponents.DayNight.Dialog">
         <item name="colorPrimary">?attr/primaryColor</item>
         <item name="colorSecondary">?attr/secondaryColor</item>
         <item name="colorPrimaryDark">?attr/primaryColorDark</item>
@@ -84,40 +54,21 @@
         <item name="android:textColorHint">?attr/textColorHint</item>
         <item name="android:textColorPrimaryInverse">?attr/textColorInverse</item>
         <item name="android:windowBackground">?attr/windowBackground</item>
-        <item name="primaryColor">@color/primaryColorLight</item>
-        <item name="secondaryColor">@color/secondaryColorLight</item>
-        <item name="primaryColorDark">@color/primaryColorDarkLight</item>
-        <item name="primaryColorVariant">@color/primaryColorVariantLight</item>
-        <item name="accentColor">@color/accentColorLight</item>
-        <item name="textColor">@color/textColorLight</item>
-        <item name="textColorHint">@color/textColorHintLight</item>
-        <item name="textColorInverse">@color/textColorInverseLight</item>
-        <item name="windowBackground">@color/windowBackgroundLight</item>
         <item name="placeholderImage">@drawable/thumbnail_placeholder</item>
-        <item name="customToolbarStyle">@style/ThemeOverlay.AppCompat.ActionBar</item>
+        <item name="customToolbarStyle">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
     </style>
     <style
-        name="DialogThemeDark"
-        parent="@style/Theme.MaterialComponents.Dialog">
-        <item name="colorPrimary">?attr/primaryColor</item>
-        <item name="colorSecondary">?attr/secondaryColor</item>
-        <item name="colorPrimaryDark">?attr/primaryColorDark</item>
-        <item name="colorPrimaryVariant">?attr/primaryColorVariant</item>
-        <item name="colorAccent">?attr/accentColor</item>
-        <item name="colorControlActivated">?attr/primaryColor</item>
-        <item name="android:textColor">?attr/textColor</item>
-        <item name="android:textColorHint">?attr/textColorHint</item>
-        <item name="android:textColorPrimaryInverse">?attr/textColorInverse</item>
-        <item name="android:windowBackground">?attr/windowBackground</item>
-        <item name="primaryColor">@color/primaryColorDark</item>
-        <item name="secondaryColor">@color/secondaryColorDark</item>
-        <item name="primaryColorDark">@color/primaryColorDarkDark</item>
-        <item name="primaryColorVariant">@color/primaryColorVariantDark</item>
-        <item name="accentColor">@color/accentColorDark</item>
-        <item name="textColor">@color/textColorDark</item>
-        <item name="textColorHint">@color/textColorHintDark</item>
-        <item name="textColorInverse">@color/textColorInverseDark</item>
-        <item name="windowBackground">@color/windowBackgroundDark</item>
-        <item name="customToolbarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        name="DialogTheme"
+        parent="BaseDialogTheme">
+        <item name="primaryColor">@color/primaryColor</item>
+        <item name="secondaryColor">@color/secondaryColor</item>
+        <item name="primaryColorDark">@color/primaryColorDark</item>
+        <item name="primaryColorVariant">@color/primaryColorVariant</item>
+        <item name="accentColor">@color/accentColor</item>
+        <item name="textColor">@color/textColor</item>
+        <item name="textColorHint">@color/textColorHint</item>
+        <item name="textColorInverse">@color/textColorInverse</item>
+        <item name="windowBackground">@color/windowBackground</item>
     </style>
+
 </resources>
