@@ -14,7 +14,9 @@ public class Constants {
 
     public static final float ITEM_ALPHA = 0.85f;
 
-    public static final int NEWS_DAYS = 3;
+    public static final int CACHE_SIZE = 1000;
+    public static final int MAX_ZOOM   = 8;
+    public static final int NEWS_DAYS  = 3;
 
     public static final String BASE_URL = "https://hknews.dev/";
 }

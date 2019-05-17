@@ -33,7 +33,7 @@ public class ImageView extends BaseView implements ImagePresenter.View {
     protected final FlowableProcessor<Irrelevant> clicks = PublishProcessor.create();
 
     private final BigImageView image;
-    private final TextView description;
+    private final TextView     description;
 
     public ImageView(@Nonnull @NonNull @lombok.NonNull final Context context) {
         super(context);

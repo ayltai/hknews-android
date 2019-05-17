@@ -23,7 +23,6 @@ import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.data.model.Image;
 import com.github.ayltai.hknews.util.DateUtils;
-import com.github.ayltai.hknews.util.MediaUtils;
 import com.github.piasy.biv.view.BigImageView;
 
 public final class CozyItemView extends ItemView {
@@ -59,8 +58,6 @@ public final class CozyItemView extends ItemView {
         this.source.setOnClickListener(listener);
         this.publishDate.setOnClickListener(listener);
         this.image.setOnClickListener(listener);
-
-        MediaUtils.setAutoCenter(this.image);
 
         this.addView(view);
     }

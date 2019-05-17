@@ -65,7 +65,7 @@
                 android:clickable="false"
                 tools:text="Phasellus at aliquam dolor"
                 style="@style/Meta.Cozy" />
-            <com.github.piasy.biv.view.BigImageView
+            <com.github.ayltai.hknews.widget.SmartCroppingImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/cozy_image_size"

@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nonnull;
 import javax.inject.Singleton;
@@ -18,7 +16,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.github.ayltai.hknews.Components;
-import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.diagnostics.PerformanceTrace;
 import com.github.ayltai.hknews.util.DevUtils;
 import com.google.firebase.ml.vision.FirebaseVision;
@@ -33,7 +30,6 @@ import io.reactivex.disposables.Disposable;
 @Singleton
 public final class FirebaseFaceCenterFinder implements FaceCenterFinder, Disposable {
     private final FirebaseVisionFaceDetector detector;
-    private final Semaphore                  semaphore = new Semaphore(Constants.CONCURRENT_DETECTION);
 
     private boolean isDisposed;
 
@@ -63,59 +59,47 @@ public final class FirebaseFaceCenterFinder implements FaceCenterFinder, Disposa
     @NonNull
     @Override
     public Single<PointF> findFaceCenter(@Nonnull @NonNull @lombok.NonNull final File file) {
-        Log.d(this.getClass().getSimpleName(), "findFaceCenter @" + this.toString());
-
         if (this.isDisposed) throw new IllegalStateException("This operation is not allowed after it is disposed");
 
         return Single.create(emitter -> {
-            try {
-                this.semaphore.tryAcquire(Constants.DETECTION_TIMEOUT, TimeUnit.SECONDS);
+            final PerformanceTrace trace = Components.getInstance().getDiagnosticsComponent().performanceTrace();
+            trace.start(this.getClass().getSimpleName());
 
-                final PerformanceTrace trace = Components.getInstance().getDiagnosticsComponent().performanceTrace();
-                trace.start(this.getClass().getSimpleName());
+            final int scale = FirebaseFaceCenterFinder.findDownSamplingScale(file);
 
-                final int scale = FirebaseFaceCenterFinder.findDownSamplingScale(file);
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = scale;
 
-                final BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = scale;
+            final Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
 
-                final Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+            this.detector
+                .detectInImage(FirebaseVisionImage.fromBitmap(bitmap))
+                .addOnSuccessListener(faces -> {
+                    if (faces.isEmpty()) {
+                        if (!emitter.isDisposed()) emitter.onSuccess(new PointF(bitmap.getWidth() / 2f, bitmap.getHeight() / 2f));
+                    } else {
+                        final Collection<PointF> centers = new ArrayList<>(faces.size());
+                        for (final FirebaseVisionFace face : faces) centers.add(new PointF(face.getBoundingBox().exactCenterX(), face.getBoundingBox().exactCenterY()));
 
-                this.detector
-                    .detectInImage(FirebaseVisionImage.fromBitmap(bitmap))
-                    .addOnSuccessListener(faces -> {
-                        if (faces.isEmpty()) {
-                            if (!emitter.isDisposed()) emitter.onSuccess(new PointF(bitmap.getWidth() / 2f, bitmap.getHeight() / 2f));
-                        } else {
-                            final Collection<PointF> centers = new ArrayList<>(faces.size());
-                            for (final FirebaseVisionFace face : faces) centers.add(new PointF(face.getBoundingBox().exactCenterX(), face.getBoundingBox().exactCenterY()));
+                        float sumX = 0f;
+                        float sumY = 0f;
 
-                            float sumX = 0f;
-                            float sumY = 0f;
-
-                            for (final PointF center : centers) {
-                                sumX += center.x;
-                                sumY += center.y;
-                            }
-
-                            if (!emitter.isDisposed()) emitter.onSuccess(new PointF(scale * sumX / centers.size(), scale * sumY / centers.size()));
+                        for (final PointF center : centers) {
+                            sumX += center.x;
+                            sumY += center.y;
                         }
-                    })
-                    .addOnFailureListener(e -> {
-                        if (!emitter.isDisposed()) emitter.onError(e);
-                    })
-                    .addOnCompleteListener(task -> {
-                        trace.stop();
 
-                        bitmap.recycle();
+                        if (!emitter.isDisposed()) emitter.onSuccess(new PointF(scale * sumX / centers.size(), scale * sumY / centers.size()));
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    if (!emitter.isDisposed()) emitter.onError(e);
+                })
+                .addOnCompleteListener(task -> {
+                    trace.stop();
 
-                        this.semaphore.release();
-                    });
-            } catch (final InterruptedException e) {
-                if (DevUtils.isLoggable()) Log.w(this.getClass().getSimpleName(), "No face detector was available");
-
-                if (!emitter.isDisposed()) emitter.onSuccess(new PointF(-1, -1));
-            }
+                    bitmap.recycle();
+                });
         });
     }
 
