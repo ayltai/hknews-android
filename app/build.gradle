@@ -116,7 +116,7 @@ ext {
     retrofitVersion       = '2.5.0'
     frescoVersion         = '1.13.0'
     bigImageViewerVersion = '1.5.7'
-    exoPlayerVersion      = '2.10.0'
+    exoPlayerVersion      = '2.10.1'
     autoValueVersion      = '1.6.5'
     lombokVersion         = '1.18.8'
     leakCanaryVersion     = '1.6.3'
@@ -209,7 +209,6 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
 
     // Utilities
-    implementation 'commons-io:commons-io:2.6'
     implementation 'org.apache.commons:commons-lang3:3.9'
 
     // Code generation tools
