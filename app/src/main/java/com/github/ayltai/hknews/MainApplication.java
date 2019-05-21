@@ -19,6 +19,7 @@ import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
 import com.facebook.imagepipeline.listener.RequestLoggingListener;
 import com.github.ayltai.hknews.config.ConfigModule;
 import com.github.ayltai.hknews.media.FrescoImageLoader;
+import com.github.ayltai.hknews.media.TensorFlowCenterFinder;
 import com.github.ayltai.hknews.util.DevUtils;
 import com.github.piasy.biv.BigImageViewer;
 import com.google.firebase.perf.FirebasePerformance;
@@ -51,6 +52,8 @@ public final class MainApplication extends BaseApplication {
                 .getConfigComponent()
                 .remoteConfigurations()
                 .isPerformanceMonitoringEnabled());
+
+        TensorFlowCenterFinder.init(this);
     }
 
     private void applyDevMode() {

@@ -18,9 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.github.ayltai.hknews.R;
-import com.github.ayltai.hknews.media.BaseImageLoaderCallback;
 import com.github.ayltai.hknews.util.Irrelevant;
-import com.github.ayltai.hknews.util.MediaUtils;
 import com.github.ayltai.hknews.view.ImagePresenter;
 import com.github.piasy.biv.view.BigImageView;
 import com.stfalcon.frescoimageviewer.ImageViewer;
@@ -41,12 +39,6 @@ public class ImageView extends BaseView implements ImagePresenter.View {
         final View view = LayoutInflater.from(context).inflate(this.getLayoutId(), this, false);
 
         this.image = view.findViewById(R.id.image);
-        this.image.setImageLoaderCallback(new BaseImageLoaderCallback() {
-            @Override
-            public void onFinish() {
-                MediaUtils.configure(ImageView.this.image);
-            }
-        });
 
         this.description = view.findViewById(R.id.description);
         if (this.description != null) this.description.setMovementMethod(LinkMovementMethod.getInstance());
@@ -105,5 +97,13 @@ public class ImageView extends BaseView implements ImagePresenter.View {
         this.setOnClickListener(onClickListener);
         if (this.description != null) this.description.setOnClickListener(onClickListener);
         this.image.setOnClickListener(onClickListener);
+    }
+
+    @CallSuper
+    @Override
+    public void onDetachedFromWindow() {
+        this.image.cancel();
+
+        super.onDetachedFromWindow();
     }
 }

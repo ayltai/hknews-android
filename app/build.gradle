@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         applicationId    'com.github.ayltai.hknews'
-        minSdkVersion    16
+        minSdkVersion    19
         targetSdkVersion 28
         versionCode      1
         versionName      '1.0.' + VERSION_REVISION + '-' + VERSION_HASH
@@ -87,6 +87,9 @@ android {
     }
 
     aaptOptions {
+        noCompress 'tflite'
+        noCompress 'lite'
+
         cruncherEnabled Boolean.valueOf(System.getenv('CI'))
     }
 
@@ -153,8 +156,6 @@ dependencies {
 
     // Firebase
     implementation 'com.google.firebase:firebase-core:16.0.9'
-    implementation 'com.google.firebase:firebase-ml-vision:20.0.0'
-    implementation 'com.google.firebase:firebase-ml-vision-face-model:17.0.2'
     implementation "com.google.firebase:firebase-perf:$firebaseVersion"
     implementation "com.google.firebase:firebase-config:$firebaseVersion"
 
@@ -203,6 +204,13 @@ dependencies {
     implementation 'io.supercharge:shimmerlayout:2.1.0'
     implementation 'pub.hanks:smallbang:1.2.2'
     implementation 'io.github.inflationx:calligraphy3:3.1.1'
+
+    // Machine learning
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
+
+    // Utilities
+    implementation 'commons-io:commons-io:2.6'
+    implementation 'org.apache.commons:commons-lang3:3.9'
 
     // Code generation tools
     compileOnly         "org.projectlombok:lombok:$lombokVersion"
@@ -258,7 +266,7 @@ configurations.all {
 //region Checkstyle configurations
 
 checkstyle {
-    toolVersion    '8.19'
+    toolVersion    '8.20'
     configFile     rootProject.file('./checkstyle.xml')
     ignoreFailures true
     showViolations true

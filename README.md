@@ -7,7 +7,7 @@ HK News Android
 [![Code Coverage](https://img.shields.io/codacy/coverage/05a4a29b58154cd28a472dd8f7f6a874.svg?style=flat)](https://app.codacy.com/app/AlanTai/hknews-android/dashboard)
 [![Code Coverage](https://img.shields.io/codecov/c/github/ayltai/hknews-android.svg?style=flat)](https://codecov.io/gh/ayltai/hknews-android)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2791/badge)](https://bestpractices.coreinfrastructure.org/projects/2791)
-[![Android API](https://img.shields.io/badge/API-16%2B-blue.svg?style=flat&label=API&maxAge=300)](https://www.android.com/history/)
+[![Android API](https://img.shields.io/badge/API-19%2B-blue.svg?style=flat&label=API&maxAge=300)](https://www.android.com/history/)
 [![License](https://img.shields.io/github/license/ayltai/hknews-android.svg?style=flat)](https://github.com/ayltai/hknews-android/blob/master/LICENSE)
 
 Serves aggregated news from 10+ local news publishers in Hong Kong. Made with ‚ù§
@@ -18,7 +18,8 @@ Serves aggregated news from 10+ local news publishers in Hong Kong. Made with ‚ù
 * Read news from 10 local news publishers
 * Support video news
 * Bookmarks and reading history
-* Smart image cropping
+* Deep-learning based smart image cropping
+* Support dark mode in Android Q
 * No ads. We hate ads as much as you do
 
 ## News Publishers
@@ -45,7 +46,7 @@ Serves aggregated news from 10+ local news publishers in Hong Kong. Made with ‚ù
 [hknews-backend](https://github.com/ayltai/hknews-backend)
 
 ## Requirements
-This app supports Android 4.1 Jelly Bean (API 16) or later.
+This app supports Android 4.4 Jelly Bean (API 19) or later.
 
 ## Acknowledgements
 This app is made with the support of open source projects:
@@ -56,6 +57,8 @@ This app is made with the support of open source projects:
 * [RxAndroid](https://github.com/ReactiveX/RxAndroid)
 * [RxJava2Debug](https://github.com/akaita/RxJava2Debug)
 * [Dagger 2](https://google.github.io/dagger)
+* [Glimpse](https://github.com/the-super-toys/glimpse-android)
+* [TensorFlow Lite](https://www.tensorflow.org/lite)
 * [Facebook Fresco](https://github.com/facebook/fresco)
 * [FrescoImageViewer](https://github.com/stfalcon-studio/FrescoImageViewer)
 * [Subsampling Scale Image View](https://github.com/davemorrissey/subsampling-scale-image-view)
@@ -67,6 +70,7 @@ This app is made with the support of open source projects:
 * [Android About Page](https://github.com/medyo/android-about-page)
 * [Retrofit](https://github.com/square/retrofit)
 * [OkHttp](https://github.com/square/okhttp)
+* [Apache Commons Lang3](https://commons.apache.org/proper/commons-lang/)
 * [Calligraphy](https://github.com/InflationX/Calligraphy)
 * [AutoValue](https://github.com/google/auto/tree/master/value)
 * [Gson](https://github.com/google/gson)
@@ -80,7 +84,6 @@ This app is made with the support of open source projects:
 
 ‚Ä¶ and closed source services:
 
-* [ML Kit for Firebase](https://firebase.google.com/docs/ml-kit)
 * [Firebase Remote Config](https://firebase.google.com/docs/remote-config)
 * [Firebase Performance Monitoring](https://firebase.google.com/docs/perf-mon)
 * [Google Analytics for Firebase](https://firebase.google.com/docs/analytics)

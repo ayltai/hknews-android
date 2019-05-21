@@ -383,7 +383,7 @@
         <module name="MagicNumber">
             <property
                 name="ignoreNumbers"
-                value="-1,0,0.5,1,2,10,100"/>
+                value="-1,0,0.5,1,2,3,4,5,10,25,50,100,255,256,512"/>
         </module>
         <module name="MissingDeprecated"/>
         <module name="MissingOverride"/>

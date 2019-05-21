@@ -31,18 +31,18 @@ public final class FirebaseRemoteConfigurations implements RemoteConfigurations 
     }
 
     @Override
-    public float getMinFaceSize() {
-        return (float)FirebaseRemoteConfigurations.config.getDouble("min_face_size");
+    public int getMaxImageSize() {
+        return (int)FirebaseRemoteConfigurations.config.getLong("max_image_size");
     }
 
     @Override
-    public int getAccuracyForFaceDetection() {
-        return (int)FirebaseRemoteConfigurations.config.getLong("accuracy_for_face_detection");
+    public float getTemperature() {
+        return (float)FirebaseRemoteConfigurations.config.getDouble("temperature");
     }
 
     @Override
-    public int getMaxImageSizeForFaceDetection() {
-        return (int)FirebaseRemoteConfigurations.config.getLong("max_image_size_for_face_detection");
+    public float getLowerBound() {
+        return (float)FirebaseRemoteConfigurations.config.getDouble("lower_bound");
     }
 
     @Override

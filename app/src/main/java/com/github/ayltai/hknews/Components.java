@@ -76,7 +76,7 @@ public final class Components {
     @Nonnull
     @NonNull
     public MediaComponent getMediaComponent() {
-        if (this.mediaComponent == null || this.mediaComponent.faceCenterFinder().isDisposed()) this.mediaComponent = DaggerMediaComponent.create();
+        if (this.mediaComponent == null || this.mediaComponent.centerFinder().isDisposed()) this.mediaComponent = DaggerMediaComponent.create();
 
         return this.mediaComponent;
     }

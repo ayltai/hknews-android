@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 
-public interface FaceCenterFinder extends Disposable {
+public interface CenterFinder extends Disposable {
     @Nonnull
     @NonNull
-    Single<PointF> findFaceCenter(@Nonnull @NonNull @lombok.NonNull File file);
+    Single<PointF> findCenter(@Nonnull @NonNull @lombok.NonNull File file);
 }

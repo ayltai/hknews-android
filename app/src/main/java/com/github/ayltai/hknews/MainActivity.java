@@ -74,7 +74,7 @@ public final class MainActivity extends ThemedActivity implements NetworkStateLi
 
         Components.getInstance()
             .getMediaComponent()
-            .faceCenterFinder()
+            .centerFinder()
             .dispose();
 
         if (!this.router.isDisposed()) {

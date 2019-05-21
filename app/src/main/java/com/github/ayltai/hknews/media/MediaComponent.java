@@ -18,5 +18,5 @@ public interface MediaComponent {
 
     @Nonnull
     @NonNull
-    FaceCenterFinder faceCenterFinder();
+    CenterFinder centerFinder();
 }

@@ -1,11 +1,11 @@
 package com.github.ayltai.hknews.config;
 
 public interface RemoteConfigurations {
-    float getMinFaceSize();
+    int getMaxImageSize();
 
-    int getAccuracyForFaceDetection();
+    float getTemperature();
 
-    int getMaxImageSizeForFaceDetection();
+    float getLowerBound();
 
     boolean isPerformanceMonitoringEnabled();
 }

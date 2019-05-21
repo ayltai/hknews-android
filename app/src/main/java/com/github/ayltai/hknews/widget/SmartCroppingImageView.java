@@ -49,14 +49,6 @@ public final class SmartCroppingImageView extends BigImageView {
     public void showImage(final Uri thumbnail, final Uri uri) {
         this.dispose();
 
-        super.showImage(thumbnail, uri);
-    }
-
-    @CallSuper
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-
         this.setImageLoaderCallback(new BaseImageLoaderCallback() {
             @Override
             public void onStart() {
@@ -72,8 +64,8 @@ public final class SmartCroppingImageView extends BigImageView {
                 if (cache == null) {
                     SmartCroppingImageView.this.disposable = Components.getInstance()
                         .getMediaComponent()
-                        .faceCenterFinder()
-                        .findFaceCenter(image)
+                        .centerFinder()
+                        .findCenter(image)
                         .compose(RxUtils.applySingleBackgroundToMainSchedulers())
                         .subscribe(
                             center -> {
@@ -95,6 +87,8 @@ public final class SmartCroppingImageView extends BigImageView {
                 MediaUtils.configure(SmartCroppingImageView.this);
             }
         });
+
+        super.showImage(thumbnail, uri);
     }
 
     @CallSuper
