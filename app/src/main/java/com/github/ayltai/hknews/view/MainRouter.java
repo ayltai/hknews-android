@@ -18,6 +18,7 @@ import androidx.core.util.Pair;
 
 import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.SettingsActivity;
+import com.github.ayltai.hknews.util.AnimationUtils;
 import com.github.ayltai.hknews.widget.MainView;
 import com.github.ayltai.hknews.widget.ModelKey;
 
@@ -54,7 +55,7 @@ public final class MainRouter extends Router {
     @Nullable
     @Override
     protected Animator getAnimator(@Nonnull @NonNull @lombok.NonNull final View view, @Nonnull @NonNull @lombok.NonNull final Direction direction, @Nullable final Runnable onStart, @Nullable final Runnable onEnd) {
-        //if (direction == Direction.FORWARD || direction == Direction.BACKWARD) return AnimationUtils.createDefaultAnimator(view, direction, onStart, onEnd);
+        if (direction == Direction.FORWARD || direction == Direction.BACKWARD) return AnimationUtils.createDefaultAnimator(view, direction, onStart, onEnd);
 
         return super.getAnimator(view, direction, onStart, onEnd);
     }
