@@ -50,14 +50,12 @@ public final class CompactItemView extends ItemView {
         this.publishDate = view.findViewById(R.id.publish_date);
         this.image       = view.findViewById(R.id.image);
 
-        final View.OnClickListener listener = v -> this.container.performClick();
-
-        this.icon.setOnClickListener(listener);
-        this.title.setOnClickListener(listener);
-        this.description.setOnClickListener(listener);
-        this.source.setOnClickListener(listener);
-        this.publishDate.setOnClickListener(listener);
-        this.image.setOnClickListener(listener);
+        this.icon.setOnTouchListener((v, e) -> this.container.onTouchEvent(e));
+        this.title.setOnTouchListener((v, e) -> this.container.onTouchEvent(e));
+        this.description.setOnTouchListener((v, e) -> this.container.onTouchEvent(e));
+        this.source.setOnTouchListener((v, e) -> this.container.onTouchEvent(e));
+        this.publishDate.setOnTouchListener((v, e) -> this.container.onTouchEvent(e));
+        this.image.setOnClickListener(v -> this.container.performClick());
 
         this.addView(view);
     }

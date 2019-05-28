@@ -13,18 +13,20 @@
         android:layout_marginEnd="@dimen/space8"
         android:layout_marginTop="@dimen/space4"
         android:layout_marginBottom="@dimen/space4"
+        android:addStatesFromChildren="true"
         android:stateListAnimator="@animator/lift_on_pressed"
         app:cardElevation="@dimen/card_elevation"
         app:cardCornerRadius="@dimen/cozy_radius"
         app:cardUseCompatPadding="true"
         app:cardPreventCornerOverlap="false"
+        tools:targetApi="P"
         style="@style/Card">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/space16"
             android:paddingBottom="@dimen/space16"
-            android:duplicateParentState="true">
+            android:addStatesFromChildren="true">
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/source_icon"
                 android:layout_width="@dimen/cozy_icon_size"

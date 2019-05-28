@@ -15,7 +15,7 @@
         <item name="android:textColorPrimaryInverse">?attr/textColorInverse</item>
         <item name="android:windowBackground">?attr/windowBackground</item>
         <item name="android:windowTranslucentStatus" tools:targetApi="LOLLIPOP">false</item>
-        <item name="placeholderImage">@drawable/thumbnail_placeholder</item>
+        <item name="placeholderImage">@color/placeholderTextColor</item>
         <item name="customToolbarStyle">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
         <item name="customPopupStyle">@style/ThemeOverlay.AppCompat.DayNight</item>
         <item name="dialogTheme">@style/DialogTheme</item>
@@ -54,7 +54,7 @@
         <item name="android:textColorHint">?attr/textColorHint</item>
         <item name="android:textColorPrimaryInverse">?attr/textColorInverse</item>
         <item name="android:windowBackground">?attr/windowBackground</item>
-        <item name="placeholderImage">@drawable/thumbnail_placeholder</item>
+        <item name="placeholderImage">@color/placeholderTextColor</item>
         <item name="customToolbarStyle">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
     </style>
     <style
