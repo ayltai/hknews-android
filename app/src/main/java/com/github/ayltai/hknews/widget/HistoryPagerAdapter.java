@@ -19,4 +19,11 @@ final class HistoryPagerAdapter extends PagerAdapter {
     protected ListPresenter createListPresenter(@Nonnull @NonNull @lombok.NonNull final String category) {
         return new HistoryListPresenter(category);
     }
+
+    @Nonnull
+    @NonNull
+    @Override
+    protected EmptyState getEmptyState() {
+        return new HistoryEmptyState();
+    }
 }

@@ -19,4 +19,11 @@ final class BookmarkPagerAdapter extends PagerAdapter {
     protected ListPresenter createListPresenter(@Nonnull @NonNull @lombok.NonNull final String category) {
         return new BookmarkListPresenter(category);
     }
+
+    @Nonnull
+    @NonNull
+    @Override
+    protected EmptyState getEmptyState() {
+        return new BookmarkEmptyState();
+    }
 }

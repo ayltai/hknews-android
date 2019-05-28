@@ -153,13 +153,13 @@ public class ListPresenter extends ModelPresenter<List<Item>, ListPresenter.View
                     items -> {
                         this.setModel(items);
 
+                        this.getView().update();
+
                         if (items.isEmpty()) {
                             this.getView().showEmptyView();
                         } else {
                             this.getView().hideEmptyView();
                         }
-
-                        this.getView().update();
                     },
                     RxUtils::handleError
                 ));

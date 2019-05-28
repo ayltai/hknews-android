@@ -2,7 +2,6 @@ package com.github.ayltai.hknews.widget;
 
 import javax.annotation.Nonnull;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.github.ayltai.hknews.R;
-import com.github.ayltai.hknews.SettingsActivity;
 import com.github.ayltai.hknews.util.Cacheable;
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.view.ListPresenter;
@@ -47,8 +45,12 @@ public abstract class ListView extends BaseView implements ListPresenter.View, C
 
     //endregion
 
-    protected ListView(@Nonnull @NonNull @lombok.NonNull final Context context) {
+    protected EmptyState emptyState;
+
+    protected ListView(@Nonnull @NonNull @lombok.NonNull final Context context, @Nonnull @NonNull @lombok.NonNull final EmptyState emptyState) {
         super(context);
+
+        this.emptyState = emptyState;
 
         final View view = LayoutInflater.from(this.getContext()).inflate(this.getLayoutId(), this, false);
 
@@ -100,35 +102,28 @@ public abstract class ListView extends BaseView implements ListPresenter.View, C
 
     @DrawableRes
     protected int getEmptyIcon() {
-        return R.drawable.ic_empty_news_black_24dp;
+        return this.emptyState.getIcon();
     }
 
     @StringRes
     protected int getEmptyTitle() {
-        return R.string.empty_news_title;
+        return this.emptyState.getTitle();
     }
 
     @StringRes
     protected int getEmptyDescription() {
-        return R.string.empty_news_description;
+        return this.emptyState.getDescription();
     }
 
     @StringRes
     protected int getEmptyAction() {
-        return R.string.empty_news_action;
+        return this.emptyState.getAction();
     }
 
     @Nonnull
     @NonNull
     protected View.OnClickListener getEmptyClickListener() {
-        return view -> {
-            final Activity activity = this.getActivity();
-            if (activity == null) {
-                SettingsActivity.show(this.getContext());
-            } else {
-                SettingsActivity.show(activity);
-            }
-        };
+        return this.emptyState.getClickListener(this);
     }
 
     //endregion

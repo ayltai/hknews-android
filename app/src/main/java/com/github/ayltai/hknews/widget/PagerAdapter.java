@@ -56,7 +56,7 @@ class PagerAdapter extends androidx.viewpager.widget.PagerAdapter {
         if (this.views.containsKey(position)) return this.views.get(position);
 
         final ListPresenter presenter = this.createListPresenter(this.presenter.getModel().get(position));
-        final ListView      view      = Components.getInstance().getConfigComponent().userConfigurations().isCompactStyle() ? new CompactListView(container.getContext()) : new CozyListView(container.getContext());
+        final ListView      view      = Components.getInstance().getConfigComponent().userConfigurations().isCompactStyle() ? new CompactListView(container.getContext(), this.getEmptyState()) : new CozyListView(container.getContext(), this.getEmptyState());
 
         container.addView(view);
 
@@ -93,5 +93,11 @@ class PagerAdapter extends androidx.viewpager.widget.PagerAdapter {
     @NonNull
     protected ListPresenter createListPresenter(@Nonnull @NonNull @lombok.NonNull final String category) {
         return new ListPresenter(category);
+    }
+
+    @Nonnull
+    @NonNull
+    protected EmptyState getEmptyState() {
+        return new EmptyState();
     }
 }

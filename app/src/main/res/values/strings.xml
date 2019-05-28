@@ -30,6 +30,12 @@
     <string name="empty_news_title">We\'ve got no news for you today!</string>
     <string name="empty_news_description">Try browsing other news categories and publishers</string>
     <string name="empty_news_action">Open settings</string>
+    <string name="empty_history_title">You haven\'t read any news yet</string>
+    <string name="empty_history_description">Do you know we have news from interesting categories and publishers?</string>
+    <string name="empty_history_action">Open settings</string>
+    <string name="empty_bookmark_title">You haven\'t bookmarked any news yet</string>
+    <string name="empty_bookmark_description">Find some interesting news by choosing your favorite categories below</string>
+    <string name="empty_bookmark_action">Open settings</string>
     <!-- endregion -->
 
     <!-- region Preferences -->
