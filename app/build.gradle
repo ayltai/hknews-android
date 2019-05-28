@@ -219,7 +219,7 @@ dependencies {
     annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.6'
 
     // Fabric
-    implementation ('com.crashlytics.sdk.android:crashlytics:2.10.0@aar') {
+    implementation ('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
         transitive = true
     }
 
@@ -265,7 +265,7 @@ configurations.all {
 //region Checkstyle configurations
 
 checkstyle {
-    toolVersion    '8.20'
+    toolVersion    '8.21'
     configFile     rootProject.file('./checkstyle.xml')
     ignoreFailures true
     showViolations true
