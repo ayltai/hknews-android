@@ -6,7 +6,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
@@ -53,14 +52,12 @@ public class AnimationUtils {
         }
     }
 
-    @Nullable
+    @Nonnull
+    @NonNull
     public Animator createDefaultAnimator(@Nonnull @NonNull @lombok.NonNull final View view, @Nonnull @NonNull @lombok.NonNull final Direction direction, @Nullable final Runnable onStart, @Nullable final Runnable onEnd) {
-        final Activity activity = ViewUtils.getActivity(view);
-        if (activity == null) return null;
-
         final Animator animator = Direction.FORWARD == direction
-            ? ObjectAnimator.ofFloat(view, "translationX", DeviceUtils.getScreenWidth(activity), 0).setDuration(AnimationUtils.getAnimationDuration(view.getContext(), android.R.integer.config_mediumAnimTime))
-            : ObjectAnimator.ofFloat(view, "translationX", 0, DeviceUtils.getScreenWidth(activity)).setDuration(AnimationUtils.getAnimationDuration(view.getContext(), android.R.integer.config_mediumAnimTime));
+            ? ObjectAnimator.ofFloat(view, "translationX", DeviceUtils.getScreenWidth(view.getContext()), 0).setDuration(AnimationUtils.getAnimationDuration(view.getContext(), android.R.integer.config_mediumAnimTime))
+            : ObjectAnimator.ofFloat(view, "translationX", 0, DeviceUtils.getScreenWidth(view.getContext())).setDuration(AnimationUtils.getAnimationDuration(view.getContext(), android.R.integer.config_mediumAnimTime));
 
         animator.setInterpolator(new AccelerateInterpolator());
 

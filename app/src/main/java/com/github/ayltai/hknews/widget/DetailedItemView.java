@@ -81,7 +81,7 @@ public final class DetailedItemView extends ItemView implements DetailedItemPres
     private final ViewGroup               videosContainer;
 
     private final ImagePresenter    featuredImagePresenter;
-    private final FeaturedImageView featuredImageView;
+    private final BannerImageView bannerImageView;
 
     //endregion
 
@@ -107,8 +107,8 @@ public final class DetailedItemView extends ItemView implements DetailedItemPres
         this.description.setMovementMethod(LinkMovementMethod.getInstance());
 
         this.featuredImagePresenter = new ImagePresenter();
-        this.featuredImageView      = new FeaturedImageView(context);
-        this.imageContainer.addView(this.featuredImageView);
+        this.bannerImageView = new BannerImageView(context);
+        this.imageContainer.addView(this.bannerImageView);
 
         final Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
@@ -314,7 +314,7 @@ public final class DetailedItemView extends ItemView implements DetailedItemPres
         this.viewOnWebButton.setOnClickListener(view -> this.viewOnWebClicks.onNext(Irrelevant.INSTANCE));
         this.shareButton.setOnClickListener(view -> this.shareClicks.onNext(Irrelevant.INSTANCE));
 
-        this.featuredImagePresenter.onViewAttached(this.featuredImageView);
+        this.featuredImagePresenter.onViewAttached(this.bannerImageView);
 
         super.onAttachedToWindow();
     }

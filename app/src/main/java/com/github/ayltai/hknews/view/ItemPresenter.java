@@ -87,7 +87,6 @@ public class ItemPresenter<V extends ItemPresenter.View> extends ModelPresenter<
     }
 
     @UiThread
-    @CallSuper
     @Override
     public void bindModel() {
         if (this.getView() != null && this.getModel() != null) {

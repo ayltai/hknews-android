@@ -52,7 +52,7 @@ public abstract class ListView extends BaseView implements ListPresenter.View, C
 
         this.emptyState = emptyState;
 
-        final View view = LayoutInflater.from(this.getContext()).inflate(this.getLayoutId(), this, false);
+        final View view = LayoutInflater.from(context).inflate(this.getLayoutId(), this, false);
 
         this.multiStatePresenter = new MultiStatePresenter();
         this.multiStateView      = new MultiStateView(context);
@@ -66,7 +66,7 @@ public abstract class ListView extends BaseView implements ListPresenter.View, C
         ((ViewGroup)view.findViewById(R.id.container)).addView(this.multiStateView);
 
         this.recyclerView = view.findViewById(this.getRecyclerViewId());
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         this.swipeRefreshLayout = view.findViewById(this.getSwipeRefreshLayoutId());
         this.swipeRefreshLayout.setOnRefreshListener(() -> {
