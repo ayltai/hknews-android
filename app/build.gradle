@@ -111,18 +111,18 @@ ext {
     supportLibraryVersion = '28.0.0'
     architectureVersion   = '2.2.0-alpha01'
     firebaseVersion       = '17.0.0'
-    daggerVersion         = '2.22.1'
+    daggerVersion         = '2.23.1'
     okHttpVersion         = '3.12.3'
     retrofitVersion       = '2.5.0'
-    frescoVersion         = '1.13.0'
+    frescoVersion         = '1.14.1'
     bigImageViewerVersion = '1.5.7'
     exoPlayerVersion      = '2.10.1'
     autoValueVersion      = '1.6.5'
     lombokVersion         = '1.18.8'
     leakCanaryVersion     = '1.6.3'
-    robolectricVersion    = '4.2.1'
+    robolectricVersion    = '4.3'
     powerMockVersion      = '2.0.2'
-    espressoVersion       = '3.2.0-beta01'
+    espressoVersion       = '3.2.0'
 }
 
 repositories {
@@ -150,17 +150,17 @@ dependencies {
 
     // Android Support libraries
     implementation 'androidx.browser:browser:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha05'
-    implementation 'com.google.android.material:material:1.1.0-alpha06'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha06'
+    implementation 'com.google.android.material:material:1.1.0-alpha07'
     implementation 'com.takisoft.preferencex:preferencex:1.1.0-alpha05'
 
     // Firebase
     implementation 'com.google.firebase:firebase-core:16.0.9'
-    implementation "com.google.firebase:firebase-perf:$firebaseVersion"
-    implementation "com.google.firebase:firebase-config:$firebaseVersion"
+    implementation 'com.google.firebase:firebase-perf:17.0.2'
+    implementation 'com.google.firebase:firebase-config:17.0.0'
 
     // Reactive programming
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     // Dependency injection
@@ -209,6 +209,7 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
 
     // Utilities
+    implementation 'net.sourceforge.streamsupport:android-retrostreams:1.7.1'
     implementation 'org.apache.commons:commons-lang3:3.9'
 
     // Code generation tools
@@ -249,7 +250,7 @@ dependencies {
     androidTestImplementation ("androidx.test.espresso:espresso-intents:$espressoVersion") {
         exclude group : 'com.android.support'
     }
-    androidTestUtil 'androidx.test:orchestrator:1.2.0-beta01'
+    androidTestUtil 'androidx.test:orchestrator:1.2.0'
 
     codacy 'com.codacy:codacy-coverage-reporter:6.0.0'
 }

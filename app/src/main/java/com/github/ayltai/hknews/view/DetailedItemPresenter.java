@@ -7,6 +7,7 @@ import android.content.Context;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.util.RxUtils;
@@ -50,7 +51,7 @@ public final class DetailedItemPresenter extends ItemPresenter<DetailedItemPrese
 
     private boolean isInitialized;
 
-    @CallSuper
+    @UiThread
     @Override
     public void bindModel() {
         if (this.getView() == null) {
