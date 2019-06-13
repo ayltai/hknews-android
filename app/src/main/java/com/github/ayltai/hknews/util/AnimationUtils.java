@@ -76,7 +76,7 @@ public class AnimationUtils {
         return animator;
     }
 
-    private int getAnimationDuration(@Nonnull @NonNull @lombok.NonNull final Context context, @IntegerRes final int durationId) {
+    public int getAnimationDuration(@Nonnull @NonNull @lombok.NonNull final Context context, @IntegerRes final int durationId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) return (int)(context.getResources().getInteger(durationId) * Settings.Global.getFloat(context.getContentResolver(), Settings.Global.ANIMATOR_DURATION_SCALE, 1f));
 
         return context.getResources().getInteger(durationId);

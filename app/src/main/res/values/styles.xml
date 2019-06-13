@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Cards -->
     <style
         name="Source"
         parent="@style/TextAppearance.AppCompat.Title">
@@ -84,6 +85,12 @@
         <item name="android:shadowRadius">2.5</item>
         <item name="android:shadowColor">@color/shadowEnd</item>
     </style>
+    <style name="Title.App">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontPath">fonts/Lato-Regular.ttf</item>
+    </style>
     <style
         name="Description"
         parent="@style/TextAppearance.AppCompat.Body1">
@@ -135,6 +142,8 @@
         <item name="android:foreground">?attr/selectableItemBackground</item>
         <item name="cardBackgroundColor">?attr/cardBackground</item>
     </style>
+
+    <!-- Popup menu -->
     <style
         name="PopupMenuLight"
         parent="@style/Widget.MaterialComponents.PopupMenu">
@@ -144,6 +153,18 @@
         name="PopupMenuDark"
         parent="@style/Widget.MaterialComponents.PopupMenu.Dark">
         <item name="android:popupBackground">?attr/windowBackground</item>
+    </style>
+
+    <style
+        name="CustomMaterialSearchBarDark"
+        parent="@style/MaterialSearchBarDark">
+        <item name="mt_navIconTint">@color/white</item>
+        <item name="mt_searchIconTint">@color/white</item>
+        <item name="mt_clearIconTint">@color/white</item>
+        <item name="mt_menuIconTint">@color/white</item>
+        <item name="mt_backIconTint">@color/white</item>
+        <item name="mt_textCursorTint">@color/accentColor</item>
+        <item name="mt_highlightedTextColor">@color/accentColor</item>
     </style>
 
     <!-- ExoPlayer -->

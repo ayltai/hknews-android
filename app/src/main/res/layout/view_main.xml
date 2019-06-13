@@ -5,45 +5,75 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/primaryColor"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
-    <FrameLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/windowBackground"
+        android:background="?attr/primaryColor"
         app:elevation="0dp">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbarHeight"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+            android:elevation="0dp"
+            android:fitsSystemWindows="true"
+            app:menu="@menu/top">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                style="@style/Title.App" />
+        </com.google.android.material.appbar.MaterialToolbar>
         <com.mancj.materialsearchbar.MaterialSearchBar
             android:id="@+id/searchBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/space8"
-            android:layout_marginStart="@dimen/space8"
-            android:layout_marginRight="@dimen/space8"
-            android:layout_marginEnd="@dimen/space8"
-            android:layout_marginTop="@dimen/space8"
+            android:layout_height="@dimen/toolbarHeight"
+            android:layout_marginTop="@dimen/space4"
+            android:layout_marginBottom="@dimen/space4"
             android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
+            android:visibility="gone"
             app:mt_searchBarColor="?attr/searchBarBackground"
-            app:mt_placeholder="@string/app_name"
             app:mt_hint="@string/search_hint"
             style="?attr/customSearchBarStyle" />
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/topNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/primaryColor"
+            app:elevation="0dp" />
     </com.google.android.material.appbar.AppBarLayout>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigationView"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-        app:labelVisibilityMode="labeled"
-        app:elevation="@dimen/shadow"
-        app:backgroundTint="?attr/bottomBarBackground"
-        app:itemIconTint="@color/bottom_tab_selector"
-        app:itemTextColor="@color/bottom_tab_selector"
-        app:menu="@menu/bottom" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="-12dp"
+        app:layout_behavior=".widget.BackdropBehavior"
+        app:cardElevation="1dp"
+        app:cardCornerRadius="16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <FrameLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:animateLayoutChanges="true" />
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                app:labelVisibilityMode="labeled"
+                app:elevation="@dimen/shadow"
+                app:backgroundTint="?attr/bottomBarBackground"
+                app:itemIconTint="@color/bottom_tab_selector"
+                app:itemTextColor="@color/bottom_tab_selector"
+                app:menu="@menu/bottom" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -16,7 +16,7 @@
         <item name="cardBackground">@color/cardBackground</item>
         <item name="searchBarBackground">@color/searchBarBackground</item>
         <item name="bottomBarBackground">@color/bottomBarBackground</item>
-        <item name="customSearchBarStyle">@style/MaterialSearchBarDark</item>
+        <item name="customSearchBarStyle">@style/MaterialSearchBarLight</item>
         <item name="popupMenuStyle">@style/PopupMenuDark</item>
         <item name="android:popupMenuStyle">@style/PopupMenuDark</item>
     </style>

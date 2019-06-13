@@ -5,10 +5,9 @@
     <color name="accentColor">@color/light_blue_200</color>
     <color name="textColor">#ddffffff</color>
     <color name="textColorHint">#99ffffff</color>
-    <color name="textColorInverse">#dddddd</color>
+    <color name="textColorInverse">#1e1e1e</color>
     <color name="windowBackground">#121212</color>
     <color name="cardBackground">#0cffffff</color>
-    <color name="searchBarBackground">#1effffff</color>
     <color name="appBarBackground">#282828</color>
     <color name="bottomBarBackground">#2f2f2f</color>
     <color name="placeholderTextColor">#60ffffff</color>

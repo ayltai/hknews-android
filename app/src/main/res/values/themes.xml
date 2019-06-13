@@ -16,8 +16,6 @@
         <item name="android:windowBackground">?attr/windowBackground</item>
         <item name="android:windowTranslucentStatus" tools:targetApi="LOLLIPOP">false</item>
         <item name="placeholderImage">@color/placeholderTextColor</item>
-        <item name="customToolbarStyle">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
-        <item name="customPopupStyle">@style/ThemeOverlay.AppCompat.DayNight</item>
         <item name="dialogTheme">@style/DialogTheme</item>
         <item name="alertDialogTheme">@style/DialogTheme</item>
     </style>
@@ -37,7 +35,7 @@
         <item name="cardBackground">@color/cardBackground</item>
         <item name="searchBarBackground">@color/searchBarBackground</item>
         <item name="bottomBarBackground">@color/bottomBarBackground</item>
-        <item name="customSearchBarStyle">@style/MaterialSearchBarLight</item>
+        <item name="customSearchBarStyle">@style/CustomMaterialSearchBarDark</item>
         <item name="popupMenuStyle">@style/PopupMenuLight</item>
         <item name="android:popupMenuStyle">@style/PopupMenuLight</item>
     </style>
@@ -55,7 +53,6 @@
         <item name="android:textColorPrimaryInverse">?attr/textColorInverse</item>
         <item name="android:windowBackground">?attr/windowBackground</item>
         <item name="placeholderImage">@color/placeholderTextColor</item>
-        <item name="customToolbarStyle">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
     </style>
     <style
         name="DialogTheme"
@@ -70,5 +67,4 @@
         <item name="textColorInverse">@color/textColorInverse</item>
         <item name="windowBackground">@color/windowBackground</item>
     </style>
-
 </resources>

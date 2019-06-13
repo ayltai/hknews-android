@@ -8,7 +8,7 @@ plugins {
     id 'com.github.spotbugs'           version '2.0.0'
     id 'jacoco'
     id 'com.getkeepsafe.dexcount'
-    id 'org.owasp.dependencycheck'     version '4.0.2'
+    id 'org.owasp.dependencycheck'     version '5.0.0'
     id 'com.github.ben-manes.versions' version '0.21.0'
 }
 
@@ -16,13 +16,13 @@ String VERSION_REVISION = 'git rev-list --count HEAD'.execute().text.trim()
 String VERSION_HASH     = 'git rev-parse --short HEAD'.execute().text.trim()
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 29
+    buildToolsVersion '29.0.0'
 
     defaultConfig {
         applicationId    'com.github.ayltai.hknews'
         minSdkVersion    19
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode      1
         versionName      '1.0.' + VERSION_REVISION + '-' + VERSION_HASH
 
@@ -114,7 +114,7 @@ ext {
     daggerVersion         = '2.23.1'
     okHttpVersion         = '3.12.3'
     retrofitVersion       = '2.5.0'
-    frescoVersion         = '1.14.1'
+    frescoVersion         = '1.14.2'
     bigImageViewerVersion = '1.5.7'
     exoPlayerVersion      = '2.10.1'
     autoValueVersion      = '1.6.5'
@@ -231,7 +231,7 @@ dependencies {
     testImplementation    "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // Unit testing
-    testImplementation 'org.mockito:mockito-core:2.27.0'
+    testImplementation 'org.mockito:mockito-core:2.28.2'
     testImplementation "org.powermock:powermock-module-junit4:$powerMockVersion"
     testImplementation "org.powermock:powermock-module-junit4-rule:$powerMockVersion"
     testImplementation "org.powermock:powermock-api-mockito2:$powerMockVersion"

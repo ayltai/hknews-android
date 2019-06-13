@@ -45,10 +45,4 @@
     <attr
         name="customSearchBarStyle"
         format="reference" />
-    <attr
-        name="customPopupStyle"
-        format="reference" />
-    <attr
-        name="customToolbarStyle"
-        format="reference" />
 </resources>
