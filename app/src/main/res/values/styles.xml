@@ -91,6 +91,11 @@
         <item name="android:textColor">@color/white</item>
         <item name="fontPath">fonts/Lato-Regular.ttf</item>
     </style>
+    <style name="Title.Menu">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
     <style
         name="Description"
         parent="@style/TextAppearance.AppCompat.Body1">

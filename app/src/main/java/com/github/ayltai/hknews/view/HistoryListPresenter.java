@@ -15,10 +15,6 @@ import com.github.ayltai.hknews.util.RxUtils;
 import io.reactivex.Single;
 
 public final class HistoryListPresenter extends ListPresenter {
-    public HistoryListPresenter(@Nonnull @NonNull @lombok.NonNull final String categoryName) {
-        super(categoryName);
-    }
-
     @Nonnull
     @NonNull
     @Override

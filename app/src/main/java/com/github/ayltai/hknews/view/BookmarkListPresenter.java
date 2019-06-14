@@ -15,10 +15,6 @@ import com.github.ayltai.hknews.util.RxUtils;
 import io.reactivex.Single;
 
 public final class BookmarkListPresenter extends ListPresenter {
-    public BookmarkListPresenter(@Nonnull @NonNull @lombok.NonNull final String categoryName) {
-        super(categoryName);
-    }
-
     @Nonnull
     @NonNull
     @Override

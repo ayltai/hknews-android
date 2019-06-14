@@ -11,4 +11,5 @@
     <color name="appBarBackground">#282828</color>
     <color name="bottomBarBackground">#2f2f2f</color>
     <color name="placeholderTextColor">#60ffffff</color>
+    <color name="menuItemBackground">#60ffffff</color>
 </resources>

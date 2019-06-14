@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.IdRes;
@@ -18,18 +19,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.collection.SparseArrayCompat;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.util.Pair;
 
+import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.SettingsActivity;
 import com.github.ayltai.hknews.util.Cacheable;
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.view.AboutPresenter;
+import com.github.ayltai.hknews.view.BookmarkListPresenter;
+import com.github.ayltai.hknews.view.CategoryPresenter;
+import com.github.ayltai.hknews.view.HistoryListPresenter;
+import com.github.ayltai.hknews.view.ListPresenter;
 import com.github.ayltai.hknews.view.MainPresenter;
-import com.github.ayltai.hknews.view.PagerPresenter;
 import com.github.ayltai.hknews.view.Presenter;
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.auto.value.AutoValue;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
@@ -39,7 +45,7 @@ import io.reactivex.processors.PublishProcessor;
 
 import flow.ClassKey;
 
-public final class MainView extends ScreenView implements MainPresenter.View, MaterialSearchBar.OnSearchActionListener, TextWatcher, Toolbar.OnMenuItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener, Cacheable {
+public final class MainView extends ScreenView implements MainPresenter.View, MaterialSearchBar.OnSearchActionListener, TextWatcher, Toolbar.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener, Cacheable {
     @AutoValue
     public abstract static class Key extends ClassKey implements Parcelable {
         @Nonnull
@@ -65,10 +71,14 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
 
     private final SparseArrayCompat<Pair<Presenter, Presenter.View>> views = new SparseArrayCompat<>();
 
-    private final AppBarLayout      appBarLayout;
     private final Toolbar           toolbar;
     private final MaterialSearchBar searchBar;
-    private final ViewGroup         container;
+    private final TextView          subheader;
+    private final ViewGroup         content;
+    private final BackdropBehavior  behavior;
+
+    private final CategoryPresenter categoryPresenter;
+    private final CategoryView      categoryView;
 
     //endregion
 
@@ -76,8 +86,9 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
         super(context);
 
         final View view = LayoutInflater.from(this.getContext()).inflate(R.layout.view_main, this, false);
-        this.container    = view.findViewById(R.id.content);
-        this.appBarLayout = view.findViewById(R.id.appBarLayout);
+
+        this.content  = view.findViewById(R.id.content);
+        this.behavior = (BackdropBehavior)((CoordinatorLayout.LayoutParams)view.findViewById(R.id.container).getLayoutParams()).getBehavior();
 
         this.toolbar = view.findViewById(R.id.toolbar);
         this.toolbar.setOnMenuItemClickListener(this);
@@ -87,23 +98,22 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
         this.searchBar.setOnSearchActionListener(this);
         this.searchBar.addTextChangeListener(this);
 
-        final BottomNavigationView navigationView = view.findViewById(R.id.bottomNavigationView);
+        final BottomNavigationView navigationView = view.findViewById(R.id.navigationView);
         navigationView.setOnNavigationItemSelectedListener(this);
         navigationView.setOnNavigationItemReselectedListener(this);
 
-        final PagerPresenter    pagerPresenter         = new PagerPresenter();
-        final PagerView         pagerView              = new PagerView(context);
-        final PagerPresenter    historyPagerPresenter  = new PagerPresenter();
-        final HistoryPagerView  historyPagerView       = new HistoryPagerView(context);
-        final PagerPresenter    bookmarkPagerPresenter = new PagerPresenter();
-        final BookmarkPagerView bookmarkPagerView      = new BookmarkPagerView(context);
-        final AboutPresenter    aboutPresenter         = new AboutPresenter();
-        final AboutView         aboutView              = new AboutView(context);
+        this.categoryPresenter = new CategoryPresenter();
+        this.categoryView      = new CategoryView(context);
 
-        this.views.put(R.id.action_news, Pair.create(pagerPresenter, pagerView));
-        this.views.put(R.id.action_histories, Pair.create(historyPagerPresenter, historyPagerView));
-        this.views.put(R.id.action_bookmarks, Pair.create(bookmarkPagerPresenter, bookmarkPagerView));
-        this.views.put(R.id.action_about, Pair.create(aboutPresenter, aboutView));
+        ((ViewGroup)view.findViewById(R.id.appBarLayout)).addView(this.categoryView);
+
+        this.subheader = view.findViewById(R.id.subheader);
+        this.subheader.setText(this.categoryPresenter.getCategoryName());
+
+        this.views.put(R.id.action_news, Pair.create(new ListPresenter(), this.createListView(new EmptyState())));
+        this.views.put(R.id.action_histories, Pair.create(new HistoryListPresenter(), this.createListView(new HistoryEmptyState())));
+        this.views.put(R.id.action_bookmarks, Pair.create(new BookmarkListPresenter(), this.createListView(new BookmarkEmptyState())));
+        this.views.put(R.id.action_about, Pair.create(new AboutPresenter(), new AboutView(context)));
 
         this.addView(view);
         this.updateLayout(BaseView.LAYOUT_SCREEN);
@@ -179,16 +189,33 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
     @CallSuper
     @Override
     public void onAttachedToWindow() {
-        super.onAttachedToWindow();
+        this.manageDisposable(this.categoryView.attaches().subscribe(irrelevant -> this.categoryPresenter.onViewAttached(this.categoryView)));
+        this.manageDisposable(this.categoryView.detaches().subscribe(irrelevant -> this.categoryPresenter.onViewDetached()));
 
-        final Pair<Presenter, Presenter.View> pair = this.findPairByView(this.container.getChildAt(0));
-        if (pair != null && pair.first != null && pair.second != null) pair.first.onViewAttached(pair.second);
+        this.manageDisposable(this.categoryView.selects().subscribe(categoryName -> {
+            this.subheader.setText(categoryName);
+
+            this.behavior.collapse();
+
+            final Pair<Presenter, Presenter.View> pair = this.findPairByView(this.content.getChildAt(0));
+            if (pair != null && pair.first != null && pair.second != null) {
+                pair.first.onViewAttached(pair.second);
+
+                if (pair.second instanceof ListView) {
+                    final ListPresenter presenter = (ListPresenter)pair.first;
+                    presenter.setCategoryName(categoryName);
+                    presenter.bindModel();
+                }
+            }
+        }));
+
+        super.onAttachedToWindow();
     }
 
     @CallSuper
     @Override
     public void onDetachedFromWindow() {
-        final Pair<Presenter, Presenter.View> pair = this.findPairByView(this.container.getChildAt(0));
+        final Pair<Presenter, Presenter.View> pair = this.findPairByView(this.content.getChildAt(0));
         if (pair != null && pair.first != null) pair.first.onViewDetached();
 
         super.onDetachedFromWindow();
@@ -208,8 +235,8 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
 
     @Override
     public void onSearchConfirmed(@Nullable final CharSequence text) {
-        final Pair<Presenter, Presenter.View> pair = this.findPairByView(this.container.getChildAt(0));
-        if (pair != null && pair.first instanceof PagerPresenter) ((PagerPresenter)pair.first).filter(text);
+        final Pair<Presenter, Presenter.View> pair = this.findPairByView(this.content.getChildAt(0));
+        if (pair != null && pair.first instanceof ListPresenter) ((ListPresenter)pair.first).filter(text);
     }
 
     @Override
@@ -234,7 +261,7 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
 
     @Override
     public boolean onMenuItemClick(@Nonnull @NonNull @lombok.NonNull final MenuItem item) {
-        final Pair<Presenter, Presenter.View> pair = this.findPairByView(this.container.getChildAt(0));
+        final Pair<Presenter, Presenter.View> pair = this.findPairByView(this.content.getChildAt(0));
 
         switch (item.getItemId()) {
             case R.id.action_search:
@@ -245,8 +272,10 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
                 return true;
 
             case R.id.action_refresh:
-                if (pair != null && pair.second instanceof PagerView) {
-                    if (pair.first != null) ((PagerPresenter)pair.first).refresh();
+                if (pair == null) return false;
+
+                if (pair.second instanceof ListView) {
+                    if (pair.first != null) ((ListView)pair.second).refreshes.onNext(Irrelevant.INSTANCE);
 
                     return true;
                 }
@@ -256,8 +285,8 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
             case R.id.action_clear:
                 if (pair == null) return false;
 
-                if (pair.second instanceof HistoryPagerView || pair.second instanceof BookmarkPagerView) {
-                    if (pair.first != null) ((PagerPresenter)pair.first).clear();
+                if (pair.second instanceof ListView) {
+                    if (pair.first != null) ((ListView)pair.second).clears.onNext(Irrelevant.INSTANCE);
 
                     return true;
                 }
@@ -313,18 +342,28 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
         return false;
     }
 
+    private ListView createListView(@Nonnull @NonNull @lombok.NonNull final EmptyState emptyState) {
+        return Components.getInstance().getConfigComponent().userConfigurations().isCompactStyle() ? new CompactListView(content.getContext(), emptyState) : new CozyListView(content.getContext(), emptyState);
+    }
+
     private void showView(@IdRes final int id) {
-        final View view = this.container.getChildAt(0);
+        final View view = this.content.getChildAt(0);
 
         final Pair<Presenter, Presenter.View> newPair = this.views.get(id);
         if (newPair != null && newPair.first != null && newPair.second != null) {
-            this.container.addView((View)newPair.second);
+            this.content.addView((View)newPair.second);
             newPair.first.onViewAttached(newPair.second);
+
+            if (id != R.id.action_about) {
+                final ListPresenter presenter = (ListPresenter)newPair.first;
+                presenter.setCategoryName(this.categoryPresenter.getCategoryName());
+                presenter.bindModel();
+            }
         }
 
         final Pair<Presenter, Presenter.View> oldPair = this.findPairByView(view);
         if (oldPair != null && oldPair.first != null) {
-            this.container.removeView(view);
+            this.content.removeView(view);
             oldPair.first.onViewDetached();
         }
 

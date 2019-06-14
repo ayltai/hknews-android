@@ -23,9 +23,9 @@ import com.google.android.material.appbar.AppBarLayout;
 public final class BackdropBehavior extends CoordinatorLayout.Behavior<View> {
     //region Constants
 
-    private static final int STATE_COLLAPSED = 1;
-    private static final int STATE_EXPANDED  = 2;
-    private static final int STATE_SETTLING  = 3;
+    public static final int STATE_COLLAPSED = 1;
+    public static final int STATE_EXPANDED  = 2;
+    public static final int STATE_SETTLING  = 3;
 
     private static final String KEY_STATE = "STATE";
 
@@ -36,7 +36,7 @@ public final class BackdropBehavior extends CoordinatorLayout.Behavior<View> {
         BackdropBehavior.STATE_EXPANDED,
         BackdropBehavior.STATE_SETTLING
     })
-    private @interface State {}
+    public @interface State {}
 
     //region Variables
 
@@ -44,6 +44,7 @@ public final class BackdropBehavior extends CoordinatorLayout.Behavior<View> {
     private @BackdropBehavior.State int targetState = BackdropBehavior.STATE_COLLAPSED;
 
     private boolean isInitialized;
+    private int     height;
 
     //region Components
 
@@ -66,6 +67,25 @@ public final class BackdropBehavior extends CoordinatorLayout.Behavior<View> {
 
     //endregion
 
+    @BackdropBehavior.State
+    public int getState() {
+        return this.state;
+    }
+
+    public void expand() {
+        if (this.targetState != BackdropBehavior.STATE_EXPANDED) {
+            this.toggleTargetState();
+            this.offsetFrontLayerTop();
+        }
+    }
+
+    public void collapse() {
+        if (this.targetState != BackdropBehavior.STATE_COLLAPSED) {
+            this.toggleTargetState();
+            this.offsetFrontLayerTop();
+        }
+    }
+
     @Override
     public boolean layoutDependsOn(@Nonnull @NonNull @lombok.NonNull final CoordinatorLayout parent, @Nonnull @NonNull @lombok.NonNull final View child, @Nonnull @NonNull @lombok.NonNull final View dependency) {
         return dependency instanceof AppBarLayout;
@@ -82,15 +102,22 @@ public final class BackdropBehavior extends CoordinatorLayout.Behavior<View> {
         if (!this.isInitialized) {
             this.isInitialized = true;
 
-            this.frontLayer.setY(this.getFrontLayoutTop());
+            this.height = this.backLayer.getHeight();
 
-            final ViewGroup.LayoutParams params = this.frontLayer.getLayoutParams();
-            params.height = this.getFrontLayoutHeight(parent);
-            this.frontLayer.setLayoutParams(params);
+            this.frontLayer.setY(this.getFrontLayerTop());
+
+            final ViewGroup.LayoutParams frontLayerLayoutParams = this.frontLayer.getLayoutParams();
+            frontLayerLayoutParams.height = this.getFrontLayerHeight(parent);
+            this.frontLayer.setLayoutParams(frontLayerLayoutParams);
+
+            this.setBackLayerHeight(this.toolbar.getHeight());
 
             this.toolbar.setNavigationIcon(this.getNavigationIcon());
             this.toolbar.setNavigationOnClickListener(view -> {
                 this.toggleTargetState();
+
+                this.setBackLayerHeight(this.targetState == BackdropBehavior.STATE_EXPANDED ? height : this.toolbar.getHeight());
+
                 this.offsetFrontLayerTop();
             });
         }
@@ -119,6 +146,8 @@ public final class BackdropBehavior extends CoordinatorLayout.Behavior<View> {
 
     private void onAfterStateChange() {
         this.state = this.targetState;
+
+        this.setBackLayerHeight(this.state == BackdropBehavior.STATE_COLLAPSED ? this.toolbar.getHeight() : ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     private void toggleTargetState() {
@@ -137,7 +166,7 @@ public final class BackdropBehavior extends CoordinatorLayout.Behavior<View> {
 
             this.frontLayer
                 .animate()
-                .y(this.getFrontLayoutTop())
+                .y(this.getFrontLayerTop())
                 .setInterpolator(new AccelerateInterpolator())
                 .setDuration(AnimationUtils.getAnimationDuration(this.frontLayer.getContext(), android.R.integer.config_mediumAnimTime))
                 .withStartAction(this::onBeforeStateChange)
@@ -145,17 +174,23 @@ public final class BackdropBehavior extends CoordinatorLayout.Behavior<View> {
                 .start();
         } else {
             this.onBeforeStateChange();
-            this.frontLayer.setY(this.getFrontLayoutTop());
+            this.frontLayer.setY(this.getFrontLayerTop());
             this.onAfterStateChange();
         }
     }
 
-    private int getFrontLayoutTop() {
-        return this.targetState == BackdropBehavior.STATE_COLLAPSED ? this.toolbar.getHeight() : this.backLayer.getHeight();
+    private int getFrontLayerTop() {
+        return this.targetState == BackdropBehavior.STATE_COLLAPSED ? this.toolbar.getHeight() : this.backLayer.getLayoutParams().height;
     }
 
-    private int getFrontLayoutHeight(@Nonnull @NonNull @lombok.NonNull final CoordinatorLayout parent) {
+    private int getFrontLayerHeight(@Nonnull @NonNull @lombok.NonNull final CoordinatorLayout parent) {
         return parent.getHeight() - this.toolbar.getHeight();
+    }
+
+    private void setBackLayerHeight(final int height) {
+        final ViewGroup.LayoutParams params = this.backLayer.getLayoutParams();
+        params.height = height;
+        this.backLayer.setLayoutParams(params);
     }
 
     private int getNavigationIcon() {

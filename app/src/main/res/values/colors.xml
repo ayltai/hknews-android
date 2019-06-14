@@ -16,4 +16,5 @@
     <color name="placeholderTextColor">#60000000</color>
     <color name="shadowStart">#00121212</color>
     <color name="shadowEnd">#ff121212</color>
+    <color name="menuItemBackground">#60000000</color>
 </resources>

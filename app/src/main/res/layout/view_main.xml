@@ -39,17 +39,12 @@
             app:mt_searchBarColor="?attr/searchBarBackground"
             app:mt_hint="@string/search_hint"
             style="?attr/customSearchBarStyle" />
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/topNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/primaryColor"
-            app:elevation="0dp" />
     </com.google.android.material.appbar.AppBarLayout>
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="-12dp"
+        android:layout_marginBottom="-16dp"
         app:layout_behavior=".widget.BackdropBehavior"
         app:cardElevation="1dp"
         app:cardCornerRadius="16dp">
@@ -57,6 +52,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/subheader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space16"
+                style="@style/TextAppearance.AppCompat.Subhead" />
             <FrameLayout
                 android:id="@+id/content"
                 android:layout_width="match_parent"
@@ -64,7 +65,7 @@
                 android:layout_weight="1"
                 android:animateLayoutChanges="true" />
             <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavigationView"
+                android:id="@+id/navigationView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"

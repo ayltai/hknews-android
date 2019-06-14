@@ -50,14 +50,17 @@ public class ListPresenter extends ModelPresenter<List<Item>, ListPresenter.View
     }
 
     private final List<String> sourceNames;
-    private final String       categoryName;
 
-    public ListPresenter(@Nonnull @NonNull @lombok.NonNull final String categoryName) {
+    private String categoryName;
+
+    public ListPresenter() {
         this.sourceNames = Components.getInstance()
             .getConfigComponent()
             .userConfigurations()
             .getSourceNames();
+    }
 
+    public void setCategoryName(@Nonnull @NonNull @lombok.NonNull final String categoryName) {
         this.categoryName = categoryName;
     }
 
