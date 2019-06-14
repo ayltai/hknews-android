@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.ayltai.hknews.view.FeaturedItemPresenter;
 import com.github.ayltai.hknews.view.FeaturedListPresenter;
 import com.github.ayltai.hknews.view.ItemPresenter;
 import com.github.ayltai.hknews.view.ListPresenter;
@@ -23,6 +24,8 @@ public final class ListAdapter extends RecyclerView.Adapter<ItemViewHolder<Prese
 
     private final ListPresenter presenter;
     private final boolean       isCompactStyle;
+
+    private ItemViewHolder<Presenter, BaseView> holder;
 
     public ListAdapter(@Nonnull @NonNull @lombok.NonNull final ListPresenter presenter, final boolean isCompactStyle) {
         this.presenter      = presenter;
@@ -43,7 +46,16 @@ public final class ListAdapter extends RecyclerView.Adapter<ItemViewHolder<Prese
     @NonNull
     @Override
     public ItemViewHolder<Presenter, BaseView> onCreateViewHolder(@Nonnull @NonNull @lombok.NonNull final ViewGroup parent, final int viewType) {
-        if (viewType == ListAdapter.TYPE_FEATURED) return new ItemViewHolder<>(new FeaturedListPresenter(), new FeaturedListView(parent.getContext()));
+        if (viewType == ListAdapter.TYPE_FEATURED) {
+            if (holder == null) {
+                final FeaturedListPresenter presenter = new FeaturedListPresenter();
+                presenter.setModel(this.presenter.getModel());
+
+                holder = new ItemViewHolder<>(presenter, new FeaturedListView(parent.getContext()));
+            }
+
+            return holder;
+        }
 
         if (this.isCompactStyle) return new ItemViewHolder<>(new ItemPresenter<>(), new CompactItemView(parent.getContext()));
 
@@ -52,18 +64,14 @@ public final class ListAdapter extends RecyclerView.Adapter<ItemViewHolder<Prese
 
     @Override
     public void onBindViewHolder(@Nonnull @NonNull @lombok.NonNull final ItemViewHolder<Presenter, BaseView> holder, final int position) {
-        if (position == 0) {
-            if (holder.presenter instanceof ModelPresenter) ((ModelPresenter)holder.presenter).setModel(this.presenter.getModel());
-        } else {
-            if (holder.presenter instanceof ModelPresenter) ((ModelPresenter)holder.presenter).setModel(this.presenter.getModel().get(position - 1));
-        }
+        if (position > 0 && holder.presenter instanceof ModelPresenter)  ((ModelPresenter)holder.presenter).setModel(this.presenter.getModel().get(position - 1));
     }
 
     @Override
     public void onViewAttachedToWindow(@Nonnull @NonNull @lombok.NonNull final ItemViewHolder<Presenter, BaseView> holder) {
         holder.presenter.onViewAttached(holder.view);
 
-        if (holder.presenter instanceof ModelPresenter) ((ModelPresenter)holder.presenter).bindModel();
+        if (holder.presenter instanceof ModelPresenter && !(holder.presenter instanceof FeaturedItemPresenter)) ((ModelPresenter)holder.presenter).bindModel();
     }
 
     @Override

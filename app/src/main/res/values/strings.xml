@@ -124,5 +124,6 @@
     <string name="time_ago_months">%s months ago</string>
     <string name="time_ago_year">A year ago</string>
     <string name="time_ago_years">%s years ago</string>
+    <string name="last_updated">%1$s (Last updated: %2$s)</string>
     <!-- endregion -->
 </resources>

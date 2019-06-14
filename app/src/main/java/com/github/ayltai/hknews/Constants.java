@@ -20,6 +20,7 @@ public class Constants {
     public static final int MAX_ZOOM           = 8;
     public static final int NEWS_DAYS          = 3;
     public static final int FEATURED_NEWS_TIME = 24 * 60 * 60 * 1000;
+    public static final int LAST_UPDATED_TIME  = 10 * 1000;
 
     public static final String BASE_URL = "https://hknews.dev/";
 }

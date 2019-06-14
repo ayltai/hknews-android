@@ -1,5 +1,6 @@
 package com.github.ayltai.hknews.config;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -26,4 +27,10 @@ public interface UserConfigurations {
     List<String> getCategoryNames();
 
     void setCategoryNames(@Nonnull @NonNull @lombok.NonNull List<String> categoryNames);
+
+    @Nonnull
+    @NonNull
+    Date getLastUpdatedDate(@Nonnull @NonNull @lombok.NonNull String categoryName);
+
+    void setLastUpdatedDate(@Nonnull @NonNull @lombok.NonNull String categoryName, @Nonnull @NonNull @lombok.NonNull Date date);
 }

@@ -2,6 +2,7 @@ package com.github.ayltai.hknews.view;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -51,7 +52,8 @@ public class ListPresenter extends ModelPresenter<List<Item>, ListPresenter.View
 
     private final List<String> sourceNames;
 
-    private String categoryName;
+    private boolean isInitialized;
+    private String  categoryName;
 
     public ListPresenter() {
         this.sourceNames = Components.getInstance()
@@ -81,6 +83,12 @@ public class ListPresenter extends ModelPresenter<List<Item>, ListPresenter.View
 
         this.subscribeRefreshes(view);
         this.subscribeClears(view);
+
+        if (!this.isInitialized) {
+            this.isInitialized = true;
+
+            this.bindModel();
+        }
     }
 
     @Nonnull
@@ -89,6 +97,11 @@ public class ListPresenter extends ModelPresenter<List<Item>, ListPresenter.View
         if (this.getView() == null) return Single.just(Irrelevant.INSTANCE);
 
         return Single.defer(() -> {
+            Components.getInstance()
+                .getConfigComponent()
+                .userConfigurations()
+                .setLastUpdatedDate(this.categoryName, new Date());
+
             this.load(this.createItemLoader(), this.sourceNames, this.categoryName, null, true);
 
             return Single.just(Irrelevant.INSTANCE);

@@ -1,5 +1,8 @@
 package com.github.ayltai.hknews.widget;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.annotation.Nonnull;
 
 import android.app.Activity;
@@ -23,9 +26,11 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.util.Pair;
 
 import com.github.ayltai.hknews.Components;
+import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.SettingsActivity;
 import com.github.ayltai.hknews.util.Cacheable;
+import com.github.ayltai.hknews.util.DateUtils;
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.view.AboutPresenter;
 import com.github.ayltai.hknews.view.BookmarkListPresenter;
@@ -82,6 +87,8 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
 
     //endregion
 
+    private Timer timer;
+
     public MainView(@Nonnull @NonNull @lombok.NonNull final Context context) {
         super(context);
 
@@ -108,7 +115,7 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
         ((ViewGroup)view.findViewById(R.id.appBarLayout)).addView(this.categoryView);
 
         this.subheader = view.findViewById(R.id.subheader);
-        this.subheader.setText(this.categoryPresenter.getCategoryName());
+        this.updateSubheader(context, this.categoryPresenter.getCategoryName());
 
         this.views.put(R.id.action_news, Pair.create(new ListPresenter(), this.createListView(new EmptyState())));
         this.views.put(R.id.action_histories, Pair.create(new HistoryListPresenter(), this.createListView(new HistoryEmptyState())));
@@ -193,21 +200,30 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
         this.manageDisposable(this.categoryView.detaches().subscribe(irrelevant -> this.categoryPresenter.onViewDetached()));
 
         this.manageDisposable(this.categoryView.selects().subscribe(categoryName -> {
-            this.subheader.setText(categoryName);
+            this.updateSubheader(this.getContext(), categoryName);
 
             this.behavior.collapse();
 
             final Pair<Presenter, Presenter.View> pair = this.findPairByView(this.content.getChildAt(0));
             if (pair != null && pair.first != null && pair.second != null) {
-                pair.first.onViewAttached(pair.second);
-
-                if (pair.second instanceof ListView) {
+                if (pair.first instanceof ListPresenter) {
                     final ListPresenter presenter = (ListPresenter)pair.first;
+
                     presenter.setCategoryName(categoryName);
                     presenter.bindModel();
                 }
+
+                pair.first.onViewAttached(pair.second);
             }
         }));
+
+        this.timer = new Timer();
+        this.timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                MainView.this.updateSubheader(MainView.this.getContext(), MainView.this.categoryPresenter.getCategoryName());
+            }
+        }, 0, Constants.LAST_UPDATED_TIME);
 
         super.onAttachedToWindow();
     }
@@ -215,6 +231,9 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
     @CallSuper
     @Override
     public void onDetachedFromWindow() {
+        this.timer.cancel();
+        this.timer.purge();
+
         final Pair<Presenter, Presenter.View> pair = this.findPairByView(this.content.getChildAt(0));
         if (pair != null && pair.first != null) pair.first.onViewDetached();
 
@@ -351,14 +370,16 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
 
         final Pair<Presenter, Presenter.View> newPair = this.views.get(id);
         if (newPair != null && newPair.first != null && newPair.second != null) {
+            if (id == R.id.action_about) {
+                this.subheader.setVisibility(View.GONE);
+            } else {
+                this.subheader.setVisibility(View.VISIBLE);
+
+                ((ListPresenter)newPair.first).setCategoryName(this.categoryPresenter.getCategoryName());
+            }
+
             this.content.addView((View)newPair.second);
             newPair.first.onViewAttached(newPair.second);
-
-            if (id != R.id.action_about) {
-                final ListPresenter presenter = (ListPresenter)newPair.first;
-                presenter.setCategoryName(this.categoryPresenter.getCategoryName());
-                presenter.bindModel();
-            }
         }
 
         final Pair<Presenter, Presenter.View> oldPair = this.findPairByView(view);
@@ -367,7 +388,21 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
             oldPair.first.onViewDetached();
         }
 
-        this.toolbar.getMenu().findItem(R.id.action_search).setVisible(id != R.id.action_about);
+        if (id == R.id.action_about) {
+            this.toolbar.getMenu().findItem(R.id.action_search).setVisible(false);
+            this.toolbar.getMenu().findItem(R.id.action_refresh).setVisible(false);
+
+            this.toolbar.setNavigationIcon(null);
+        } else {
+            this.toolbar.getMenu().findItem(R.id.action_search).setVisible(true);
+            this.toolbar.getMenu().findItem(R.id.action_refresh).setVisible(true);
+
+            this.toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+        }
+    }
+
+    private void updateSubheader(@Nonnull @NonNull @lombok.NonNull final Context context, @Nonnull @NonNull @lombok.NonNull final String categoryName) {
+        this.subheader.setText(String.format(context.getResources().getString(R.string.last_updated), categoryName, DateUtils.getHumanReadableDate(context, Components.getInstance().getConfigComponent().userConfigurations().getLastUpdatedDate(categoryName))));
     }
 
     @Nullable

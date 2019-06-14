@@ -2,6 +2,7 @@ package com.github.ayltai.hknews.config;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -114,6 +115,21 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
         this.preferences
             .edit()
             .putStringSet(PreferenceUserConfigurations.KEY_CATEGORY_NAMES, new HashSet<>(categoryNames))
+            .commit();
+    }
+
+    @Nonnull
+    @NonNull
+    @Override
+    public Date getLastUpdatedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName) {
+        return new Date(this.preferences.getLong(categoryName, System.currentTimeMillis()));
+    }
+
+    @Override
+    public void setLastUpdatedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName, @NonNull @Nonnull @lombok.NonNull final Date date) {
+        this.preferences
+            .edit()
+            .putLong(categoryName, date.getTime())
             .commit();
     }
 }
