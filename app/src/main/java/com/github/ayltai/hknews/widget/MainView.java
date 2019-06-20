@@ -105,7 +105,7 @@ public final class MainView extends ScreenView implements MainPresenter.View, Ma
         this.searchBar.setOnSearchActionListener(this);
         this.searchBar.addTextChangeListener(this);
 
-        final BottomNavigationView navigationView = view.findViewById(R.id.navigationView);
+        final BottomNavigationView navigationView = view.findViewById(R.id.bottomNavigationView);
         navigationView.setOnNavigationItemSelectedListener(this);
         navigationView.setOnNavigationItemReselectedListener(this);
 

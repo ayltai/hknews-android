@@ -29,7 +29,7 @@ public final class CategoryView extends BaseView implements CategoryPresenter.Vi
 
         final View view = LayoutInflater.from(context).inflate(R.layout.view_category, this, false);
 
-        this.navigationView = view.findViewById(R.id.navigationView);
+        this.navigationView = view.findViewById(R.id.topNavigationView);
 
         this.addView(view);
     }

@@ -30,11 +30,12 @@
         <item name="textColor">@color/textColor</item>
         <item name="textColorHint">@color/textColorHint</item>
         <item name="textColorInverse">@color/textColorInverse</item>
+        <item name="appBackground">@color/appBackground</item>
         <item name="windowBackground">@color/windowBackground</item>
         <item name="placeholderTextColor">@color/placeholderTextColor</item>
         <item name="cardBackground">@color/cardBackground</item>
         <item name="searchBarBackground">@color/searchBarBackground</item>
-        <item name="bottomBarBackground">@color/bottomBarBackground</item>
+        <item name="barBackground">@color/barBackground</item>
         <item name="customSearchBarStyle">@style/CustomMaterialSearchBarDark</item>
         <item name="popupMenuStyle">@style/PopupMenuLight</item>
         <item name="android:popupMenuStyle">@style/PopupMenuLight</item>

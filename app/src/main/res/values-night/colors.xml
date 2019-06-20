@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">@color/deep_orange_300</color>
-    <color name="primaryColorDark">@color/appBarBackground</color>
-    <color name="accentColor">@color/light_blue_200</color>
+    <color name="primaryColor">@color/teal_a400</color>
+    <color name="primaryColorDark">@color/blue_gray_900</color>
+    <color name="accentColor">@color/amber_a400</color>
     <color name="textColor">#ddffffff</color>
     <color name="textColorHint">#99ffffff</color>
     <color name="textColorInverse">#1e1e1e</color>
-    <color name="windowBackground">#121212</color>
-    <color name="cardBackground">#0cffffff</color>
-    <color name="appBarBackground">#282828</color>
-    <color name="bottomBarBackground">#2f2f2f</color>
+    <color name="appBackground">@color/blue_gray_900</color>
+    <color name="windowBackground">@color/blue_gray_900</color>
+    <color name="searchBarBackground">@color/barBackground</color>
+    <color name="cardBackground">@color/blue_gray_800</color>
+    <color name="barBackground">@color/blue_gray_900</color>
     <color name="placeholderTextColor">#60ffffff</color>
     <color name="menuItemBackground">#60ffffff</color>
 </resources>

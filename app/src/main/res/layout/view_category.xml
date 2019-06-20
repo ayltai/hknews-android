@@ -2,10 +2,10 @@
 <com.google.android.material.navigation.NavigationView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigationView"
+    android:id="@+id/topNavigationView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/primaryColor"
+    android:background="?attr/appBackground"
     app:elevation="0dp"
     app:itemBackground="@drawable/bg_menu_item"
     app:itemTextAppearance="@style/Title.Menu"

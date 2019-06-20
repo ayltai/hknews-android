@@ -5,14 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/primaryColor"
+    android:background="?attr/appBackground"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/primaryColor"
+        android:background="?attr/appBackground"
         app:elevation="0dp">
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -51,6 +51,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="?attr/cardBackground"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/subheader"
@@ -65,13 +66,13 @@
                 android:layout_weight="1"
                 android:animateLayoutChanges="true" />
             <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/navigationView"
+                android:id="@+id/bottomNavigationView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 app:labelVisibilityMode="labeled"
                 app:elevation="@dimen/shadow"
-                app:backgroundTint="?attr/bottomBarBackground"
+                app:backgroundTint="?attr/barBackground"
                 app:itemIconTint="@color/bottom_tab_selector"
                 app:itemTextColor="@color/bottom_tab_selector"
                 app:menu="@menu/bottom" />

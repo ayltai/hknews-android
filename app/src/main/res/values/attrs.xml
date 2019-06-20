@@ -25,6 +25,9 @@
         name="textColorInverse"
         format="color" />
     <attr
+        name="appBackground"
+        format="color" />
+    <attr
         name="windowBackground"
         format="color" />
     <attr
@@ -34,7 +37,7 @@
         name="searchBarBackground"
         format="color" />
     <attr
-        name="bottomBarBackground"
+        name="barBackground"
         format="color" />
     <attr
         name="placeholderTextColor"
