@@ -6,11 +6,11 @@
     <color name="textColor">#ddffffff</color>
     <color name="textColorHint">#99ffffff</color>
     <color name="textColorInverse">#1e1e1e</color>
-    <color name="appBackground">@color/blue_gray_900</color>
+    <color name="appBackground">@color/gray_900</color>
     <color name="windowBackground">@color/blue_gray_900</color>
     <color name="searchBarBackground">@color/barBackground</color>
     <color name="cardBackground">@color/blue_gray_800</color>
-    <color name="barBackground">@color/blue_gray_900</color>
+    <color name="barBackground">@color/gray_900</color>
     <color name="placeholderTextColor">#60ffffff</color>
     <color name="menuItemBackground">#60ffffff</color>
 </resources>

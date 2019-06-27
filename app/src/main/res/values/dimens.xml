@@ -35,5 +35,6 @@
     <dimen name="detailed_image_height_max">240dp</dimen>
 
     <dimen name="toolbarHeight">56dp</dimen>
+    <dimen name="bottomBarHeight">56dp</dimen>
     <dimen name="shadow">4dp</dimen>
 </resources>

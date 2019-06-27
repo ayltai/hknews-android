@@ -44,14 +44,13 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="-16dp"
         app:layout_behavior=".widget.BackdropBehavior"
         app:cardElevation="1dp"
         app:cardCornerRadius="16dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/cardBackground"
+            android:background="?attr/windowBackground"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/subheader"
@@ -64,18 +63,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:paddingBottom="@dimen/bottomBarHeight"
                 android:animateLayoutChanges="true" />
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavigationView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                app:labelVisibilityMode="labeled"
-                app:elevation="@dimen/shadow"
-                app:backgroundTint="?attr/barBackground"
-                app:itemIconTint="@color/bottom_tab_selector"
-                app:itemTextColor="@color/bottom_tab_selector"
-                app:menu="@menu/bottom" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        app:elevation="@dimen/shadow"
+        app:backgroundTint="?attr/barBackground"
+        app:itemIconTint="@color/bottom_tab_selector"
+        app:itemTextColor="@color/bottom_tab_selector"
+        app:menu="@menu/bottom" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
