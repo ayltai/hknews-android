@@ -110,7 +110,7 @@ configurations {
 ext {
     multiDexVersion       = '2.0.1'
     supportLibraryVersion = '28.0.0'
-    architectureVersion   = '2.2.0-alpha01'
+    architectureVersion   = '2.2.0-alpha02'
     daggerVersion         = '2.23.2'
     okHttpVersion         = '3.12.3'
     retrofitVersion       = '2.6.0'
