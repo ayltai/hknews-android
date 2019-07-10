@@ -266,7 +266,7 @@ configurations.all {
 //region Checkstyle configurations
 
 checkstyle {
-    toolVersion    '8.21'
+    toolVersion    '8.22'
     configFile     rootProject.file('./checkstyle.xml')
     ignoreFailures true
     showViolations true
