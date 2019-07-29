@@ -217,7 +217,7 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
     compileOnly         "com.google.auto.value:auto-value-annotations:$autoValueVersion"
     annotationProcessor "com.google.auto.value:auto-value:$autoValueVersion"
-    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.6'
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.7'
 
     // Fabric
     implementation ('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
