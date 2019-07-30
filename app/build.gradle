@@ -151,7 +151,7 @@ dependencies {
     // Android Support libraries
     implementation 'androidx.browser:browser:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0-beta01'
-    implementation 'com.google.android.material:material:1.1.0-alpha08'
+    implementation 'com.google.android.material:material:1.1.0-alpha09'
     implementation 'com.takisoft.preferencex:preferencex:1.1.0-alpha05'
 
     // Firebase
