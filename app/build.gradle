@@ -113,7 +113,7 @@ ext {
     architectureVersion   = '2.2.0-alpha02'
     daggerVersion         = '2.24'
     okHttpVersion         = '3.12.3'
-    retrofitVersion       = '2.6.0'
+    retrofitVersion       = '2.6.1'
     frescoVersion         = '2.0.0'
     bigImageViewerVersion = '1.5.7'
     exoPlayerVersion      = '2.10.3'
