@@ -16,6 +16,7 @@ import javax.inject.Singleton;
 
 import android.app.Application;
 import android.content.res.AssetFileDescriptor;
+import android.graphics.Point;
 import android.graphics.PointF;
 
 import androidx.annotation.NonNull;
@@ -102,7 +103,7 @@ public final class TensorFlowCenterFinder implements CenterFinder {
             for (int j = 0; j < heatMap[i].length; j++) {
                 if (heatMap[i][j] >= min && cheatSheet[i][j] == 0) {
                     final BinaryBlob blob = new BinaryBlob();
-                    blob.explore(j, i, heatMap, cheatSheet, min);
+                    blob.explore(new Point(i, j), heatMap, cheatSheet, min);
                     blobs.add(blob);
                 }
             }

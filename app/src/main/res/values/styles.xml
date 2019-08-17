@@ -15,8 +15,14 @@
     <style name="Source.Cozy">
         <item name="android:textSize">@dimen/textNormal</item>
     </style>
+    <style name="Source.Cozy.Placeholder">
+        <item name="android:textColor">?attr/placeholderTextColor</item>
+    </style>
     <style name="Source.Compact">
         <item name="android:textSize">@dimen/textSmall</item>
+    </style>
+    <style name="Source.Compact.Placeholder">
+        <item name="android:textColor">?attr/placeholderTextColor</item>
     </style>
     <style name="Source.Details">
         <item name="android:maxLines">2147483647</item>
@@ -37,8 +43,14 @@
     <style name="Meta.Cozy">
         <item name="android:textSize">@dimen/textSmall</item>
     </style>
+    <style name="Meta.Cozy.Placeholder">
+        <item name="android:textColor">?attr/placeholderTextColor</item>
+    </style>
     <style name="Meta.Compact">
         <item name="android:textSize">@dimen/textSmall</item>
+    </style>
+    <style name="Meta.Compact.Placeholder">
+        <item name="android:textColor">?attr/placeholderTextColor</item>
     </style>
     <style name="Meta.Details">
         <item name="android:maxLines">2147483647</item>
@@ -60,10 +72,16 @@
         <item name="android:textSize">@dimen/textLarge</item>
         <item name="android:autoLink">web</item>
     </style>
+    <style name="Title.Cozy.Placeholder">
+        <item name="android:textColor">?attr/placeholderTextColor</item>
+    </style>
     <style name="Title.Compact">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/textNormal</item>
         <item name="fontPath">fonts/Lato-Bold.ttf</item>
+    </style>
+    <style name="Title.Compact.Placeholder">
+        <item name="android:textColor">?attr/placeholderTextColor</item>
     </style>
     <style name="Title.Details">
         <item name="android:layout_marginLeft">@dimen/space16</item>
@@ -74,16 +92,6 @@
         <item name="android:maxLines">2147483647</item>
         <item name="android:ellipsize">none</item>
         <item name="android:textSize">@dimen/textLarge</item>
-    </style>
-    <style name="Title.Banner">
-        <item name="android:padding">@dimen/space16</item>
-        <item name="android:layout_gravity">bottom</item>
-        <item name="android:textSize">@dimen/textLarge</item>
-        <item name="android:textColor">#ddffffff</item>
-        <item name="android:shadowDx">2.5</item>
-        <item name="android:shadowDy">2.5</item>
-        <item name="android:shadowRadius">2.5</item>
-        <item name="android:shadowColor">@color/shadowEnd</item>
     </style>
     <style name="Title.App">
         <item name="android:maxLines">1</item>
@@ -111,9 +119,15 @@
         <item name="android:textSize">@dimen/textNormal</item>
         <item name="android:autoLink">web</item>
     </style>
+    <style name="Description.Cozy.Placeholder">
+        <item name="android:textColor">?attr/placeholderTextColor</item>
+    </style>
     <style name="Description.Compact">
         <item name="android:maxLines">2</item>
         <item name="android:textSize">@dimen/textNormal</item>
+    </style>
+    <style name="Description.Compact.Placeholder">
+        <item name="android:textColor">?attr/placeholderTextColor</item>
     </style>
     <style name="Description.Details">
         <item name="android:layout_marginLeft">@dimen/space16</item>
@@ -147,75 +161,12 @@
         <item name="android:foreground">?attr/selectableItemBackground</item>
         <item name="cardBackgroundColor">?attr/cardBackground</item>
     </style>
-
-    <!-- Popup menu -->
     <style
-        name="PopupMenuLight"
-        parent="@style/Widget.MaterialComponents.PopupMenu">
-        <item name="android:popupBackground">?attr/windowBackground</item>
-    </style>
-    <style
-        name="PopupMenuDark"
-        parent="@style/Widget.MaterialComponents.PopupMenu.Dark">
-        <item name="android:popupBackground">?attr/windowBackground</item>
-    </style>
-
-    <style
-        name="CustomMaterialSearchBarDark"
-        parent="@style/MaterialSearchBarDark">
-        <item name="mt_navIconTint">@color/white</item>
-        <item name="mt_searchIconTint">@color/white</item>
-        <item name="mt_clearIconTint">@color/white</item>
-        <item name="mt_menuIconTint">@color/white</item>
-        <item name="mt_backIconTint">@color/white</item>
-        <item name="mt_textCursorTint">@color/accentColor</item>
-        <item name="mt_highlightedTextColor">@color/accentColor</item>
-    </style>
-
-    <!-- ExoPlayer -->
-    <style name="ExoPlayerControlButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@null</item>
-    </style>
-    <style name="ExoPlayerControlItem">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">@dimen/space8</item>
-        <item name="android:paddingStart">@dimen/space8</item>
-        <item name="android:paddingRight">@dimen/space8</item>
-        <item name="android:paddingEnd">@dimen/space8</item>
-        <item name="android:textSize">@dimen/textSmall</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">#bebebe</item>
-        <item name="android:includeFontPadding">false</item>
-    </style>
-
-    <!-- About -->
-    <style name="about_About.wrapper">
+        name="Toolbar"
+        parent="@style/Widget.MaterialComponents.Toolbar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">?attr/windowBackground</item>
-    </style>
-    <style
-        name="about_description"
-        parent="@android:style/TextAppearance">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:lineSpacingExtra">@dimen/space8</item>
-        <item name="android:layout_marginBottom">@dimen/space16</item>
-        <item name="android:textColor">?attr/textColor</item>
-        <item name="android:textSize">@dimen/about_description_text_size</item>
-    </style>
-    <style name="about_separator">
-        <item name="android:layout_height">@dimen/about_separator_height</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:background">?attr/textColorHint</item>
-        <item name="android:padding">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginTop">0dp</item>
-        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_height">@dimen/toolbar</item>
+        <item name="android:theme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
+        <item name="android:background">?attr/appBackground</item>
     </style>
 </resources>

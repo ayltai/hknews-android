@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="model"
+            type="com.github.ayltai.hknews.data.view.AboutViewModel" />
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:elevation="@dimen/elevation"
+                app:elevation="@dimen/elevation"
+                style="@style/Toolbar"
+                tools:targetApi="LOLLIPOP" />
+        </com.google.android.material.appbar.AppBarLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/toolbar"
+            android:paddingBottom="@dimen/bottomNavigationView"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="@dimen/space8"
+                    android:layout_margin="@dimen/space8"
+                    android:text="@string/app_name"
+                    style="@style/TextAppearance.MaterialComponents.Headline5" />
+                <ImageView
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_margin="@dimen/space8"
+                    android:layout_gravity="center_horizontal"
+                    app:srcCompat="@drawable/logo" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="@dimen/space8"
+                    android:layout_margin="@dimen/space8"
+                    android:gravity="center_horizontal"
+                    android:text="@{model.description}"
+                    tools:text="@tools:sample/lorem/random" />
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:divider="?android:attr/dividerHorizontal"
+                    app:showDividers="middle">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/space8"
+                        android:layout_margin="@dimen/space8"
+                        android:text="@{model.version}"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                        tools:text="@tools:sample/lorem" />
+                    <TextView
+                        android:id="@+id/website"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/space8"
+                        android:layout_margin="@dimen/space8"
+                        android:background="?attr/selectableItemBackground"
+                        android:text="@{model.website}"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                        tools:text="@tools:sample/lorem" />
+                    <TextView
+                        android:id="@+id/issues"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/space8"
+                        android:layout_margin="@dimen/space8"
+                        android:background="?attr/selectableItemBackground"
+                        android:text="@{model.issues}"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                        tools:text="@tools:sample/lorem" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

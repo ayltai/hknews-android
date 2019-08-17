@@ -31,7 +31,6 @@ final class NetModule {
             .addInterceptor(chain -> chain.proceed(chain.request()
                 .newBuilder()
                 .header("User-Agent", BuildConfig.APPLICATION_ID + " " + BuildConfig.VERSION_NAME)
-                .header("x-api-key", BuildConfig.API_KEY)
                 .build()))
             .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build();

@@ -1,107 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/container"
-        android:layout_marginLeft="@dimen/space8"
-        android:layout_marginStart="@dimen/space8"
-        android:layout_marginRight="@dimen/space8"
-        android:layout_marginEnd="@dimen/space8"
-        android:layout_marginTop="@dimen/space4"
-        android:layout_marginBottom="@dimen/space4"
-        android:addStatesFromChildren="true"
-        android:stateListAnimator="@animator/lift_on_pressed"
-        app:cardElevation="@dimen/card_elevation"
-        app:cardCornerRadius="@dimen/cozy_radius"
-        app:cardUseCompatPadding="true"
-        app:cardPreventCornerOverlap="false"
-        tools:targetApi="P"
-        style="@style/Card">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/space16"
-            android:paddingBottom="@dimen/space16"
-            android:addStatesFromChildren="true">
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/source_icon"
-                android:layout_width="@dimen/cozy_icon_size"
-                android:layout_height="@dimen/cozy_icon_size"
-                android:layout_marginLeft="@dimen/space16"
-                android:layout_marginStart="@dimen/space16"
-                android:layout_marginRight="@dimen/space16"
-                android:layout_marginEnd="@dimen/space16"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:clickable="false"
-                app:placeholderImage="?attr/placeholderImage"
-                app:fadeDuration="@android:integer/config_shortAnimTime" />
-            <TextView
-                android:id="@+id/source_name"
-                android:layout_marginRight="@dimen/space16"
-                android:layout_marginEnd="@dimen/space16"
-                android:layout_toRightOf="@+id/source_icon"
-                android:layout_toEndOf="@+id/source_icon"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/source_icon"
-                android:layout_alignWithParentIfMissing="true"
-                android:clickable="false"
-                tools:text="Proin rutrum ipsum"
-                style="@style/Source.Cozy" />
-            <TextView
-                android:id="@+id/publish_date"
-                android:layout_marginRight="@dimen/space16"
-                android:layout_marginEnd="@dimen/space16"
-                android:layout_toRightOf="@+id/source_icon"
-                android:layout_toEndOf="@+id/source_icon"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignBottom="@+id/source_icon"
-                android:layout_alignWithParentIfMissing="true"
-                android:clickable="false"
-                tools:text="Phasellus at aliquam dolor"
-                style="@style/Meta.Cozy" />
-            <com.github.ayltai.hknews.widget.SmartCroppingImageView
-                android:id="@+id/image"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View" />
+        <import type="android.text.TextUtils" />
+        <variable
+            name="item"
+            type="com.github.ayltai.hknews.data.model.Item" />
+    </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/container"
+            android:layout_marginLeft="@dimen/space8"
+            android:layout_marginStart="@dimen/space8"
+            android:layout_marginRight="@dimen/space8"
+            android:layout_marginEnd="@dimen/space8"
+            android:layout_marginTop="@dimen/space4"
+            android:layout_marginBottom="@dimen/space4"
+            android:addStatesFromChildren="true"
+            android:stateListAnimator="@animator/lift_on_pressed"
+            app:cardElevation="@dimen/elevation"
+            app:cardCornerRadius="@dimen/cozy_radius"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false"
+            tools:targetApi="P"
+            style="@style/Card">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/cozy_image_size"
-                android:layout_marginTop="@dimen/space16"
-                android:layout_below="@+id/source_icon"
-                android:layout_alignWithParentIfMissing="true"
-                android:background="?attr/placeholderImage"
-                app:initScaleType="centerCrop"
-                app:tapToRetry="true" />
-            <TextView
-                android:id="@+id/title"
-                android:layout_below="@+id/image"
-                android:layout_alignWithParentIfMissing="true"
-                android:paddingLeft="@dimen/space16"
-                android:paddingStart="@dimen/space16"
-                android:paddingRight="@dimen/space16"
-                android:paddingEnd="@dimen/space16"
+                android:layout_height="wrap_content"
                 android:paddingTop="@dimen/space16"
-                android:clickable="false"
-                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                style="@style/Title.Cozy" />
-            <TextView
-                android:id="@+id/description"
-                android:layout_below="@+id/title"
-                android:layout_alignWithParentIfMissing="true"
-                android:paddingLeft="@dimen/space16"
-                android:paddingStart="@dimen/space16"
-                android:paddingRight="@dimen/space16"
-                android:paddingEnd="@dimen/space16"
-                android:paddingTop="@dimen/space16"
-                android:clickable="false"
-                tools:text="Sed eu rhoncus enim, sit amet iaculis ante. Sed at finibus lectus, at consequat lacus. Etiam ipsum erat, facilisis vel sagittis sed, scelerisque ut eros. Praesent at mauris laoreet, imperdiet urna imperdiet, sollicitudin erat. Etiam iaculis mauris eu libero dignissim mattis mollis vitae enim. Quisque nec semper arcu. Ut lobortis, justo vitae finibus tempus, mauris elit fermentum mi, at cursus leo nisi et dui. Phasellus turpis diam, mollis at elementum aliquet, ullamcorper in metus. In lobortis scelerisque ante in mollis. Curabitur eget efficitur massa."
-                style="@style/Description.Cozy" />
-        </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
-</FrameLayout>
-
+                android:paddingBottom="@dimen/space16"
+                android:addStatesFromChildren="true">
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/source_icon"
+                    android:layout_width="@dimen/cozy_icon_size"
+                    android:layout_height="@dimen/cozy_icon_size"
+                    android:layout_marginLeft="@dimen/space16"
+                    android:layout_marginStart="@dimen/space16"
+                    android:layout_marginRight="@dimen/space16"
+                    android:layout_marginEnd="@dimen/space16"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:clickable="false"
+                    tools:src="@tools:sample/avatars"
+                    app:imageUrl="@{item.source.imageUrl}"
+                    app:placeholderImage="?attr/placeholderImage"
+                    app:fadeDuration="@android:integer/config_shortAnimTime" />
+                <TextView
+                    android:id="@+id/source_name"
+                    android:layout_marginRight="@dimen/space16"
+                    android:layout_marginEnd="@dimen/space16"
+                    android:layout_toRightOf="@+id/source_icon"
+                    android:layout_toEndOf="@+id/source_icon"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/source_icon"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:clickable="false"
+                    android:text="@{item.source.getDisplayName()}"
+                    tools:text="@tools:sample/cities"
+                    style="@style/Source.Cozy" />
+                <TextView
+                    android:id="@+id/publish_date"
+                    android:layout_marginRight="@dimen/space16"
+                    android:layout_marginEnd="@dimen/space16"
+                    android:layout_toRightOf="@+id/source_icon"
+                    android:layout_toEndOf="@+id/source_icon"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignBottom="@+id/source_icon"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:clickable="false"
+                    app:publishDate="@{item.publishDate}"
+                    tools:text="@tools:sample/date/day_of_week"
+                    style="@style/Meta.Cozy" />
+                <com.github.ayltai.hknews.widget.SmartCroppingImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/cozy_image_size"
+                    android:layout_marginTop="@dimen/space16"
+                    android:layout_below="@+id/source_icon"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:background="?attr/placeholderImage"
+                    android:visibility="@{item.images.isEmpty() ? View.GONE : View.VISIBLE}"
+                    app:imageUrl="@{item.images.isEmpty() ? null : item.images[0].imageUrl}"
+                    app:initScaleType="centerCrop"
+                    app:tapToRetry="true" />
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_below="@+id/image"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:paddingLeft="@dimen/space16"
+                    android:paddingStart="@dimen/space16"
+                    android:paddingRight="@dimen/space16"
+                    android:paddingEnd="@dimen/space16"
+                    android:paddingTop="@dimen/space16"
+                    android:clickable="false"
+                    android:visibility="@{TextUtils.isEmpty(item.title) ? View.GONE : View.VISIBLE}"
+                    app:title="@{item.title}"
+                    tools:text="@tools:sample/lorem"
+                    style="@style/Title.Cozy" />
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_below="@+id/title"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:paddingLeft="@dimen/space16"
+                    android:paddingStart="@dimen/space16"
+                    android:paddingRight="@dimen/space16"
+                    android:paddingEnd="@dimen/space16"
+                    android:paddingTop="@dimen/space16"
+                    android:clickable="false"
+                    android:visibility="@{TextUtils.isEmpty(item.description) ? View.GONE : View.VISIBLE}"
+                    app:description="@{item.description}"
+                    tools:text="@tools:sample/lorem/random"
+                    style="@style/Description.Cozy" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+</layout>

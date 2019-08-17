@@ -45,15 +45,8 @@ public class MediaUtils {
     }
 
     public int[] getPixels(@Nonnull @NonNull @lombok.NonNull final File file, final int scale, final int width, final int height) {
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = scale;
-
-        final Bitmap bitmap       = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
-        final Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, height, false);
-
-        bitmap.recycle();
-
-        final int[] pixels = new int[width * height];
+        final int[]  pixels       = new int[width * height];
+        final Bitmap scaledBitmap = MediaUtils.decode(file, scale, width, height);
 
         scaledBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
         scaledBitmap.recycle();

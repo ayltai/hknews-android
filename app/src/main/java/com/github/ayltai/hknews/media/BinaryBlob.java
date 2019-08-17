@@ -1,7 +1,11 @@
 package com.github.ayltai.hknews.media;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 import javax.annotation.Nonnull;
 
+import android.graphics.Point;
 import android.graphics.PointF;
 
 import androidx.annotation.NonNull;
@@ -21,16 +25,25 @@ final class BinaryBlob {
         this.weightedSum += weight;
     }
 
-    public void explore(final int j, final int i, final float[][] heatMap, final int[][] cheatSheet, final float lowerBound) {
-        if (i >= 0 && j >= 0 && heatMap.length > i && heatMap[i].length > j && heatMap[i][j] > lowerBound && cheatSheet[i][j] == 0) {
-            this.addPixel(j, i, heatMap[i][j]);
+    public void explore(@Nonnull @NonNull @lombok.NonNull final Point point, @Nonnull @NonNull @lombok.NonNull final float[][] heatMap, @Nonnull @NonNull @lombok.NonNull final int[][] cheatSheet, final float lowerBound) {
+        final Queue<Point> queue = new ArrayDeque<>();
+        queue.offer(point);
 
-            cheatSheet[i][j] = 1;
+        while (!queue.isEmpty()) {
+            final Point p = queue.poll();
+            final int   i = p.x;
+            final int   j = p.y;
 
-            this.explore(j + 1, i, heatMap, cheatSheet, lowerBound);
-            this.explore(j - 1, i, heatMap, cheatSheet, lowerBound);
-            this.explore(j, i + 1, heatMap, cheatSheet, lowerBound);
-            this.explore(j, i - 1, heatMap, cheatSheet, lowerBound);
+            if (i >= 0 && j >= 0 && heatMap.length > i && heatMap[i].length > j && heatMap[i][j] > lowerBound && cheatSheet[i][j] == 0) {
+                this.addPixel(j, i, heatMap[i][j]);
+
+                cheatSheet[i][j] = 1;
+
+                queue.offer(new Point(j + 1, i));
+                queue.offer(new Point(j - 1, i));
+                queue.offer(new Point(j, i + 1));
+                queue.offer(new Point(j, i - 1));
+            }
         }
     }
 

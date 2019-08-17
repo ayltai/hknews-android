@@ -51,7 +51,6 @@ This app supports Android 4.4 Jelly Bean (API 19) or later.
 ## Acknowledgements
 This app is made with the support of open source projects:
 
-* [Flow](https://github.com/square/flow)
 * [Realm](https://realm.io/news/realm-for-android)
 * [RxJava](https://github.com/ReactiveX/RxJava)
 * [RxAndroid](https://github.com/ReactiveX/RxAndroid)
@@ -67,7 +66,6 @@ This app is made with the support of open source projects:
 * [ExoPlayer](https://github.com/google/ExoPlayer)
 * [ShimmerLayout](https://github.com/team-supercharge/ShimmerLayout)
 * [SmallBang](https://github.com/hanks-zyh/SmallBang)
-* [Android About Page](https://github.com/medyo/android-about-page)
 * [Retrofit](https://github.com/square/retrofit)
 * [OkHttp](https://github.com/square/okhttp)
 * [Apache Commons Lang3](https://commons.apache.org/proper/commons-lang/)

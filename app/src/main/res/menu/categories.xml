@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_category_hongkong"
+        android:title="@string/action_category_hongkong"
+        android:icon="@drawable/ic_hongkong_black_24dp" />
+    <item
+        android:id="@+id/action_category_international"
+        android:title="@string/action_category_international"
+        android:icon="@drawable/ic_international_black_24dp" />
+    <item
+        android:id="@+id/action_category_china"
+        android:title="@string/action_category_china"
+        android:icon="@drawable/ic_china_black_24dp" />
+    <item
+        android:id="@+id/action_category_economy"
+        android:title="@string/action_category_economy"
+        android:icon="@drawable/ic_economy_black_24dp" />
+    <item
+        android:id="@+id/action_category_property"
+        android:title="@string/action_category_property"
+        android:icon="@drawable/ic_property_black_24dp" />
+    <item
+        android:id="@+id/action_category_entertainment"
+        android:title="@string/action_category_entertainment"
+        android:icon="@drawable/ic_entertainment_black_24dp" />
+    <item
+        android:id="@+id/action_category_sports"
+        android:title="@string/action_category_sports"
+        android:icon="@drawable/ic_sports_black_24dp" />
+    <item
+        android:id="@+id/action_category_supplement"
+        android:title="@string/action_category_supplement"
+        android:icon="@drawable/ic_supplement_black_24dp" />
+    <item
+        android:id="@+id/action_category_education"
+        android:title="@string/action_category_education"
+        android:icon="@drawable/ic_education_black_24dp" />
+</menu>

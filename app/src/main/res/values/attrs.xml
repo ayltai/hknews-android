@@ -34,9 +34,6 @@
         name="cardBackground"
         format="color" />
     <attr
-        name="searchBarBackground"
-        format="color" />
-    <attr
         name="barBackground"
         format="color" />
     <attr
@@ -44,8 +41,5 @@
         format="color" />
     <attr
         name="placeholderImage"
-        format="reference" />
-    <attr
-        name="customSearchBarStyle"
         format="reference" />
 </resources>

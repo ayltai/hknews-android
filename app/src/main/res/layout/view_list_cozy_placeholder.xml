@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.supercharge.shimmerlayout.ShimmerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shimmerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:shimmer_animation_duration="@android:integer/config_mediumAnimTime">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/view_item_cozy_placeholder" />
+        <include layout="@layout/view_item_cozy_placeholder" />
+        <include layout="@layout/view_item_cozy_placeholder" />
+    </LinearLayout>
+</io.supercharge.shimmerlayout.ShimmerLayout>

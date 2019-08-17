@@ -41,13 +41,13 @@ public class ItemRepository extends Repository {
 
     @Nonnull
     @NonNull
-    public Single<Irrelevant> set(@Nonnull @NonNull @lombok.NonNull final Item item) {
+    public Single<Item> set(@Nonnull @NonNull @lombok.NonNull final Item item) {
         return Single.defer(() -> {
             if (!this.getRealm().isInTransaction()) this.getRealm().beginTransaction();
             this.getRealm().copyToRealmOrUpdate(item);
             if (this.getRealm().isInTransaction()) this.getRealm().commitTransaction();
 
-            return Single.just(Irrelevant.INSTANCE);
+            return Single.just(item);
         });
     }
 

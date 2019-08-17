@@ -16,11 +16,13 @@ public class Constants {
 
     public static final float ITEM_ALPHA = 0.85f;
 
-    public static final int CACHE_SIZE         = 1000;
+    public static final int CACHE_SIZE         = 1024;
     public static final int MAX_ZOOM           = 8;
-    public static final int NEWS_DAYS          = 3;
-    public static final int FEATURED_NEWS_TIME = 24 * 60 * 60 * 1000;
+    public static final int NEWS_DAYS          = 2;
     public static final int LAST_UPDATED_TIME  = 10 * 1000;
 
     public static final String BASE_URL = "https://hknews.dev/";
+
+    public static final String ARG_CATEGORY = "CATEGORY";
+    public static final String ARG_ITEM_URL = "ITEM_URL";
 }

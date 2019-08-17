@@ -8,12 +8,13 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.data.repository.ItemRepository;
 import com.github.ayltai.hknews.data.repository.Repository;
 import com.github.ayltai.hknews.util.RxUtils;
-import com.github.ayltai.hknews.util.StringUtils;
 
 import io.reactivex.Single;
 import io.reactivex.functions.Consumer;
@@ -55,7 +56,7 @@ public class ItemLoader extends Loader<List<Item>> {
         return Components.getInstance()
             .getNetComponent()
             .apiService()
-            .query(StringUtils.join(ItemLoader.DELIMITER, this.sourceNames), StringUtils.join(ItemLoader.DELIMITER, this.categoryNames), this.days);
+            .query(StringUtils.join(this.sourceNames, ItemLoader.DELIMITER), StringUtils.join(this.categoryNames, ItemLoader.DELIMITER), this.days);
     }
 
     @Nonnull

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Space -->
     <dimen name="space4">4dp</dimen>
     <dimen name="space8">8dp</dimen>
     <dimen name="space12">12dp</dimen>
     <dimen name="space16">16dp</dimen>
+    <dimen name="toolbar">56dp</dimen>
+    <dimen name="bottomNavigationView">56dp</dimen>
+    <dimen name="elevation">2dp</dimen>
+    <dimen name="elevation_on_press">4dp</dimen>
 
     <!-- Text -->
     <dimen name="textLarge">24sp</dimen>
@@ -17,10 +20,6 @@
     <dimen name="iconLarge">56dp</dimen>
     <dimen name="iconVeryLarge">144dp</dimen>
 
-    <!-- Item -->
-    <dimen name="card_elevation">2dp</dimen>
-    <dimen name="card_elevation_on_press">4dp</dimen>
-
     <!-- Item (Cozy) -->
     <dimen name="cozy_radius">3dp</dimen>
     <dimen name="cozy_icon_size">40dp</dimen>
@@ -30,11 +29,4 @@
     <dimen name="compact_radius">0dp</dimen>
     <dimen name="compact_icon_size">32dp</dimen>
     <dimen name="compact_image_size">80dp</dimen>
-
-    <!-- Contents -->
-    <dimen name="detailed_image_height_max">240dp</dimen>
-
-    <dimen name="toolbarHeight">56dp</dimen>
-    <dimen name="bottomBarHeight">56dp</dimen>
-    <dimen name="shadow">4dp</dimen>
 </resources>

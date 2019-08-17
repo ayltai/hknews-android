@@ -6,16 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SettingsActivity">
-    <androidx.appcompat.widget.Toolbar
+    android:fitsSystemWindows="true"
+    tools:context=".app.SettingsActivity">
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/windowBackground"
-        app:layout_scrollFlags="scroll|enterAlways|snap"
-        app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
-        app:contentInsetStart="0dp"
-        app:theme="@style/ThemeOverlay.MaterialComponents" />
+        android:elevation="@dimen/elevation"
+        app:elevation="@dimen/elevation"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+        style="@style/Toolbar"
+        tools:targetApi="LOLLIPOP" />
     <ScrollView
         android:id="@+id/content"
         android:layout_width="match_parent"

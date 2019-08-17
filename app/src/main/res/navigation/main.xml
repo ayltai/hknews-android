@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main">
+    <fragment
+        android:id="@+id/action_news_cozy"
+        android:name="com.github.ayltai.hknews.app.ListFragment$Cozy"
+        android:label="action_news_cozy"
+        tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/action_news_compact"
+        android:name="com.github.ayltai.hknews.app.ListFragment$Compact"
+        android:label="action_news_compact"
+        tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/action_histories_cozy"
+        android:name="com.github.ayltai.hknews.app.HistoryListFragment$Cozy"
+        android:label="action_histories_cozy"
+        tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/action_histories_compact"
+        android:name="com.github.ayltai.hknews.app.HistoryListFragment$Compact"
+        android:label="action_histories_compact"
+        tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/action_bookmarks_cozy"
+        android:name="com.github.ayltai.hknews.app.BookmarkListFragment$Cozy"
+        android:label="action_bookmarks_cozy"
+        tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/action_bookmarks_compact"
+        android:name="com.github.ayltai.hknews.app.BookmarkListFragment$Compact"
+        android:label="action_bookmarks_compact"
+        tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/action_details"
+        android:name="com.github.ayltai.hknews.app.DetailsFragment"
+        android:label="action_details"
+        tools:layout="@layout/fragment_details" />
+    <fragment
+        android:id="@+id/action_about"
+        android:name="com.github.ayltai.hknews.app.AboutFragment"
+        android:label="action_about"
+        tools:layout="@layout/fragment_about" />
+</navigation>

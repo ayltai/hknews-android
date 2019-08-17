@@ -1,6 +1,7 @@
 package com.github.ayltai.hknews.config;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -17,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.collection.ArraySet;
 import androidx.preference.PreferenceManager;
 
-import com.github.ayltai.hknews.data.model.Category;
+import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.data.model.Source;
 
 @Singleton
@@ -84,9 +85,10 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
     @NonNull
     @Override
     public List<String> getSourceNames() {
-        final List<String> sourceNames = new ArrayList<>(this.preferences.getStringSet(PreferenceUserConfigurations.KEY_SOURCE_NAMES, new ArraySet<>(Source.DEFAULT_SOURCES)));
+        final List<String> defaultSourceNames = Arrays.asList(this.context.getResources().getStringArray(R.array.publisher_values));
+        final List<String> sourceNames        = new ArrayList<>(this.preferences.getStringSet(PreferenceUserConfigurations.KEY_SOURCE_NAMES, new ArraySet<>(defaultSourceNames)));
 
-        Collections.sort(sourceNames, (sourceName1, sourceName2) -> Source.DEFAULT_SOURCES.indexOf(Source.getDisplayName(sourceName1)) - Source.DEFAULT_SOURCES.indexOf(Category.getDisplayName(sourceName2)));
+        Collections.sort(sourceNames, (sourceName1, sourceName2) -> defaultSourceNames.indexOf(Source.getDisplayName(sourceName1)) - defaultSourceNames.indexOf(Source.getDisplayName(sourceName2)));
 
         return sourceNames;
     }
@@ -103,9 +105,10 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
     @NonNull
     @Override
     public List<String> getCategoryNames() {
-        final List<String> categoryNames = new ArrayList<>(this.preferences.getStringSet(PreferenceUserConfigurations.KEY_CATEGORY_NAMES, new ArraySet<>(Category.DEFAULT_CATEGORIES)));
+        final List<String> defaultCategoryNames = Arrays.asList(this.context.getResources().getStringArray(R.array.category_values));
+        final List<String> categoryNames        = new ArrayList<>(this.preferences.getStringSet(PreferenceUserConfigurations.KEY_CATEGORY_NAMES, new ArraySet<>(defaultCategoryNames)));
 
-        Collections.sort(categoryNames, (categoryName1, categoryName2) -> Category.DEFAULT_CATEGORIES.indexOf(categoryName1) - Category.DEFAULT_CATEGORIES.indexOf(categoryName2));
+        Collections.sort(categoryNames, (categoryName1, categoryName2) -> defaultCategoryNames.indexOf(categoryName1) - defaultCategoryNames.indexOf(categoryName2));
 
         return categoryNames;
     }

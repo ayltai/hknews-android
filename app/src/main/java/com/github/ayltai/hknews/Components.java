@@ -2,13 +2,10 @@ package com.github.ayltai.hknews;
 
 import javax.annotation.Nonnull;
 
-import android.app.Activity;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.github.ayltai.hknews.analytics.AnalyticsComponent;
-import com.github.ayltai.hknews.analytics.DaggerAnalyticsComponent;
 import com.github.ayltai.hknews.config.ConfigComponent;
 import com.github.ayltai.hknews.config.DaggerConfigComponent;
 import com.github.ayltai.hknews.data.DaggerDataComponent;
@@ -20,9 +17,6 @@ import com.github.ayltai.hknews.media.DaggerMediaComponent;
 import com.github.ayltai.hknews.media.MediaComponent;
 import com.github.ayltai.hknews.net.DaggerNetComponent;
 import com.github.ayltai.hknews.net.NetComponent;
-import com.github.ayltai.hknews.view.DaggerRouterComponent;
-import com.github.ayltai.hknews.view.RouterComponent;
-import com.github.ayltai.hknews.view.RouterModule;
 
 public final class Components {
     private static Components instance = new Components();
@@ -39,12 +33,6 @@ public final class Components {
 
     public static Components getInstance() {
         return Components.instance;
-    }
-
-    @Nonnull
-    @NonNull
-    public AnalyticsComponent getAnalyticsComponent() {
-        return DaggerAnalyticsComponent.create();
     }
 
     @Nonnull
@@ -87,13 +75,5 @@ public final class Components {
         if (this.netComponent == null) this.netComponent = DaggerNetComponent.create();
 
         return this.netComponent;
-    }
-
-    @Nonnull
-    @NonNull
-    public RouterComponent getRouterComponent(@Nonnull @NonNull @lombok.NonNull final Activity activity) {
-        return DaggerRouterComponent.builder()
-            .routerModule(new RouterModule(activity))
-            .build();
     }
 }

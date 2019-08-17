@@ -1,33 +1,33 @@
 package com.github.ayltai.hknews.data.model;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.collection.ArrayMap;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @ToString
-public class Source extends RealmObject implements Comparable<Source>, Parcelable {
+@EqualsAndHashCode(
+    callSuper              = true,
+    onlyExplicitlyIncluded = true
+)
+@NoArgsConstructor
+public class Source extends RealmObject implements Comparable<Source> {
     public static final String FIELD_NAME = "name";
 
-    public static final List<String> DEFAULT_SOURCES = Arrays.asList("蘋果日報", "東方日報", "星島日報", "星島即時", "經濟日報", "成報", "明報", "頭條日報", "頭條即時", "晴報", "信報", "香港電台", "南華早報", "英文虎報", "文匯報");
-
-    private static final Map<String, Integer> SOURCES       = new HashMap<>();
-    private static final Map<String, String>  DISPLAY_NAMES = new HashMap<>();
+    private static final Map<String, Integer> SOURCES       = new ArrayMap<>();
+    private static final Map<String, String>  DISPLAY_NAMES = new ArrayMap<>();
 
     static {
         int i = 0;
@@ -63,6 +63,7 @@ public class Source extends RealmObject implements Comparable<Source>, Parcelabl
         Source.DISPLAY_NAMES.put("文匯報", "文匯報");
     }
 
+    @EqualsAndHashCode.Include
     @Getter
     @PrimaryKey
     private String name;
@@ -91,56 +92,4 @@ public class Source extends RealmObject implements Comparable<Source>, Parcelabl
 
         return Source.SOURCES.get(this.name.substring(0, 2)) - Source.SOURCES.get(source.name.substring(0, 2));
     }
-
-    @Override
-    public boolean equals(@Nullable final Object source) {
-        if (this == source) return true;
-        if (source == null || getClass() != source.getClass()) return false;
-
-        return this.name.substring(0, 2).equals(((Source)source).name.substring(0, 2));
-    }
-
-    @Override
-    public int hashCode() {
-        return this.name.substring(0, 2).hashCode();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@Nonnull @NonNull @lombok.NonNull final Parcel dest, final int flags) {
-        dest.writeString(this.name);
-        dest.writeString(this.imageUrl);
-        dest.writeTypedList(this.categories);
-    }
-
-    public Source() {
-    }
-
-    protected Source(@Nonnull @NonNull @lombok.NonNull final Parcel in) {
-        this.name       = in.readString();
-        this.imageUrl   = in.readString();
-        this.categories = new RealmList<>();
-
-        this.categories.addAll(in.createTypedArrayList(Category.CREATOR));
-    }
-
-    public static final Creator<Source> CREATOR = new Creator<Source>() {
-        @Nonnull
-        @NonNull
-        @Override
-        public Source createFromParcel(@Nonnull @NonNull @lombok.NonNull final Parcel source) {
-            return new Source(source);
-        }
-
-        @Nonnull
-        @NonNull
-        @Override
-        public Source[] newArray(final int size) {
-            return new Source[size];
-        }
-    };
 }
