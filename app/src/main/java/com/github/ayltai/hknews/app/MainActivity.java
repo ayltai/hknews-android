@@ -23,6 +23,8 @@ import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.media.FrescoImageLoader;
@@ -30,8 +32,6 @@ import com.github.ayltai.hknews.net.NetworkStateListener;
 import com.github.ayltai.hknews.net.NetworkStateReceiver;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
-
-import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 public final class MainActivity extends ThemedActivity implements NetworkStateListener {
     static {
@@ -143,6 +143,6 @@ public final class MainActivity extends ThemedActivity implements NetworkStateLi
         menu.add(Menu.NONE, isCompactStyle ? R.id.action_histories_compact : R.id.action_histories_cozy, 1, R.string.title_histories)
             .setIcon(R.drawable.ic_history_black_24dp);
         menu.add(Menu.NONE, isCompactStyle ? R.id.action_bookmarks_compact : R.id.action_bookmarks_cozy, 2, R.string.title_bookmarks)
-            .setIcon(R.drawable.ic_bookmark_black_24dp);
+            .setIcon(R.drawable.ic_bookmark_white_24dp);
     }
 }

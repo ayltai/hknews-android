@@ -6,11 +6,11 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.github.ayltai.hknews.data.repository.Repository;
-import com.github.ayltai.hknews.util.RxUtils;
-
 import io.reactivex.Single;
 import io.reactivex.functions.Consumer;
+
+import com.github.ayltai.hknews.data.repository.Repository;
+import com.github.ayltai.hknews.util.RxUtils;
 
 import lombok.Getter;
 import lombok.Setter;

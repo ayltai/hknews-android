@@ -8,12 +8,12 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import io.reactivex.Single;
+import io.reactivex.functions.Consumer;
+
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Source;
 import com.github.ayltai.hknews.data.repository.SourceRepository;
-
-import io.reactivex.Single;
-import io.reactivex.functions.Consumer;
 
 public final class SourceLoader extends Loader<List<Source>> {
     @Nonnull

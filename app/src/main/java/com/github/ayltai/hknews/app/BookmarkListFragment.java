@@ -52,11 +52,8 @@ public abstract class BookmarkListFragment<B extends ViewDataBinding> extends Li
         this.swipeRefreshLayout.setEnabled(false);
     }
 
-    @CallSuper
     @Override
-    protected void setUpToolbar() {
-        super.setUpToolbar();
-
+    protected void setUpMenuItems() {
         this.toolbar.inflateMenu(R.menu.bookmark);
     }
 

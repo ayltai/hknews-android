@@ -6,10 +6,10 @@ import javax.annotation.Nonnull;
 
 import androidx.annotation.NonNull;
 
+import io.reactivex.Single;
+
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.data.model.Source;
-
-import io.reactivex.Single;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;

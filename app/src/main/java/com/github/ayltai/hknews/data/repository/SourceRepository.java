@@ -8,14 +8,14 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import io.reactivex.Single;
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Source;
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.util.RxUtils;
-
-import io.reactivex.Single;
-import io.realm.Realm;
-import io.realm.RealmResults;
 
 public final class SourceRepository extends Repository {
     @Nonnull

@@ -9,9 +9,9 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
-import com.github.ayltai.hknews.data.model.Item;
-
 import io.reactivex.Single;
+
+import com.github.ayltai.hknews.data.model.Item;
 
 public abstract class LocalListViewModel extends ListViewModel {
     protected LocalListViewModel(@Nonnull @NonNull @lombok.NonNull final Application application) {

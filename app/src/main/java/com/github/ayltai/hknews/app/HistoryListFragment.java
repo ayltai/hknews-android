@@ -52,11 +52,8 @@ public abstract class HistoryListFragment<B extends ViewDataBinding> extends Lis
         this.swipeRefreshLayout.setEnabled(false);
     }
 
-    @CallSuper
     @Override
-    protected void setUpToolbar() {
-        super.setUpToolbar();
-
+    protected void setUpMenuItems() {
         this.toolbar.inflateMenu(R.menu.history);
     }
 

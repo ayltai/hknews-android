@@ -8,13 +8,13 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import io.reactivex.Single;
+import io.reactivex.functions.Consumer;
+
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.data.repository.HistoryItemRepository;
 import com.github.ayltai.hknews.data.repository.Repository;
 import com.github.ayltai.hknews.util.RxUtils;
-
-import io.reactivex.Single;
-import io.reactivex.functions.Consumer;
 
 public final class HistoryItemLoader extends ItemLoader {
     @Nonnull

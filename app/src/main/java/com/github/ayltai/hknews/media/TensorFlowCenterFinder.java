@@ -24,13 +24,13 @@ import androidx.annotation.NonNull;
 import org.apache.commons.lang3.ArrayUtils;
 import org.tensorflow.lite.Interpreter;
 
+import io.reactivex.Single;
+
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.diagnostics.PerformanceTrace;
 import com.github.ayltai.hknews.util.MathUtils;
 import com.github.ayltai.hknews.util.MediaUtils;
-
-import io.reactivex.Single;
 
 @Singleton
 public final class TensorFlowCenterFinder implements CenterFinder {

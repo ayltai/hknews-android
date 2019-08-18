@@ -6,6 +6,11 @@ import android.os.StrictMode;
 
 import androidx.annotation.CallSuper;
 
+import io.fabric.sdk.android.Fabric;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
+
 import com.akaita.java.rxjava2debug.RxJava2Debug;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
@@ -24,11 +29,6 @@ import com.github.ayltai.hknews.util.DevUtils;
 import com.github.piasy.biv.BigImageViewer;
 import com.google.firebase.perf.FirebasePerformance;
 import com.squareup.leakcanary.LeakCanary;
-
-import io.fabric.sdk.android.Fabric;
-import io.github.inflationx.calligraphy3.CalligraphyConfig;
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
-import io.github.inflationx.viewpump.ViewPump;
 
 public final class MainApplication extends BaseApplication {
     @CallSuper

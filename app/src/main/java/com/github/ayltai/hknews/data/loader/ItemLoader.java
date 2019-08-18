@@ -10,14 +10,14 @@ import androidx.annotation.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
 
+import io.reactivex.Single;
+import io.reactivex.functions.Consumer;
+
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.data.repository.ItemRepository;
 import com.github.ayltai.hknews.data.repository.Repository;
 import com.github.ayltai.hknews.util.RxUtils;
-
-import io.reactivex.Single;
-import io.reactivex.functions.Consumer;
 
 import lombok.Getter;
 import lombok.Setter;

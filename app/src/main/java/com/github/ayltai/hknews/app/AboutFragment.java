@@ -74,8 +74,7 @@ public final class AboutFragment extends BaseFragment {
         this.view.findViewById(R.id.issues).setOnClickListener(this.getOnClickListener(this.getString(model.getIssuesUrl())));
     }
 
-    @Nonnull
-    @NonNull
+    @Nullable
     private View.OnClickListener getOnClickListener(@Nonnull @NonNull @lombok.NonNull final String uri) {
         final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         return this.getActivity() == null || intent.resolveActivity(this.getActivity().getPackageManager()) == null ? null : view -> this.startActivity(intent);

@@ -12,9 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
-import com.github.ayltai.hknews.R;
-
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
+import com.github.ayltai.hknews.R;
 
 public final class SettingsActivity extends ThemedActivity {
     public static final int REQUEST_CODE = 1;

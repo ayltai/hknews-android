@@ -9,12 +9,12 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import io.reactivex.Single;
+import io.realm.Realm;
+
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.util.RxUtils;
-
-import io.reactivex.Single;
-import io.realm.Realm;
 
 public final class BookmarkItemRepository extends ItemRepository {
     @Nonnull

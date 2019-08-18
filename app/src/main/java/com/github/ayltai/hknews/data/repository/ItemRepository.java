@@ -9,15 +9,15 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.github.ayltai.hknews.Components;
-import com.github.ayltai.hknews.data.model.Item;
-import com.github.ayltai.hknews.util.Irrelevant;
-import com.github.ayltai.hknews.util.RxUtils;
-
 import io.reactivex.Single;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.Sort;
+
+import com.github.ayltai.hknews.Components;
+import com.github.ayltai.hknews.data.model.Item;
+import com.github.ayltai.hknews.util.Irrelevant;
+import com.github.ayltai.hknews.util.RxUtils;
 
 public class ItemRepository extends Repository {
     @Nonnull

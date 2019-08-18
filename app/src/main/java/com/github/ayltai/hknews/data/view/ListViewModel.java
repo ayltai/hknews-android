@@ -10,12 +10,12 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import io.reactivex.Single;
+
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.data.loader.ItemLoader;
 import com.github.ayltai.hknews.data.model.Item;
-
-import io.reactivex.Single;
 
 public class ListViewModel extends AndroidViewModel {
     protected final ItemLoader loader;

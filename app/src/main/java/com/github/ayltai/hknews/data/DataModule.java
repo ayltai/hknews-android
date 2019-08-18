@@ -6,10 +6,10 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.github.ayltai.hknews.util.DevUtils;
-
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+
+import com.github.ayltai.hknews.util.DevUtils;
 
 import dagger.Module;
 import dagger.Provides;

@@ -25,6 +25,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
+import io.reactivex.Maybe;
+
 import com.facebook.binaryresource.BinaryResource;
 import com.facebook.binaryresource.FileBinaryResource;
 import com.facebook.cache.common.CacheKey;
@@ -45,8 +47,6 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.github.ayltai.hknews.util.RxUtils;
 import com.github.piasy.biv.loader.ImageLoader;
 import com.github.piasy.biv.metadata.ImageInfoExtractor;
-
-import io.reactivex.Maybe;
 
 @Singleton
 public final class FrescoImageLoader implements ImageLoader, Closeable, LifecycleObserver {

@@ -28,6 +28,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import io.reactivex.disposables.Disposable;
+import io.supercharge.shimmerlayout.ShimmerLayout;
+
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.R;
@@ -43,9 +46,6 @@ import com.github.ayltai.hknews.widget.BackdropBehavior;
 import com.github.ayltai.hknews.widget.CompactListAdapter;
 import com.github.ayltai.hknews.widget.CozyListAdapter;
 import com.github.ayltai.hknews.widget.ListAdapter;
-
-import io.reactivex.disposables.Disposable;
-import io.supercharge.shimmerlayout.ShimmerLayout;
 
 public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragment {
     public static final class Cozy extends ListFragment<ViewItemCozyBinding> {
@@ -183,16 +183,10 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         this.onRefresh();
     }
 
-    @CallSuper
-    @Override
-    protected void setUpToolbar() {
-        super.setUpToolbar();
-
-        this.toolbar.inflateMenu(R.menu.news);
-    }
-
     @Override
     protected void setUpMenuItems() {
+        this.toolbar.inflateMenu(R.menu.news);
+
         final Menu     menu             = this.toolbar.getMenu();
         final MenuItem refreshMenuItem  = menu.findItem(R.id.action_refresh);
         final MenuItem settingsMenuItem = menu.findItem(R.id.action_settings);

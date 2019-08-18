@@ -8,10 +8,10 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.github.ayltai.hknews.util.DevUtils;
-
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
+
+import com.github.ayltai.hknews.util.DevUtils;
 
 import retrofit2.Call;
 import retrofit2.CallAdapter;

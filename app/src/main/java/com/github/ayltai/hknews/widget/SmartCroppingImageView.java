@@ -14,14 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.collection.LruCache;
 
+import io.reactivex.disposables.Disposable;
+
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.media.BaseImageLoaderCallback;
 import com.github.ayltai.hknews.util.MediaUtils;
 import com.github.ayltai.hknews.util.RxUtils;
 import com.github.piasy.biv.view.BigImageView;
-
-import io.reactivex.disposables.Disposable;
 
 public final class SmartCroppingImageView extends BigImageView {
     private static final LruCache<String, PointF> CACHE = new LruCache<>(Constants.CACHE_SIZE);

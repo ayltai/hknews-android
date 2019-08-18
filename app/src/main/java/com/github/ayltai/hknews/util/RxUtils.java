@@ -8,8 +8,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.akaita.java.rxjava2debug.RxJava2Debug;
-
 import io.reactivex.FlowableTransformer;
 import io.reactivex.MaybeTransformer;
 import io.reactivex.ObservableTransformer;
@@ -18,6 +16,8 @@ import io.reactivex.SingleTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
+import com.akaita.java.rxjava2debug.RxJava2Debug;
 
 import lombok.experimental.UtilityClass;
 

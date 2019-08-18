@@ -4,8 +4,14 @@ import java.util.Date;
 
 import javax.annotation.Nonnull;
 
+import android.app.Activity;
+import android.app.Application;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,21 +22,31 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.github.ayltai.hknews.Components;
+import io.reactivex.disposables.CompositeDisposable;
+
 import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.R;
-import com.github.ayltai.hknews.data.repository.ItemRepository;
+import com.github.ayltai.hknews.data.view.DetailsViewModel;
 import com.github.ayltai.hknews.databinding.FragmentDetailsBinding;
 import com.github.ayltai.hknews.util.RxUtils;
-
-import io.reactivex.disposables.Disposable;
 
 public final class DetailsFragment extends BaseFragment {
     private FragmentDetailsBinding binding;
     private String                 itemUrl;
-    private Disposable             disposable;
+    private DetailsViewModel       model;
+    private CompositeDisposable    disposables;
+    private boolean                isBookmarked;
+
+    @CallSuper
+    @Override
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        this.disposables = new CompositeDisposable();
+    }
 
     @CallSuper
     @Nonnull
@@ -52,7 +68,7 @@ public final class DetailsFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
 
-        this.disposable.dispose();
+        this.disposables.dispose();
     }
 
     @LayoutRes
@@ -72,20 +88,25 @@ public final class DetailsFragment extends BaseFragment {
     protected void init() {
         super.init();
 
-        final ItemRepository repository = ItemRepository.create(Components.getInstance()
-            .getDataComponent(this.getActivity())
-            .realm());
+        final Activity activity = this.getActivity();
+        if (activity != null) {
+            final Application application = activity.getApplication();
+            if (application != null) {
+                this.model = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(DetailsViewModel.class);
 
-        this.disposable = repository.get(this.itemUrl)
-            .flatMap(item -> {
-                item.setLastAccessed(new Date());
+                this.disposables.add(this.model
+                    .get(this.itemUrl)
+                    .flatMap(item -> this.model.setLastAccess(this.itemUrl, new Date()))
+                    .subscribe(
+                        item -> {
+                            this.isBookmarked = item.isBookmarked();
 
-                return repository.set(item);
-            })
-            .subscribe(
-                item -> this.binding.setItem(item),
-                RxUtils::handleError
-            );
+                            this.binding.setItem(item);
+                        },
+                        RxUtils::handleError
+                    ));
+            }
+        }
     }
 
     @CallSuper
@@ -95,12 +116,46 @@ public final class DetailsFragment extends BaseFragment {
 
         this.toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
 
-
         final AppCompatActivity activity = (AppCompatActivity)this.getActivity();
-        if (activity != null) {
-            activity.setSupportActionBar(this.toolbar);
+        if (activity != null) this.toolbar.setNavigationOnClickListener(view -> Navigation.findNavController(activity, R.id.navHostFragment).navigateUp());
+    }
 
-            this.toolbar.setNavigationOnClickListener(view -> Navigation.findNavController(activity, R.id.navHostFragment).navigateUp());
-        }
+    @Override
+    protected void setUpMenuItems() {
+        final Menu     menu             = this.toolbar.getMenu();
+        final MenuItem bookmarkMenuItem = menu.findItem(R.id.action_bookmark);
+        final MenuItem viewMenuItem     = menu.findItem(R.id.action_view);
+        final MenuItem shareMenuItem    = menu.findItem(R.id.action_share);
+
+        if (bookmarkMenuItem != null) bookmarkMenuItem.setOnMenuItemClickListener(item -> {
+            this.disposables.add(this.model
+                .setIsBookmarked(this.itemUrl, !this.isBookmarked)
+                .subscribe(
+                    irrelevant -> {
+                        this.isBookmarked = !this.isBookmarked;
+
+                        bookmarkMenuItem.setIcon(this.isBookmarked ? R.drawable.ic_bookmark_filled_white_24dp : R.drawable.ic_bookmark_white_24dp);
+                    },
+                    RxUtils::handleError
+                ));
+
+            return true;
+        });
+
+        if (viewMenuItem != null) viewMenuItem.setOnMenuItemClickListener(item -> {
+            final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(this.itemUrl));
+
+            if (this.getActivity() == null || intent.resolveActivity(this.getActivity().getPackageManager()) == null) return false;
+
+            this.startActivity(intent);
+
+            return true;
+        });
+
+        if (shareMenuItem != null) shareMenuItem.setOnMenuItemClickListener(item -> {
+            // TODO: Implements share
+
+            return true;
+        });
     }
 }
