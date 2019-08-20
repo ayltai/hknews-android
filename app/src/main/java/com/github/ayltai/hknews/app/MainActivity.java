@@ -40,6 +40,7 @@ public final class MainActivity extends ThemedActivity implements NetworkStateLi
 
     private static final List<Integer> BOTTOM_TAB_FRAGMENTS = Arrays.asList(R.id.action_news_cozy, R.id.action_news_compact, R.id.action_histories_cozy, R.id.action_histories_compact, R.id.action_bookmarks_cozy, R.id.action_bookmarks_compact, R.id.action_about);
 
+    private NavController        navController;
     private Snackbar             snackbar;
     private NetworkStateReceiver networkStateReceiver;
 
@@ -59,22 +60,22 @@ public final class MainActivity extends ThemedActivity implements NetworkStateLi
             .userConfigurations()
             .isCompactStyle();
 
-        final NavController navController = ((NavHostFragment)this.getSupportFragmentManager()
+        this.navController = ((NavHostFragment)this.getSupportFragmentManager()
             .findFragmentById(R.id.navHostFragment))
             .getNavController();
 
-        final NavGraph navGraph = navController.getNavInflater().inflate(R.navigation.main);
+        final NavGraph navGraph = this.navController.getNavInflater().inflate(R.navigation.main);
         navGraph.setStartDestination(isCompactStyle ? R.id.action_news_compact : R.id.action_news_cozy);
-        navController.setGraph(navGraph);
+        this.navController.setGraph(navGraph);
 
         final BottomNavigationView bottomNavigationView = this.findViewById(R.id.bottomNavigationView);
         MainActivity.setUpMenu(bottomNavigationView.getMenu(), isCompactStyle);
         bottomNavigationView.setOnNavigationItemReselectedListener(item -> { });
         bottomNavigationView.setSelectedItemId(isCompactStyle ? R.id.action_news_compact : R.id.action_news_cozy);
 
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        NavigationUI.setupWithNavController(bottomNavigationView, this.navController);
 
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> bottomNavigationView.setVisibility(MainActivity.BOTTOM_TAB_FRAGMENTS.contains(destination.getId()) ? View.VISIBLE : View.GONE));
+        this.navController.addOnDestinationChangedListener((controller, destination, arguments) -> bottomNavigationView.setVisibility(MainActivity.BOTTOM_TAB_FRAGMENTS.contains(destination.getId()) ? View.VISIBLE : View.GONE));
     }
 
     @CallSuper
@@ -118,6 +119,11 @@ public final class MainActivity extends ThemedActivity implements NetworkStateLi
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == SettingsActivity.REQUEST_CODE && resultCode == Activity.RESULT_OK) this.recreate();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return this.navController.navigateUp();
     }
 
     @Override

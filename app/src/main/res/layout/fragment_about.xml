@@ -18,6 +18,7 @@
                 android:id="@+id/toolbar"
                 android:elevation="@dimen/elevation"
                 app:elevation="@dimen/elevation"
+                app:title="@string/app_name"
                 style="@style/Toolbar"
                 tools:targetApi="LOLLIPOP" />
         </com.google.android.material.appbar.AppBarLayout>
@@ -26,7 +27,8 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/toolbar"
             android:paddingBottom="@dimen/bottomNavigationView"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

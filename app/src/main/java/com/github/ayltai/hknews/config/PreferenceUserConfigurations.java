@@ -25,10 +25,13 @@ import com.github.ayltai.hknews.data.model.Source;
 public final class PreferenceUserConfigurations implements UserConfigurations {
     //region Constants
 
-    private static final String KEY_IS_DARK_THEME    = "IS_DARK_THEME";
-    private static final String KEY_IS_COMPACT_STYLE = "IS_COMPACT_STYLE";
-    private static final String KEY_SOURCE_NAMES     = "SOURCE_NAMES";
-    private static final String KEY_CATEGORY_NAMES   = "CATEGORY_NAMES";
+    private static final String KEY_IS_DARK_THEME        = "IS_DARK_THEME";
+    private static final String KEY_IS_COMPACT_STYLE     = "IS_COMPACT_STYLE";
+    private static final String KEY_SOURCE_NAMES         = "SOURCE_NAMES";
+    private static final String KEY_CATEGORY_NAMES       = "CATEGORY_NAMES";
+    private static final String KEY_LAST_UPDATED_DATE    = "LAST_UPDATED_DATE_";
+    private static final String KEY_LAST_ACCESSED_DATE   = "LAST_ACCESSED_DATE_";
+    private static final String KEY_LAST_BOOKMARKED_DATE = "LAST_BOOKMARKED_DATE_";
 
     //endregion
 
@@ -67,7 +70,7 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
         this.preferences
             .edit()
             .putBoolean(PreferenceUserConfigurations.KEY_IS_DARK_THEME, isDarkTheme)
-            .commit();
+            .apply();
     }
 
     public boolean isCompactStyle() {
@@ -78,7 +81,7 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
         this.preferences
             .edit()
             .putBoolean(PreferenceUserConfigurations.KEY_IS_COMPACT_STYLE, isCompactStyle)
-            .commit();
+            .apply();
     }
 
     @Nonnull
@@ -98,7 +101,7 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
         this.preferences
             .edit()
             .putStringSet(PreferenceUserConfigurations.KEY_SOURCE_NAMES, new HashSet<>(sourceNames))
-            .commit();
+            .apply();
     }
 
     @Nonnull
@@ -118,21 +121,51 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
         this.preferences
             .edit()
             .putStringSet(PreferenceUserConfigurations.KEY_CATEGORY_NAMES, new HashSet<>(categoryNames))
-            .commit();
+            .apply();
     }
 
     @Nonnull
     @NonNull
     @Override
     public Date getLastUpdatedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName) {
-        return new Date(this.preferences.getLong(categoryName, System.currentTimeMillis()));
+        return new Date(this.preferences.getLong(PreferenceUserConfigurations.KEY_LAST_UPDATED_DATE + categoryName, System.currentTimeMillis()));
     }
 
     @Override
     public void setLastUpdatedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName, @NonNull @Nonnull @lombok.NonNull final Date date) {
         this.preferences
             .edit()
-            .putLong(categoryName, date.getTime())
-            .commit();
+            .putLong(PreferenceUserConfigurations.KEY_LAST_UPDATED_DATE + categoryName, date.getTime())
+            .apply();
+    }
+
+    @Nonnull
+    @NonNull
+    @Override
+    public Date getLastAccessedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName) {
+        return new Date(this.preferences.getLong(PreferenceUserConfigurations.KEY_LAST_ACCESSED_DATE + categoryName, System.currentTimeMillis()));
+    }
+
+    @Override
+    public void setLastAccessedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName, @NonNull @Nonnull @lombok.NonNull final Date date) {
+        this.preferences
+            .edit()
+            .putLong(PreferenceUserConfigurations.KEY_LAST_ACCESSED_DATE + categoryName, date.getTime())
+            .apply();
+    }
+
+    @Nonnull
+    @NonNull
+    @Override
+    public Date getLastBookmarkedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName) {
+        return new Date(this.preferences.getLong(PreferenceUserConfigurations.KEY_LAST_BOOKMARKED_DATE + categoryName, System.currentTimeMillis()));
+    }
+
+    @Override
+    public void setLastBookmarkedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName, @NonNull @Nonnull @lombok.NonNull final Date date) {
+        this.preferences
+            .edit()
+            .putLong(PreferenceUserConfigurations.KEY_LAST_BOOKMARKED_DATE + categoryName, date.getTime())
+            .apply();
     }
 }

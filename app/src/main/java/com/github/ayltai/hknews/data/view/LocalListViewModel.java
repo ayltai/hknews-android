@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import io.reactivex.Single;
 
 import com.github.ayltai.hknews.data.model.Item;
+import com.github.ayltai.hknews.data.repository.Repository;
+import com.github.ayltai.hknews.util.RxUtils;
 
 public abstract class LocalListViewModel extends ListViewModel {
     protected LocalListViewModel(@Nonnull @NonNull @lombok.NonNull final Application application) {
@@ -20,9 +22,12 @@ public abstract class LocalListViewModel extends ListViewModel {
 
     @Nonnull
     @NonNull
+    @Override
     public Single<List<Item>> getItems(@Nonnull @NonNull @lombok.NonNull final String category) {
         this.loader.setCategoryNames(Collections.singletonList(category));
 
-        return this.loader.load(this.getApplication());
+        return this.loader
+            .load(this.getApplication())
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER));
     }
 }

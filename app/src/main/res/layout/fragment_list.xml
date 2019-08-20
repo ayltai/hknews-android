@@ -19,6 +19,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 app:elevation="0dp"
+                app:title="@string/app_name"
                 style="@style/Toolbar" />
             <com.google.android.material.navigation.NavigationView
                 android:id="@+id/category_view"
@@ -36,13 +37,13 @@
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/bottomNavigationView"
             app:layout_behavior=".widget.BackdropBehavior"
             app:cardElevation="1dp"
             app:cardCornerRadius="16dp">
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingBottom="@dimen/bottomNavigationView"
                 android:orientation="vertical"
                 app:divider="?android:attr/dividerHorizontal"
                 app:showDividers="middle">

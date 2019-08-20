@@ -23,17 +23,22 @@ public final class DataBindingUtils {
 
     @BindingAdapter("title")
     public static void setTitle(@Nonnull @NonNull @lombok.NonNull final TextView view, @Nullable final String title) {
-        view.setText(Html.fromHtml(title));
+        view.setText(title == null ? null : Html.fromHtml(title));
     }
 
     @BindingAdapter("description")
     public static void setDescription(@Nonnull @NonNull @lombok.NonNull final TextView view, @Nullable final String description) {
-        view.setText(Html.fromHtml(description));
+        view.setText(description == null ? null : Html.fromHtml(description));
     }
 
     @BindingAdapter("imageUrl")
-    public static void setImageUrl(@Nonnull @NonNull @lombok.NonNull final SimpleDraweeView view, @Nonnull @NonNull @lombok.NonNull final String imageUrl) {
-        view.setImageURI(Constants.BASE_URL + imageUrl);
+    public static void setImageUrl(@Nonnull @NonNull @lombok.NonNull final SimpleDraweeView view, @Nullable final String imageUrl) {
+        if (imageUrl == null) {
+            view.setVisibility(View.GONE);
+        } else {
+            view.setVisibility(View.VISIBLE);
+            view.setImageURI(Constants.BASE_URL + imageUrl);
+        }
     }
 
     @BindingAdapter("imageUrl")
@@ -47,7 +52,7 @@ public final class DataBindingUtils {
     }
 
     @BindingAdapter("publishDate")
-    public static void setPublishDate(@Nonnull @NonNull @lombok.NonNull final TextView view, @Nonnull @NonNull @lombok.NonNull final Date date) {
-        view.setText(DateUtils.getHumanReadableDate(view.getContext(), date));
+    public static void setPublishDate(@Nonnull @NonNull @lombok.NonNull final TextView view, @Nullable final Date date) {
+        view.setText(date == null ? null : DateUtils.getHumanReadableDate(view.getContext(), date));
     }
 }

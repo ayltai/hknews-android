@@ -1,5 +1,6 @@
 package com.github.ayltai.hknews.data.loader;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -22,7 +23,7 @@ public final class HistoryItemLoader extends ItemLoader {
     @Override
     protected Single<List<Item>> loadLocally(@Nonnull @NonNull @lombok.NonNull final Context context) {
         return HistoryItemRepository.create(context)
-            .flatMap(manager -> manager.get(this.sourceNames, this.categoryNames, this.keywords))
+            .flatMap(repository -> repository.get(this.sourceNames, this.categoryNames, this.keywords))
             .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER));
     }
 
@@ -30,7 +31,7 @@ public final class HistoryItemLoader extends ItemLoader {
     @NonNull
     @Override
     protected Single<List<Item>> loadRemotely(@Nonnull @NonNull @lombok.NonNull final Context context) {
-        return this.loadLocally(context);
+        return Single.just(Collections.emptyList());
     }
 
     @Nonnull

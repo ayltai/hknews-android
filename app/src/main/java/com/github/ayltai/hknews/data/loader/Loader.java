@@ -24,7 +24,6 @@ public abstract class Loader<T> {
     @NonNull
     public Single<T> load(@Nonnull @NonNull @lombok.NonNull final Context context) {
         if (this.isForcedRefresh) return this.loadRemotely(context)
-            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER))
             .doOnSuccess(this.onLoadRemotely(context));
 
         return this.loadLocally(context)
@@ -32,8 +31,10 @@ public abstract class Loader<T> {
             .concatWith(this.loadRemotely(context)
                 .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER))
                 .doOnSuccess(this.onLoadRemotely(context)))
+            .compose(RxUtils.applyFlowableSchedulers(Repository.SCHEDULER))
             .filter(this::isValid)
-            .firstOrError();
+            .firstOrError()
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER));
     }
 
     @Nonnull

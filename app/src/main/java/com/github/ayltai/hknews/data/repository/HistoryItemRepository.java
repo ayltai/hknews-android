@@ -30,7 +30,7 @@ public final class HistoryItemRepository extends ItemRepository {
 
     @Nonnull
     @NonNull
-    public static ItemRepository create(@Nonnull @NonNull @lombok.NonNull final Realm realm) {
+    private static ItemRepository create(@Nonnull @NonNull @lombok.NonNull final Realm realm) {
         return new HistoryItemRepository(realm);
     }
 
@@ -42,7 +42,8 @@ public final class HistoryItemRepository extends ItemRepository {
     @NonNull
     @Override
     public Single<List<Item>> get(@Nonnull @NonNull @lombok.NonNull final List<String> sourceNames, @Nonnull @NonNull @lombok.NonNull final List<String> categoryNames, @Nullable final String keywords) {
-        return Single.defer(() -> Single.just(this.get(this.getRealm().where(Item.class).isNotNull(Item.FIELD_LAST_ACCESSED), sourceNames, categoryNames, keywords)));
+        return Single.defer(() -> Single.just(this.get(this.getRealm().where(Item.class).isNotNull(Item.FIELD_LAST_ACCESSED), sourceNames, categoryNames, keywords)))
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER));
     }
 
     @Nonnull

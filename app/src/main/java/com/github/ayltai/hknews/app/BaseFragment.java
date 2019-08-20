@@ -12,11 +12,8 @@ import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-
-import com.github.ayltai.hknews.R;
 
 public abstract class BaseFragment extends Fragment {
     private static final String ARG_IS_INITIALIZED = "IS_INITIALIZED";
@@ -43,6 +40,8 @@ public abstract class BaseFragment extends Fragment {
     public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        this.restoreViewState(savedInstanceState);
+
         if (!this.isInitialized) {
             this.isInitialized = true;
 
@@ -55,7 +54,7 @@ public abstract class BaseFragment extends Fragment {
     public void onViewStateRestored(@Nullable final Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
 
-        if (savedInstanceState != null && savedInstanceState.containsKey(BaseFragment.ARG_IS_INITIALIZED)) this.isInitialized = savedInstanceState.getBoolean(BaseFragment.ARG_IS_INITIALIZED, false);
+        this.restoreViewState(savedInstanceState);
     }
 
     @CallSuper
@@ -66,6 +65,11 @@ public abstract class BaseFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
+    @CallSuper
+    protected void restoreViewState(@Nullable final Bundle savedInstanceState) {
+        if (savedInstanceState != null && savedInstanceState.containsKey(BaseFragment.ARG_IS_INITIALIZED)) this.isInitialized = savedInstanceState.getBoolean(BaseFragment.ARG_IS_INITIALIZED, false);
+    }
+
     @LayoutRes
     protected abstract int getLayoutId();
 
@@ -74,17 +78,7 @@ public abstract class BaseFragment extends Fragment {
 
     @CallSuper
     protected void init() {
-        this.setUpToolbar();
         this.setUpMenuItems();
-    }
-
-    @CallSuper
-    protected void setUpToolbar() {
-        final AppCompatActivity activity = (AppCompatActivity)this.getActivity();
-        if (activity != null) {
-            activity.setSupportActionBar(this.toolbar);
-            if (activity.getSupportActionBar() != null) activity.getSupportActionBar().setTitle(R.string.app_name);
-        }
     }
 
     protected void setUpMenuItems() {

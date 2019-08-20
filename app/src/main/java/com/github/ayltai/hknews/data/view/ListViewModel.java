@@ -16,6 +16,9 @@ import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.data.loader.ItemLoader;
 import com.github.ayltai.hknews.data.model.Item;
+import com.github.ayltai.hknews.data.repository.ItemRepository;
+import com.github.ayltai.hknews.data.repository.Repository;
+import com.github.ayltai.hknews.util.RxUtils;
 
 public class ListViewModel extends AndroidViewModel {
     protected final ItemLoader loader;
@@ -38,13 +41,14 @@ public class ListViewModel extends AndroidViewModel {
 
         return this.loader
             .load(this.getApplication())
-            .doAfterSuccess(items -> {
-                this.isForcedRefresh = true;
-
-                if (!isForcedRefresh) {
-                    // TODO: Saves remote items
-                }
-            });
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER))
+            .flatMap(items -> isForcedRefresh
+                ? Single.just(items)
+                : ItemRepository.create(this.getApplication())
+                .flatMap(repository -> repository.set(items))
+                .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER)))
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER))
+            .doOnSuccess(items -> this.isForcedRefresh = true);
     }
 
     @Nonnull

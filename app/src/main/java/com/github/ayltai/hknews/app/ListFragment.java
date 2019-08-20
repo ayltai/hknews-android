@@ -114,18 +114,18 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
 
     @CallSuper
     @Override
-    public void onViewStateRestored(@Nullable final Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-
-        if (savedInstanceState != null && savedInstanceState.containsKey(Constants.ARG_CATEGORY)) this.category = savedInstanceState.getString(Constants.ARG_CATEGORY);
-    }
-
-    @CallSuper
-    @Override
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         outState.putString(Constants.ARG_CATEGORY, this.category);
 
         super.onSaveInstanceState(outState);
+    }
+
+    @CallSuper
+    @Override
+    protected void restoreViewState(@Nullable final Bundle savedInstanceState) {
+        super.restoreViewState(savedInstanceState);
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(Constants.ARG_CATEGORY)) this.category = savedInstanceState.getString(Constants.ARG_CATEGORY);
     }
 
     @LayoutRes
@@ -257,10 +257,13 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         });
     }
 
-    private void onRefresh() {
+    @CallSuper
+    protected void onRefresh() {
         this.binding.subheader.setText(this.category);
 
         this.swipeRefreshLayout.setRefreshing(true);
+        this.shimmerLayout.startShimmerAnimation();
+        this.shimmerLayout.setVisibility(View.VISIBLE);
 
         if (this.disposable != null) this.disposable.dispose();
 

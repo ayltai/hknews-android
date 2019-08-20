@@ -28,7 +28,7 @@ public final class BookmarkItemRepository extends ItemRepository {
 
     @Nonnull
     @NonNull
-    public static ItemRepository create(@Nonnull @NonNull @lombok.NonNull final Realm realm) {
+    private static ItemRepository create(@Nonnull @NonNull @lombok.NonNull final Realm realm) {
         return new BookmarkItemRepository(realm);
     }
 
@@ -40,6 +40,7 @@ public final class BookmarkItemRepository extends ItemRepository {
     @NonNull
     @Override
     public Single<List<Item>> get(@Nonnull @NonNull @lombok.NonNull final List<String> sourceNames, @Nonnull @NonNull @lombok.NonNull final List<String> categoryNames, @Nullable final String keywords) {
-        return Single.defer(() -> Single.just(this.get(this.getRealm().where(Item.class).equalTo(Item.FIELD_IS_BOOKMARKED, true), sourceNames, categoryNames, keywords)));
+        return Single.defer(() -> Single.just(this.get(this.getRealm().where(Item.class).equalTo(Item.FIELD_IS_BOOKMARKED, true), sourceNames, categoryNames, keywords)))
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER));
     }
 }

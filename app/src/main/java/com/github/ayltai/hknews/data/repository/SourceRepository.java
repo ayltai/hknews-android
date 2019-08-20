@@ -29,7 +29,7 @@ public final class SourceRepository extends Repository {
 
     @Nonnull
     @NonNull
-    public static SourceRepository create(@Nonnull @NonNull @lombok.NonNull final Realm realm) {
+    private static SourceRepository create(@Nonnull @NonNull @lombok.NonNull final Realm realm) {
         return new SourceRepository(realm);
     }
 
@@ -40,39 +40,43 @@ public final class SourceRepository extends Repository {
     @Nonnull
     @NonNull
     public Single<List<Source>> get() {
-        return Single.defer(() -> {
-            final RealmResults<Source> records = this.getRealm()
-                .where(Source.class)
-                .findAll();
+        return Single.defer(
+            () -> {
+                final RealmResults<Source> records = this.getRealm()
+                    .where(Source.class)
+                    .findAll();
 
-            if (records.isEmpty()) return Components.getInstance()
-                .getNetComponent()
-                .apiService()
-                .sources()
-                .doOnSuccess(this::put);
+                if (records.isEmpty()) return Components.getInstance()
+                    .getNetComponent()
+                    .apiService()
+                    .sources()
+                    .doOnSuccess(this::put);
 
-            return Single.just(records);
-        });
+                return Single.just(records);
+            })
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER));
     }
 
     @Nonnull
     @NonNull
     private Single<Irrelevant> put(@Nonnull @NonNull @lombok.NonNull final Iterable<Source> sources) {
-        return Single.defer(() -> {
-            if (!this.getRealm().isInTransaction()) this.getRealm().beginTransaction();
+        return Single.defer(
+            () -> {
+                if (!this.getRealm().isInTransaction()) this.getRealm().beginTransaction();
 
-            for (final Source source : sources) {
-                final RealmResults<Source> records = this.getRealm()
-                    .where(Source.class)
-                    .equalTo(Source.FIELD_NAME, source.getName())
-                    .findAll();
+                for (final Source source : sources) {
+                    final RealmResults<Source> records = this.getRealm()
+                        .where(Source.class)
+                        .equalTo(Source.FIELD_NAME, source.getName())
+                        .findAll();
 
-                if (records.isEmpty()) this.getRealm().insert(source);
-            }
+                    if (records.isEmpty()) this.getRealm().insert(source);
+                }
 
-            if (this.getRealm().isInTransaction()) this.getRealm().commitTransaction();
+                if (this.getRealm().isInTransaction()) this.getRealm().commitTransaction();
 
-            return Single.just(Irrelevant.INSTANCE);
-        });
+                return Single.just(Irrelevant.INSTANCE);
+            })
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER));
     }
 }

@@ -1,16 +1,20 @@
 package com.github.ayltai.hknews.app;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
 import android.app.Activity;
+import android.os.Bundle;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.data.view.BookmarkListViewModel;
@@ -41,6 +45,29 @@ public abstract class BookmarkListFragment<B extends ViewDataBinding> extends Li
         protected ListAdapter<ViewItemCompactBinding> getListAdapter(@Nonnull @NonNull @lombok.NonNull final List<Item> items) {
             if (this.adapter == null) this.adapter = new CompactListAdapter(items);
             return this.adapter;
+        }
+    }
+
+    private Date lastBookmarkedDate;
+
+    @CallSuper
+    @Override
+    public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final Date lastBookmarkedDate = Components.getInstance()
+                .getConfigComponent()
+                .userConfigurations()
+                .getLastBookmarkedDate(this.category);
+
+        if (this.lastBookmarkedDate == null) {
+            this.lastBookmarkedDate = lastBookmarkedDate;
+        } else if (this.lastBookmarkedDate.compareTo(lastBookmarkedDate) < 0) {
+            this.lastBookmarkedDate = lastBookmarkedDate;
+
+            this.onRefresh();
+        } else {
+            this.lastBookmarkedDate = new Date();
         }
     }
 

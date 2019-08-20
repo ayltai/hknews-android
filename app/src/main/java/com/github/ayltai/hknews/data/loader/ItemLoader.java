@@ -46,7 +46,8 @@ public class ItemLoader extends Loader<List<Item>> {
     @Override
     protected Single<List<Item>> loadLocally(@Nonnull @NonNull @lombok.NonNull final Context context) {
         return ItemRepository.create(context)
-            .flatMap(repository -> repository.get(this.sourceNames, this.categoryNames, this.keywords));
+            .flatMap(repository -> repository.get(this.sourceNames, this.categoryNames, this.keywords))
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER));
     }
 
     @Nonnull
@@ -63,12 +64,9 @@ public class ItemLoader extends Loader<List<Item>> {
     @NonNull
     @Override
     protected Consumer<? super List<Item>> onLoadRemotely(@Nonnull @NonNull @lombok.NonNull final Context context) {
-        return items -> ItemRepository.create(
-            Components.getInstance()
-                .getDataComponent(context)
-                .realm())
-            .set(items)
-            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER))
+        return items -> ItemRepository.create(context)
+            .flatMap(repository -> repository.set(items))
+            .compose(RxUtils.applySingleSchedulers(ItemRepository.SCHEDULER))
             .subscribe();
     }
 

@@ -13,7 +13,9 @@ import io.reactivex.functions.Consumer;
 
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Source;
+import com.github.ayltai.hknews.data.repository.ItemRepository;
 import com.github.ayltai.hknews.data.repository.SourceRepository;
+import com.github.ayltai.hknews.util.RxUtils;
 
 public final class SourceLoader extends Loader<List<Source>> {
     @Nonnull
@@ -21,7 +23,8 @@ public final class SourceLoader extends Loader<List<Source>> {
     @Override
     protected Single<List<Source>> loadLocally(@Nonnull @NonNull @lombok.NonNull final Context context) {
         return SourceRepository.create(context)
-            .flatMap(SourceRepository::get);
+            .flatMap(SourceRepository::get)
+            .compose(RxUtils.applySingleSchedulers(ItemRepository.SCHEDULER));
     }
 
     @Nonnull

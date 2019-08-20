@@ -2,6 +2,8 @@ package com.github.ayltai.hknews.data.model;
 
 import java.util.Date;
 
+import androidx.annotation.Nullable;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -38,6 +40,7 @@ public class Item extends RealmObject {
     @Getter
     private String description;
 
+    @EqualsAndHashCode.Include
     @Getter
     @PrimaryKey
     private String url;
@@ -59,9 +62,11 @@ public class Item extends RealmObject {
 
     @Getter
     @Setter
+    @Nullable
     private Date lastAccessed;
 
     @Getter
     @Setter
-    private boolean isBookmarked;
+    @Nullable
+    private Boolean isBookmarked;
 }
