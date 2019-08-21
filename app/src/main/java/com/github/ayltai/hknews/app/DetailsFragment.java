@@ -1,6 +1,8 @@
 package com.github.ayltai.hknews.app;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 
@@ -27,11 +29,16 @@ import io.reactivex.disposables.CompositeDisposable;
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.R;
+import com.github.ayltai.hknews.data.model.Image;
+import com.github.ayltai.hknews.data.model.Video;
 import com.github.ayltai.hknews.data.repository.Repository;
 import com.github.ayltai.hknews.data.view.DetailsViewModel;
 import com.github.ayltai.hknews.databinding.FragmentDetailsBinding;
+import com.github.ayltai.hknews.databinding.ViewImageBinding;
+import com.github.ayltai.hknews.databinding.ViewVideoBinding;
 import com.github.ayltai.hknews.util.IntentUtils;
 import com.github.ayltai.hknews.util.RxUtils;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 
 public final class DetailsFragment extends BaseFragment {
     //region Variables
@@ -94,10 +101,45 @@ public final class DetailsFragment extends BaseFragment {
                             this.title        = item.getTitle();
                             this.isBookmarked = Boolean.TRUE.equals(item.getIsBookmarked());
 
-                            this.binding.setItem(item);
-
                             final MenuItem bookmarkMenuItem = this.toolbar.getMenu().findItem(R.id.action_bookmark);
                             if (bookmarkMenuItem != null) bookmarkMenuItem.setIcon(this.isBookmarked ? R.drawable.ic_bookmark_filled_white_24dp : R.drawable.ic_bookmark_white_24dp);
+
+                            this.binding.setItem(item);
+
+                            if (!item.getVideos().isEmpty()) {
+                                for (final Video video : item.getVideos()) {
+                                    final ViewVideoBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this.getContext()), R.layout.view_video, this.binding.videosContainer, false);
+                                    final View             view    = binding.getRoot();
+
+                                    view.findViewById(R.id.image).setOnClickListener(v -> VideoActivity.show(this.getContext(), video.getVideoUrl()));
+
+                                    this.binding.videosContainer.addView(view);
+
+                                    binding.setVideo(video);
+                                }
+                            }
+
+                            if (!item.getImages().isEmpty()) {
+                                final List<String> urls = new ArrayList<>();
+                                for (final Image image : item.getImages()) urls.add(image.getImageUrl());
+
+                                for (final Image image : item.getImages()) {
+                                    final ViewImageBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this.getContext()), R.layout.view_image, this.binding.imagesContainer, false);
+                                    final View             view    = binding.getRoot();
+
+                                    final View.OnClickListener listener = v -> new ImageViewer.Builder<>(this.getContext(), urls)
+                                        .allowSwipeToDismiss(false)
+                                        .setStartPosition(urls.indexOf(image.getImageUrl()))
+                                        .show();
+
+                                    view.findViewById(R.id.image).setOnClickListener(listener);
+                                    view.findViewById(R.id.description).setOnClickListener(listener);
+
+                                    this.binding.imagesContainer.addView(view);
+
+                                    binding.setImage(image);
+                                }
+                            }
                         },
                         RxUtils::handleError
                     ));

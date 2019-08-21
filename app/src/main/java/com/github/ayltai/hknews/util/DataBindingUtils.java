@@ -15,7 +15,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.ayltai.hknews.Constants;
-import com.github.ayltai.hknews.widget.SmartCroppingImageView;
+import com.github.piasy.biv.view.BigImageView;
 
 public final class DataBindingUtils {
     private DataBindingUtils() {
@@ -42,7 +42,7 @@ public final class DataBindingUtils {
     }
 
     @BindingAdapter("imageUrl")
-    public static void setImageUrl(@Nonnull @NonNull @lombok.NonNull final SmartCroppingImageView view, @Nullable final String imageUrl) {
+    public static void setImageUrl(@Nonnull @NonNull @lombok.NonNull final BigImageView view, @Nullable final String imageUrl) {
         if (imageUrl == null) {
             view.setVisibility(View.GONE);
         } else {

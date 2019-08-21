@@ -8,6 +8,9 @@
     <string name="app_issues">Report an issue</string>
     <string name="app_issues_uri" translatable="false">https://github.com/ayltai/hknews-android/issues</string>
 
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+
     <!-- region Error messages -->
     <string name="error_network">Failed to connect to the internet</string>
     <!-- endregion -->
