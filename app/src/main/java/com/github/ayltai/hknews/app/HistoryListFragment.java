@@ -113,4 +113,9 @@ public abstract class HistoryListFragment<B extends ViewDataBinding> extends Lis
 
         return this.model;
     }
+
+    @Override
+    protected void onClear() {
+        //
+    }
 }

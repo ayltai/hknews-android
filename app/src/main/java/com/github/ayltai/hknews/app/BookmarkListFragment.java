@@ -113,4 +113,9 @@ public abstract class BookmarkListFragment<B extends ViewDataBinding> extends Li
 
         return this.model;
     }
+
+    @Override
+    protected void onClear() {
+        //
+    }
 }

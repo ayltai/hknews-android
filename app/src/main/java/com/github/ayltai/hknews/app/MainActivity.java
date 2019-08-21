@@ -118,7 +118,10 @@ public final class MainActivity extends ThemedActivity implements NetworkStateLi
     protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == SettingsActivity.REQUEST_CODE && resultCode == Activity.RESULT_OK) this.recreate();
+        if (requestCode == SettingsActivity.REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            this.finish();
+            this.startActivity(new Intent(this, MainActivity.class));
+        }
     }
 
     @Override

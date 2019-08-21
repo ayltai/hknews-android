@@ -189,10 +189,17 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
 
         final Menu     menu             = this.toolbar.getMenu();
         final MenuItem refreshMenuItem  = menu.findItem(R.id.action_refresh);
+        final MenuItem clearMenuItem    = menu.findItem(R.id.action_clear);
         final MenuItem settingsMenuItem = menu.findItem(R.id.action_settings);
 
         if (refreshMenuItem != null) refreshMenuItem.setOnMenuItemClickListener(item -> {
             this.onRefresh();
+
+            return true;
+        });
+
+        if (clearMenuItem != null) clearMenuItem.setOnMenuItemClickListener(item -> {
+            this.onClear();
 
             return true;
         });
@@ -288,5 +295,8 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
                 },
                 RxUtils::handleError
             );
+    }
+
+    protected void onClear() {
     }
 }

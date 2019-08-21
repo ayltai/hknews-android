@@ -30,6 +30,7 @@
     <string name="action_bookmark">Bookmark</string>
     <string name="action_view">View in browser</string>
     <string name="action_share">Share</string>
+    <string name="action_clear">Clear</string>
     <string name="action_category_hongkong">Hong Kong</string>
     <string name="action_category_international">International</string>
     <string name="action_category_china">China</string>
