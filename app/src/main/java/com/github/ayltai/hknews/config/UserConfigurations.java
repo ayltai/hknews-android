@@ -34,15 +34,7 @@ public interface UserConfigurations {
 
     void setLastUpdatedDate(@Nonnull @NonNull @lombok.NonNull String categoryName, @Nonnull @NonNull @lombok.NonNull Date date);
 
-    @Nonnull
-    @NonNull
-    Date getLastAccessedDate(@Nonnull @NonNull @lombok.NonNull String categoryName);
+    int getPosition(@Nonnull @NonNull @lombok.NonNull String listName, @Nonnull @NonNull @lombok.NonNull String categoryName);
 
-    void setLastAccessedDate(@Nonnull @NonNull @lombok.NonNull String categoryName, @Nonnull @NonNull @lombok.NonNull Date date);
-
-    @Nonnull
-    @NonNull
-    Date getLastBookmarkedDate(@Nonnull @NonNull @lombok.NonNull String categoryName);
-
-    void setLastBookmarkedDate(@Nonnull @NonNull @lombok.NonNull String categoryName, @Nonnull @NonNull @lombok.NonNull Date date);
+    void setPosition(@Nonnull @NonNull @lombok.NonNull String listName, @Nonnull @NonNull @lombok.NonNull String categoryName, int position);
 }

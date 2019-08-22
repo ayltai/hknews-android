@@ -16,6 +16,7 @@ import io.realm.Sort;
 
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Item;
+import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.util.RxUtils;
 
 public final class HistoryItemRepository extends ItemRepository {
@@ -36,6 +37,26 @@ public final class HistoryItemRepository extends ItemRepository {
 
     private HistoryItemRepository(@Nonnull @NonNull @lombok.NonNull final Realm realm) {
         super(realm);
+    }
+
+    @Nonnull
+    @NonNull
+    @Override
+    public Single<Irrelevant> deleteAll(@Nonnull @NonNull @lombok.NonNull final List<String> sourceNames, @Nonnull @NonNull @lombok.NonNull final List<String> categoryNames) {
+        return Single.defer(
+            () -> {
+                RealmQuery<Item> query = this.getRealm()
+                    .where(Item.class)
+                    .isNotNull(Item.FIELD_LAST_ACCESSED);
+
+                if (!sourceNames.isEmpty()) query = query.in(Item.FIELD_SOURCE, sourceNames.toArray(new String[0]));
+                if (!categoryNames.isEmpty()) query = query.in(Item.FIELD_CATEGORY, categoryNames.toArray(new String[0]));
+
+                query.findAll().deleteAllFromRealm();
+
+                return Single.just(Irrelevant.INSTANCE);
+            })
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER));
     }
 
     @Nonnull

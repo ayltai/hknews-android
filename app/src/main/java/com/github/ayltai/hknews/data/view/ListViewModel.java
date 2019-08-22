@@ -1,6 +1,7 @@
 package com.github.ayltai.hknews.data.view;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -18,6 +19,7 @@ import com.github.ayltai.hknews.data.loader.ItemLoader;
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.data.repository.ItemRepository;
 import com.github.ayltai.hknews.data.repository.Repository;
+import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.util.RxUtils;
 
 public class ListViewModel extends AndroidViewModel {
@@ -34,21 +36,30 @@ public class ListViewModel extends AndroidViewModel {
     @Nonnull
     @NonNull
     public Single<List<Item>> getItems(@Nonnull @NonNull @lombok.NonNull final String category) {
-        final boolean isForcedRefresh = this.isForcedRefresh;
-
         this.loader.setCategoryNames(Collections.singletonList(category));
         this.loader.setForcedRefresh(this.isForcedRefresh);
 
         return this.loader
             .load(this.getApplication())
             .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER))
-            .flatMap(items -> isForcedRefresh
-                ? Single.just(items)
-                : ItemRepository.create(this.getApplication())
+            .flatMap(items -> ItemRepository.create(this.getApplication())
                 .flatMap(repository -> repository.set(items))
                 .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER)))
             .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER))
-            .doOnSuccess(items -> this.isForcedRefresh = true);
+            .doOnSuccess(items -> {
+                if (this.isForcedRefresh) Components.getInstance()
+                    .getConfigComponent()
+                    .userConfigurations()
+                    .setLastUpdatedDate(category, new Date());
+
+                this.isForcedRefresh = true;
+            });
+    }
+
+    @Nonnull
+    @NonNull
+    public Single<Irrelevant> clear(@Nonnull @NonNull @lombok.NonNull final List<String> sourceNames, @Nonnull @NonNull @lombok.NonNull final String category) {
+        return Single.just(Irrelevant.INSTANCE);
     }
 
     @Nonnull

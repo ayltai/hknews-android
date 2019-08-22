@@ -94,7 +94,7 @@ public final class DetailsFragment extends BaseFragment {
                     .doOnSuccess(item -> Components.getInstance()
                         .getConfigComponent()
                         .userConfigurations()
-                        .setLastAccessedDate(item.getCategory().getName(), now))
+                        .setPosition(HistoryListFragment.class.getSimpleName(), item.getCategory().getName(), 0))
                     .compose(RxUtils.applySingleBackgroundToMainSchedulers())
                     .subscribe(
                         item -> {
@@ -115,7 +115,7 @@ public final class DetailsFragment extends BaseFragment {
 
                                     this.binding.videosContainer.addView(view);
 
-                                    binding.setVideo(video);
+                                    binding.setModel(video);
                                 }
                             }
 
@@ -137,7 +137,7 @@ public final class DetailsFragment extends BaseFragment {
 
                                     this.binding.imagesContainer.addView(view);
 
-                                    binding.setImage(image);
+                                    binding.setModel(image);
                                 }
                             }
                         },
@@ -194,7 +194,7 @@ public final class DetailsFragment extends BaseFragment {
                     .doOnSuccess(i -> Components.getInstance()
                         .getConfigComponent()
                         .userConfigurations()
-                        .setLastBookmarkedDate(i.getCategory().getName(), new Date()))
+                        .setPosition(BookmarkListFragment.class.getSimpleName(), i.getCategory().getName(), 0))
                     .compose(RxUtils.applySingleBackgroundToMainSchedulers())
                     .subscribe(
                         i -> {

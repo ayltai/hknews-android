@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="video"
+            name="model"
             type="com.github.ayltai.hknews.data.model.Video" />
     </data>
     <FrameLayout
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/placeholderImage"
-            app:imageUrl="@{video.imageUrl}"
+            app:imageUrl="@{model.imageUrl}"
             app:initScaleType="centerCrop"
             app:actualImageScaleType="centerCrop"
             app:fadeDuration="@android:integer/config_shortAnimTime" />

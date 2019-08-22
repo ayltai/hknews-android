@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <import type="android.text.TextUtils" />
         <variable
-            name="image"
+            name="model"
             type="com.github.ayltai.hknews.data.model.Image" />
     </data>
     <LinearLayout
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/placeholderImage"
-            app:imageUrl="@{image.imageUrl}"
+            app:imageUrl="@{model.imageUrl}"
             app:initScaleType="centerCrop"
             app:actualImageScaleType="centerCrop"
             app:fadeDuration="@android:integer/config_mediumAnimTime" />
@@ -31,9 +31,9 @@
             android:paddingTop="@dimen/space8"
             android:layout_gravity="center_horizontal"
             android:autoLink="all"
-            android:visibility="@{TextUtils.isEmpty(image.description) ? View.GONE : View.VISIBLE}"
+            android:visibility="@{TextUtils.isEmpty(model.description) ? View.GONE : View.VISIBLE}"
             android:textIsSelectable="true"
-            android:text="@{image.description}"
+            android:text="@{model.description}"
             tools:text="@tools:sample/lorem" />
     </LinearLayout>
 </layout>

@@ -14,8 +14,6 @@ public class Constants {
 
     public static final int MIN_FETCH_TIME = 30;
 
-    public static final float ITEM_ALPHA = 0.85f;
-
     public static final int CACHE_SIZE         = 1024;
     public static final int MAX_ZOOM           = 8;
     public static final int NEWS_DAYS          = 2;
@@ -23,6 +21,5 @@ public class Constants {
 
     public static final String BASE_URL = "https://hknews.dev/";
 
-    public static final String ARG_CATEGORY = "CATEGORY";
     public static final String ARG_ITEM_URL = "ITEM_URL";
 }

@@ -19,6 +19,7 @@
             android:layout_marginStart="-4dp"
             android:layout_marginRight="-4dp"
             android:layout_marginEnd="-4dp"
+            android:alpha="@{item.lastAccessed == null ? 1f : 0.85f}"
             android:addStatesFromChildren="true"
             android:stateListAnimator="@animator/lift_on_pressed"
             app:cardElevation="@dimen/elevation"

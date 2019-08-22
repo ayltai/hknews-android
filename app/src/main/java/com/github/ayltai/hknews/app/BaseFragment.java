@@ -18,9 +18,13 @@ import androidx.fragment.app.Fragment;
 public abstract class BaseFragment extends Fragment {
     private static final String ARG_IS_INITIALIZED = "IS_INITIALIZED";
 
+    //region Variables
+
     protected View    view;
     protected Toolbar toolbar;
     protected boolean isInitialized;
+
+    //endregion
 
     @CallSuper
     @Nonnull

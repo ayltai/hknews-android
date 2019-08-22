@@ -21,6 +21,7 @@
             android:layout_marginEnd="@dimen/space8"
             android:layout_marginTop="@dimen/space4"
             android:layout_marginBottom="@dimen/space4"
+            android:alpha="@{item.lastAccessed == null ? 1f : 0.85f}"
             android:addStatesFromChildren="true"
             android:stateListAnimator="@animator/lift_on_pressed"
             app:cardElevation="@dimen/elevation"

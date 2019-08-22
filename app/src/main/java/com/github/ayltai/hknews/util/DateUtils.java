@@ -20,6 +20,7 @@ public class DateUtils {
     private static final long MINUTE_MILLIS = 60 * DateUtils.SECOND_MILLIS;
     private static final long HOUR_MILLIS   = 60 * DateUtils.MINUTE_MILLIS;
     private static final long DAY_MILLIS    = 24 * DateUtils.HOUR_MILLIS;
+    private static final long DAY_DAYS      = 30;
     private static final long MONTH_DAYS    = 45;
     private static final long YEAR_DAYS     = 365;
     private static final long YEARS_DAYS    = 550;
@@ -43,6 +44,7 @@ public class DateUtils {
 
         final long days = Math.round(diff / (double)DateUtils.DAY_MILLIS);
 
+        if (days < DateUtils.DAY_DAYS) return context.getString(R.string.time_ago_days);
         if (days < DateUtils.MONTH_DAYS) return context.getString(R.string.time_ago_month);
         if (days < DateUtils.YEAR_DAYS) return context.getString(R.string.time_ago_months);
         if (days < DateUtils.YEARS_DAYS) return context.getString(R.string.time_ago_year);

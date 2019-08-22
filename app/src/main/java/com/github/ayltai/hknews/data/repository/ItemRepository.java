@@ -17,6 +17,7 @@ import io.realm.Sort;
 
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Item;
+import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.util.RxUtils;
 
 public class ItemRepository extends Repository {
@@ -37,6 +38,12 @@ public class ItemRepository extends Repository {
 
     protected ItemRepository(@Nonnull @NonNull @lombok.NonNull final Realm realm) {
         super(realm);
+    }
+
+    @Nonnull
+    @NonNull
+    public Single<Irrelevant> deleteAll(@Nonnull @NonNull @lombok.NonNull final List<String> sourceNames, @Nonnull @NonNull @lombok.NonNull final List<String> categoryNames) {
+        throw new UnsupportedOperationException();
     }
 
     @Nonnull

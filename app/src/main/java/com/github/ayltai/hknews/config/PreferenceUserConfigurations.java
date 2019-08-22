@@ -32,6 +32,7 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
     private static final String KEY_LAST_UPDATED_DATE    = "LAST_UPDATED_DATE_";
     private static final String KEY_LAST_ACCESSED_DATE   = "LAST_ACCESSED_DATE_";
     private static final String KEY_LAST_BOOKMARKED_DATE = "LAST_BOOKMARKED_DATE_";
+    private static final String KEY_POSITION             = "POSITION_";
 
     //endregion
 
@@ -139,33 +140,16 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
             .apply();
     }
 
-    @Nonnull
-    @NonNull
     @Override
-    public Date getLastAccessedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName) {
-        return new Date(this.preferences.getLong(PreferenceUserConfigurations.KEY_LAST_ACCESSED_DATE + categoryName, System.currentTimeMillis()));
+    public int getPosition(@Nonnull @NonNull @lombok.NonNull final String listName, @Nonnull @NonNull @lombok.NonNull final String categoryName) {
+        return this.preferences.getInt(PreferenceUserConfigurations.KEY_POSITION + listName + categoryName, 0);
     }
 
     @Override
-    public void setLastAccessedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName, @NonNull @Nonnull @lombok.NonNull final Date date) {
+    public void setPosition(@Nonnull @NonNull @lombok.NonNull final String listName, @Nonnull @NonNull @lombok.NonNull final String categoryName, final int position) {
         this.preferences
             .edit()
-            .putLong(PreferenceUserConfigurations.KEY_LAST_ACCESSED_DATE + categoryName, date.getTime())
-            .apply();
-    }
-
-    @Nonnull
-    @NonNull
-    @Override
-    public Date getLastBookmarkedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName) {
-        return new Date(this.preferences.getLong(PreferenceUserConfigurations.KEY_LAST_BOOKMARKED_DATE + categoryName, System.currentTimeMillis()));
-    }
-
-    @Override
-    public void setLastBookmarkedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName, @NonNull @Nonnull @lombok.NonNull final Date date) {
-        this.preferences
-            .edit()
-            .putLong(PreferenceUserConfigurations.KEY_LAST_BOOKMARKED_DATE + categoryName, date.getTime())
+            .putInt(PreferenceUserConfigurations.KEY_POSITION + listName + categoryName, position)
             .apply();
     }
 }

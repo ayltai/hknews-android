@@ -1,20 +1,16 @@
 package com.github.ayltai.hknews.app;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
 import android.app.Activity;
-import android.os.Bundle;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.data.view.EmptyViewModel;
@@ -33,8 +29,7 @@ public abstract class HistoryListFragment<B extends ViewDataBinding> extends Lis
         @NonNull
         @Override
         protected ListAdapter<ViewItemCozyBinding> getListAdapter(@Nonnull @NonNull @lombok.NonNull final List<Item> items) {
-            if (this.adapter == null) this.adapter = new CozyListAdapter(items);
-            return this.adapter;
+            return this.adapter == null ? this.adapter = new CozyListAdapter(items) : this.adapter;
         }
     }
 
@@ -43,31 +38,7 @@ public abstract class HistoryListFragment<B extends ViewDataBinding> extends Lis
         @NonNull
         @Override
         protected ListAdapter<ViewItemCompactBinding> getListAdapter(@Nonnull @NonNull @lombok.NonNull final List<Item> items) {
-            if (this.adapter == null) this.adapter = new CompactListAdapter(items);
-            return this.adapter;
-        }
-    }
-
-    private Date lastAccessedDate;
-
-    @CallSuper
-    @Override
-    public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        final Date lastAccessedDate = Components.getInstance()
-                .getConfigComponent()
-                .userConfigurations()
-                .getLastAccessedDate(this.category);
-
-        if (this.lastAccessedDate == null) {
-            this.lastAccessedDate = lastAccessedDate;
-        } else if (this.lastAccessedDate.compareTo(lastAccessedDate) < 0) {
-            this.lastAccessedDate = lastAccessedDate;
-
-            this.onRefresh();
-        } else {
-            this.lastAccessedDate = new Date();
+            return this.adapter == null ? this.adapter = new CompactListAdapter(items) : this.adapter;
         }
     }
 
@@ -115,7 +86,7 @@ public abstract class HistoryListFragment<B extends ViewDataBinding> extends Lis
     }
 
     @Override
-    protected void onClear() {
-        //
+    protected void updateSubheader() {
+        this.binding.subheader.setText(this.category);
     }
 }
