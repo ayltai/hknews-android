@@ -169,7 +169,7 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         Components.getInstance()
             .getConfigComponent()
             .userConfigurations()
-            .setPosition(this.getClass().getSimpleName(), this.category, this.position);
+            .setPosition(this.getClass().getSimpleName(), this.category, ((LinearLayoutManager)this.recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
     }
 
     @CallSuper
