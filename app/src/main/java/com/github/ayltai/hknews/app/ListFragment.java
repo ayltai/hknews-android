@@ -59,7 +59,7 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         @NonNull
         @Override
         protected ListAdapter<ViewItemCozyBinding> getListAdapter(@Nonnull @NonNull @lombok.NonNull final List<Item> items) {
-            return this.adapter == null ? this.adapter = new CozyListAdapter(items) : this.adapter;
+            return new CozyListAdapter(items);
         }
     }
 
@@ -68,7 +68,7 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         @NonNull
         @Override
         protected ListAdapter<ViewItemCompactBinding> getListAdapter(@Nonnull @NonNull @lombok.NonNull final List<Item> items) {
-            return this.adapter == null ? this.adapter = new CompactListAdapter(items) : this.adapter;
+            return new CompactListAdapter(items);
         }
     }
 
@@ -83,11 +83,10 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
 
     protected SwipeRefreshLayout  swipeRefreshLayout;
     protected FragmentListBinding binding;
+    protected ListAdapter<B>      adapter;
     protected ListViewModel       model;
     protected String              category;
     protected int                 position;
-
-    ListAdapter<B> adapter;
 
     private BackdropBehavior    behavior;
     private RecyclerView        recyclerView;
@@ -134,7 +133,10 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
 
         if (this.swipeRefreshLayout == null) {
             this.swipeRefreshLayout = view.findViewById(this.getSwipeRefreshLayoutId());
-            this.swipeRefreshLayout.setOnRefreshListener(this::onRefresh);
+            this.swipeRefreshLayout.setOnRefreshListener(() -> {
+                this.resetPosition();
+                this.onRefresh();
+            });
         }
 
         if (this.emptyView == null) this.emptyView = view.findViewById(android.R.id.empty);
@@ -255,6 +257,7 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         final MenuItem settingsMenuItem = menu.findItem(R.id.action_settings);
 
         if (refreshMenuItem != null) refreshMenuItem.setOnMenuItemClickListener(item -> {
+            this.resetPosition();
             this.onRefresh();
 
             return true;
@@ -322,6 +325,7 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
 
             this.category = actions.get(item.getItemId());
 
+            this.resetPosition();
             this.onRefresh();
 
             return true;
@@ -370,6 +374,15 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
                 irrelevant -> { },
                 RxUtils::handleError
             ));
+    }
+
+    protected void resetPosition() {
+        this.position = 0;
+
+        Components.getInstance()
+            .getConfigComponent()
+            .userConfigurations()
+            .setPosition(this.getClass().getSimpleName(), this.category, 0);
     }
 
     protected void updateSubheader() {

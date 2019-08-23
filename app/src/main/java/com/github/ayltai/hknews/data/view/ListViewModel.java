@@ -17,7 +17,6 @@ import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.data.loader.ItemLoader;
 import com.github.ayltai.hknews.data.model.Item;
-import com.github.ayltai.hknews.data.repository.ItemRepository;
 import com.github.ayltai.hknews.data.repository.Repository;
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.util.RxUtils;
@@ -41,10 +40,6 @@ public class ListViewModel extends AndroidViewModel {
 
         return this.loader
             .load(this.getApplication())
-            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER))
-            .flatMap(items -> ItemRepository.create(this.getApplication())
-                .flatMap(repository -> repository.set(items))
-                .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER)))
             .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER))
             .doOnSuccess(items -> {
                 if (this.isForcedRefresh) Components.getInstance()

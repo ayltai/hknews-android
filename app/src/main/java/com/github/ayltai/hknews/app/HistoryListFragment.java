@@ -29,7 +29,7 @@ public abstract class HistoryListFragment<B extends ViewDataBinding> extends Lis
         @NonNull
         @Override
         protected ListAdapter<ViewItemCozyBinding> getListAdapter(@Nonnull @NonNull @lombok.NonNull final List<Item> items) {
-            return this.adapter == null ? this.adapter = new CozyListAdapter(items) : this.adapter;
+            return new CozyListAdapter(items);
         }
     }
 
@@ -38,7 +38,7 @@ public abstract class HistoryListFragment<B extends ViewDataBinding> extends Lis
         @NonNull
         @Override
         protected ListAdapter<ViewItemCompactBinding> getListAdapter(@Nonnull @NonNull @lombok.NonNull final List<Item> items) {
-            return this.adapter == null ? this.adapter = new CompactListAdapter(items) : this.adapter;
+            return new CompactListAdapter(items);
         }
     }
 

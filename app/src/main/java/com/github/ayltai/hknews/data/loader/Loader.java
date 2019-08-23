@@ -24,6 +24,7 @@ public abstract class Loader<T> {
     @NonNull
     public Single<T> load(@Nonnull @NonNull @lombok.NonNull final Context context) {
         if (this.isForcedRefresh) return this.loadRemotely(context)
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER))
             .doOnSuccess(this.onLoadRemotely(context));
 
         return this.loadLocally(context)
