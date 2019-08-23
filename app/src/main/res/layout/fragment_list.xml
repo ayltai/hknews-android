@@ -44,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="@dimen/bottomNavigationView"
+                android:background="?attr/windowBackground"
                 android:orientation="vertical"
                 app:divider="?android:attr/dividerHorizontal"
                 app:showDividers="middle">
