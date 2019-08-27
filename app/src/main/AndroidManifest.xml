@@ -9,6 +9,7 @@
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:appCategory="news"
         android:resizeableActivity="true"
         android:supportsRtl="false"
