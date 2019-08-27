@@ -22,6 +22,7 @@ import android.view.ViewStub;
 import androidx.annotation.CallSuper;
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
+import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.collection.ArrayMap;
@@ -81,12 +82,10 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
 
     //region Variables
 
-    protected SwipeRefreshLayout  swipeRefreshLayout;
     protected FragmentListBinding binding;
-    protected ListAdapter<B>      adapter;
     protected ListViewModel       model;
+    protected SwipeRefreshLayout  swipeRefreshLayout;
     protected String              category;
-    protected int                 position;
 
     private BackdropBehavior    behavior;
     private RecyclerView        recyclerView;
@@ -94,6 +93,7 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
     private View                emptyView;
     private CompositeDisposable disposables;
     private Timer               timer;
+    private int                 position;
 
     //endregion
 
@@ -124,22 +124,18 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
 
         final View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        if (this.behavior == null) this.behavior = (BackdropBehavior)((CoordinatorLayout.LayoutParams)view.findViewById(R.id.cardView).getLayoutParams()).getBehavior();
+        this.behavior = (BackdropBehavior)((CoordinatorLayout.LayoutParams)view.findViewById(R.id.cardView).getLayoutParams()).getBehavior();
 
-        if (this.recyclerView == null) {
-            this.recyclerView = view.findViewById(this.getRecyclerViewId());
-            this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        }
+        this.recyclerView = view.findViewById(this.getRecyclerViewId());
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        if (this.swipeRefreshLayout == null) {
-            this.swipeRefreshLayout = view.findViewById(this.getSwipeRefreshLayoutId());
-            this.swipeRefreshLayout.setOnRefreshListener(() -> {
-                this.resetPosition();
-                this.onRefresh();
-            });
-        }
+        this.swipeRefreshLayout = view.findViewById(this.getSwipeRefreshLayoutId());
+        this.swipeRefreshLayout.setOnRefreshListener(() -> {
+            this.resetPosition();
+            this.onRefresh();
+        });
 
-        if (this.emptyView == null) this.emptyView = view.findViewById(android.R.id.empty);
+        this.emptyView = view.findViewById(android.R.id.empty);
 
         return view;
     }
@@ -213,6 +209,11 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         return R.id.recyclerView;
     }
 
+    @MenuRes
+    protected int getMenu() {
+        return R.menu.news;
+    }
+
     @Nonnull
     @NonNull
     protected abstract ListAdapter<B> getListAdapter(@Nonnull @NonNull List<Item> items);
@@ -247,11 +248,13 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         this.onRefresh();
     }
 
+    @CallSuper
     @Override
     protected void setUpMenuItems() {
-        this.toolbar.inflateMenu(R.menu.news);
+        this.toolbar.inflateMenu(this.getMenu());
 
         final Menu     menu             = this.toolbar.getMenu();
+        final MenuItem searchMenuItem   = menu.findItem(R.id.action_search);
         final MenuItem refreshMenuItem  = menu.findItem(R.id.action_refresh);
         final MenuItem clearMenuItem    = menu.findItem(R.id.action_clear);
         final MenuItem settingsMenuItem = menu.findItem(R.id.action_settings);
@@ -336,6 +339,7 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
     protected void onRefresh() {
         this.swipeRefreshLayout.setRefreshing(true);
         this.recyclerView.setVisibility(View.GONE);
+        this.emptyView.setVisibility(View.GONE);
         this.shimmerLayout.startShimmerAnimation();
         this.shimmerLayout.setVisibility(View.VISIBLE);
 

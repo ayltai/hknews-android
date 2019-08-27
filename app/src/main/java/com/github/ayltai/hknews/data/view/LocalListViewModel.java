@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import io.reactivex.Single;
 
@@ -23,8 +24,9 @@ public abstract class LocalListViewModel extends ListViewModel {
     @Nonnull
     @NonNull
     @Override
-    public Single<List<Item>> getItems(@Nonnull @NonNull @lombok.NonNull final String category) {
+    public Single<List<Item>> getItems(@Nonnull @NonNull @lombok.NonNull final String category, @Nullable final String keywords) {
         this.loader.setCategoryNames(Collections.singletonList(category));
+        this.loader.setKeywords(keywords);
 
         return this.loader
             .load(this.getApplication())

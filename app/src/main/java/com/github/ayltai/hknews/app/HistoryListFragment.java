@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import android.app.Activity;
 
 import androidx.annotation.CallSuper;
+import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
@@ -42,17 +43,18 @@ public abstract class HistoryListFragment<B extends ViewDataBinding> extends Lis
         }
     }
 
+    @MenuRes
+    @Override
+    protected int getMenu() {
+        return R.menu.history;
+    }
+
     @CallSuper
     @Override
     protected void init() {
         super.init();
 
         this.swipeRefreshLayout.setEnabled(false);
-    }
-
-    @Override
-    protected void setUpMenuItems() {
-        this.toolbar.inflateMenu(R.menu.history);
     }
 
     @Override

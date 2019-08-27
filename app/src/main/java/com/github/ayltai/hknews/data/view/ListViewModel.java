@@ -9,12 +9,14 @@ import javax.annotation.Nonnull;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 
 import io.reactivex.Single;
 
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.Constants;
+import com.github.ayltai.hknews.config.UserConfigurations;
 import com.github.ayltai.hknews.data.loader.ItemLoader;
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.data.repository.Repository;
@@ -35,7 +37,22 @@ public class ListViewModel extends AndroidViewModel {
     @Nonnull
     @NonNull
     public Single<List<Item>> getItems(@Nonnull @NonNull @lombok.NonNull final String category) {
+        return this.getItems(category, null);
+    }
+
+    @Nonnull
+    @NonNull
+    public Single<List<Item>> getItems(@Nonnull @NonNull @lombok.NonNull final String category, @Nullable final String keywords) {
+        if (keywords == null) this.isForcedRefresh = false;
+
+        final UserConfigurations configs = Components.getInstance()
+            .getConfigComponent()
+            .userConfigurations();
+
+        if (System.currentTimeMillis() - configs.getLastUpdatedDate(category).getTime() > Constants.AUTO_REFRESH_TIME) this.isForcedRefresh = true;
+
         this.loader.setCategoryNames(Collections.singletonList(category));
+        this.loader.setKeywords(keywords);
         this.loader.setForcedRefresh(this.isForcedRefresh);
 
         return this.loader

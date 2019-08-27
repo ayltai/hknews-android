@@ -27,7 +27,6 @@ import androidx.navigation.Navigation;
 import io.reactivex.disposables.CompositeDisposable;
 
 import com.github.ayltai.hknews.Components;
-import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.data.model.Image;
 import com.github.ayltai.hknews.data.model.Video;
@@ -65,14 +64,16 @@ public final class DetailsFragment extends BaseFragment {
     @NonNull
     @Override
     public View onCreateView(@Nonnull @NonNull @lombok.NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        final Bundle bundle = this.getArguments();
-        this.itemUrl = bundle == null || !bundle.containsKey(Constants.ARG_ITEM_URL) ? null : bundle.getString(Constants.ARG_ITEM_URL);
-
         final View view = super.onCreateView(inflater, container, savedInstanceState);
 
         this.binding = DataBindingUtil.bind(view);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@Nonnull @NonNull @lombok.NonNull final View view, @Nullable final Bundle savedInstanceState) {
+        if (this.getArguments() != null) this.itemUrl = DetailsFragmentArgs.fromBundle(this.getArguments()).getItemUrl();
     }
 
     @CallSuper
