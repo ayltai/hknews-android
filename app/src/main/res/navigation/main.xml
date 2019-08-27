@@ -1,43 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main">
     <fragment
         android:id="@+id/action_news_cozy"
         android:name="com.github.ayltai.hknews.app.ListFragment$Cozy"
         android:label="action_news_cozy"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/detailsAction"
+            app:destination="@+id/detailsFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="itemUrl"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/action_news_compact"
         android:name="com.github.ayltai.hknews.app.ListFragment$Compact"
         android:label="action_news_compact"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/detailsAction"
+            app:destination="@+id/detailsFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="itemUrl"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/action_histories_cozy"
         android:name="com.github.ayltai.hknews.app.HistoryListFragment$Cozy"
         android:label="action_histories_cozy"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/detailsAction"
+            app:destination="@+id/detailsFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="itemUrl"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/action_histories_compact"
         android:name="com.github.ayltai.hknews.app.HistoryListFragment$Compact"
         android:label="action_histories_compact"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/detailsAction"
+            app:destination="@+id/detailsFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="itemUrl"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/action_bookmarks_cozy"
         android:name="com.github.ayltai.hknews.app.BookmarkListFragment$Cozy"
         android:label="action_bookmarks_cozy"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/detailsAction"
+            app:destination="@+id/detailsFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="itemUrl"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/action_bookmarks_compact"
         android:name="com.github.ayltai.hknews.app.BookmarkListFragment$Compact"
         android:label="action_bookmarks_compact"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/detailsAction"
+            app:destination="@+id/detailsFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="itemUrl"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+    </fragment>
     <fragment
-        android:id="@+id/action_details"
+        android:id="@+id/detailsFragment"
         android:name="com.github.ayltai.hknews.app.DetailsFragment"
         android:label="action_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="itemUrl"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
     <fragment
         android:id="@+id/action_about"
         android:name="com.github.ayltai.hknews.app.AboutFragment"

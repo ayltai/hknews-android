@@ -4,14 +4,13 @@ import javax.annotation.Nonnull;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 
-import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.R;
+import com.github.ayltai.hknews.app.ListFragment$CozyDirections;
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.databinding.ViewItemCompactBinding;
 import com.github.ayltai.hknews.util.ViewUtils;
@@ -32,11 +31,6 @@ public final class CompactItemView extends ItemView<ViewItemCompactBinding> {
         this.binding.setItem(item);
 
         final Activity activity = ViewUtils.getActivity(this);
-        if (activity != null) {
-            final Bundle bundle = new Bundle();
-            bundle.putString(Constants.ARG_ITEM_URL, item.getUrl());
-
-            this.setOnClickListener(view -> Navigation.findNavController(activity, R.id.navHostFragment).navigate(R.id.action_details, bundle));
-        }
+        if (activity != null) this.setOnClickListener(view -> Navigation.findNavController(activity, R.id.navHostFragment).navigate(ListFragment$CozyDirections.detailsAction(item.getUrl())));
     }
 }

@@ -14,12 +14,12 @@ public class Constants {
 
     public static final int MIN_FETCH_TIME = 30;
 
-    public static final int CACHE_SIZE         = 1024;
-    public static final int MAX_ZOOM           = 8;
-    public static final int NEWS_DAYS          = 2;
-    public static final int LAST_UPDATED_TIME  = 10 * 1000;
+    public static final int CACHE_SIZE = 1024;
+    public static final int MAX_ZOOM   = 8;
+
+    public static final int NEWS_DAYS         = 2;
+    public static final int LAST_UPDATED_TIME = 10 * 1000;
+    public static final int AUTO_REFRESH_TIME = 30 * 60 * 1000;
 
     public static final String BASE_URL = "https://hknews.dev/";
-
-    public static final String ARG_ITEM_URL = "ITEM_URL";
 }
