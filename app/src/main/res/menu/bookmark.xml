@@ -11,10 +11,10 @@
         android:id="@+id/action_clear"
         android:title="@string/action_clear"
         android:icon="@drawable/ic_clear_white_24dp"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:icon="@drawable/ic_settings_white_24dp"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 </menu>

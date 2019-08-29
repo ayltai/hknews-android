@@ -21,5 +21,10 @@ public class Constants {
     public static final int LAST_UPDATED_TIME = 10 * 1000;
     public static final int AUTO_REFRESH_TIME = 30 * 60 * 1000;
 
+    public static final int SEARCH_TYPE_UNDEFINED = -1;
+    public static final int SEARCH_TYPE_NEWS      = 0;
+    public static final int SEARCH_TYPE_BOOKMARKS = 1;
+    public static final int SEARCH_TYPE_HISTORIES = 2;
+
     public static final String BASE_URL = "https://hknews.dev/";
 }

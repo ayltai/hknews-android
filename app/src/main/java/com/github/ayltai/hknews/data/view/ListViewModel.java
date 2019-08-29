@@ -23,9 +23,15 @@ import com.github.ayltai.hknews.data.repository.Repository;
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.util.RxUtils;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class ListViewModel extends AndroidViewModel {
     protected final ItemLoader loader;
 
+    @Getter
+    @Setter
+    private String  keywords;
     private boolean isForcedRefresh;
 
     public ListViewModel(@Nonnull @NonNull @lombok.NonNull final Application application) {
@@ -36,23 +42,15 @@ public class ListViewModel extends AndroidViewModel {
 
     @Nonnull
     @NonNull
-    public Single<List<Item>> getItems(@Nonnull @NonNull @lombok.NonNull final String category) {
-        return this.getItems(category, null);
-    }
-
-    @Nonnull
-    @NonNull
-    public Single<List<Item>> getItems(@Nonnull @NonNull @lombok.NonNull final String category, @Nullable final String keywords) {
-        if (keywords == null) this.isForcedRefresh = false;
-
+    public Single<List<Item>> getItems(@Nullable final String category) {
         final UserConfigurations configs = Components.getInstance()
             .getConfigComponent()
             .userConfigurations();
 
-        if (System.currentTimeMillis() - configs.getLastUpdatedDate(category).getTime() > Constants.AUTO_REFRESH_TIME) this.isForcedRefresh = true;
+        this.isForcedRefresh = this.keywords == null && (this.isForcedRefresh || System.currentTimeMillis() - configs.getLastUpdatedDate(category).getTime() > Constants.AUTO_REFRESH_TIME);
 
         this.loader.setCategoryNames(Collections.singletonList(category));
-        this.loader.setKeywords(keywords);
+        this.loader.setKeywords(this.keywords);
         this.loader.setForcedRefresh(this.isForcedRefresh);
 
         return this.loader

@@ -21,6 +21,7 @@
                 android:elevation="@dimen/elevation"
                 app:elevation="@dimen/elevation"
                 app:title="@string/app_name"
+                app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
                 app:menu="@menu/details"
                 style="@style/Toolbar"
                 tools:targetApi="LOLLIPOP" />

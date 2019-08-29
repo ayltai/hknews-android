@@ -16,17 +16,18 @@ import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.data.repository.Repository;
 import com.github.ayltai.hknews.util.RxUtils;
 
-public abstract class LocalListViewModel extends ListViewModel {
-    protected LocalListViewModel(@Nonnull @NonNull @lombok.NonNull final Application application) {
+public class LocalListViewModel extends ListViewModel {
+    public LocalListViewModel(@Nonnull @NonNull @lombok.NonNull final Application application) {
         super(application);
     }
 
     @Nonnull
     @NonNull
     @Override
-    public Single<List<Item>> getItems(@Nonnull @NonNull @lombok.NonNull final String category, @Nullable final String keywords) {
-        this.loader.setCategoryNames(Collections.singletonList(category));
-        this.loader.setKeywords(keywords);
+    public Single<List<Item>> getItems(@Nullable final String category) {
+        this.loader.setCategoryNames(category == null ? Collections.emptyList() : Collections.singletonList(category));
+        this.loader.setKeywords(this.getKeywords());
+        this.loader.setForcedRefresh(false);
 
         return this.loader
             .load(this.getApplication())

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import io.reactivex.Single;
+import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.Sort;
@@ -131,9 +132,9 @@ public class ItemRepository extends Repository {
         if (!categoryNames.isEmpty()) query = query.in(Item.FIELD_CATEGORY, categoryNames.toArray(new String[0]));
 
         if (keywords != null) query = query.beginGroup()
-            .contains(Item.FIELD_TITLE, keywords)
+            .contains(Item.FIELD_TITLE, keywords, Case.INSENSITIVE)
             .or()
-            .contains(Item.FIELD_DESCRIPTION, keywords)
+            .contains(Item.FIELD_DESCRIPTION, keywords, Case.INSENSITIVE)
             .endGroup();
 
         return this.getRealm().copyFromRealm(this.sort(query).findAll());

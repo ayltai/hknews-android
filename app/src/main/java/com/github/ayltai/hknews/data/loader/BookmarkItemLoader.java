@@ -42,7 +42,7 @@ public final class BookmarkItemLoader extends ItemLoader {
     }
 
     @Override
-    protected boolean isValid(@Nonnull @NonNull @lombok.NonNull final List<Item> item) {
+    protected boolean isValid(@Nonnull @NonNull @lombok.NonNull final List<Item> items) {
         return true;
     }
 }

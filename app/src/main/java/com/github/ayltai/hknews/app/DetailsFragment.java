@@ -174,10 +174,7 @@ public final class DetailsFragment extends BaseFragment {
         super.init();
 
         final Activity activity = this.getActivity();
-        if (activity != null) {
-            this.toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-            this.toolbar.setNavigationOnClickListener(view -> Navigation.findNavController(activity, R.id.navHostFragment).navigateUp());
-        }
+        if (activity != null) this.toolbar.setNavigationOnClickListener(view -> Navigation.findNavController(activity, R.id.navHostFragment).navigateUp());
     }
 
     @Override

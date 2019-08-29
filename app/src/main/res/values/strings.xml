@@ -52,6 +52,8 @@
     <string name="empty_bookmark_title">You haven\'t bookmarked any news yet</string>
     <string name="empty_bookmark_description">Find some interesting news by choosing your favorite categories below</string>
     <string name="empty_bookmark_action">Open settings</string>
+    <string name="empty_search_title">No news is good news</string>
+    <string name="empty_search_description">We couldn\'t find any news that matches your search</string>
     <!-- endregion -->
 
     <!-- region Time -->

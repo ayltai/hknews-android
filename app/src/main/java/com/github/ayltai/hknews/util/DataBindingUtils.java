@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import android.net.Uri;
 import android.text.Html;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,5 +55,10 @@ public final class DataBindingUtils {
     @BindingAdapter("publishDate")
     public static void setPublishDate(@Nonnull @NonNull @lombok.NonNull final TextView view, @Nullable final Date date) {
         view.setText(date == null ? null : DateUtils.getHumanReadableDate(view.getContext(), date));
+    }
+
+    @BindingAdapter("emptyAction")
+    public static void setEmptyAction(@Nonnull @NonNull @lombok.NonNull final Button button, final int resId) {
+        if (resId > 0) button.setText(resId);
     }
 }

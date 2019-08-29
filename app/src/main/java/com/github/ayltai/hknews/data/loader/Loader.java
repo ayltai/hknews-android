@@ -50,5 +50,5 @@ public abstract class Loader<T> {
     @NonNull
     protected abstract Consumer<? super T> onLoadRemotely(@Nonnull @NonNull @lombok.NonNull Context context);
 
-    protected abstract boolean isValid(@Nonnull @NonNull @lombok.NonNull T item);
+    protected abstract boolean isValid(@Nonnull @NonNull @lombok.NonNull T items);
 }

@@ -6,17 +6,19 @@ import javax.annotation.Nonnull;
 
 import android.app.Activity;
 
-import androidx.annotation.CallSuper;
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.github.ayltai.hknews.BR;
+import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.data.view.EmptyViewModel;
 import com.github.ayltai.hknews.data.view.HistoryListViewModel;
 import com.github.ayltai.hknews.data.view.ListViewModel;
+import com.github.ayltai.hknews.databinding.FragmentListBinding;
 import com.github.ayltai.hknews.databinding.ViewItemCompactBinding;
 import com.github.ayltai.hknews.databinding.ViewItemCozyBinding;
 import com.github.ayltai.hknews.util.ViewUtils;
@@ -24,7 +26,7 @@ import com.github.ayltai.hknews.widget.CompactListAdapter;
 import com.github.ayltai.hknews.widget.CozyListAdapter;
 import com.github.ayltai.hknews.widget.ListAdapter;
 
-public abstract class HistoryListFragment<B extends ViewDataBinding> extends ListFragment<B> {
+public abstract class HistoryListFragment<C extends ViewDataBinding> extends LocalListFragment<FragmentListBinding, C> {
     public static final class Cozy extends HistoryListFragment<ViewItemCozyBinding> {
         @Nonnull
         @NonNull
@@ -49,14 +51,6 @@ public abstract class HistoryListFragment<B extends ViewDataBinding> extends Lis
         return R.menu.history;
     }
 
-    @CallSuper
-    @Override
-    protected void init() {
-        super.init();
-
-        this.swipeRefreshLayout.setEnabled(false);
-    }
-
     @Override
     protected void setUpEmptyView() {
         final EmptyViewModel model = new EmptyViewModel();
@@ -65,9 +59,9 @@ public abstract class HistoryListFragment<B extends ViewDataBinding> extends Lis
         model.setDescription(R.string.empty_history_description);
         model.setAction(R.string.empty_history_action);
 
-        this.binding.setModel(model);
+        this.binding.setVariable(BR.model, model);
 
-        this.binding.emptyAction.setOnClickListener(view -> {
+        this.binding.getRoot().findViewById(R.id.empty_action).setOnClickListener(view -> {
             if (this.getContext() != null) SettingsActivity.show(this.getContext());
         });
     }
@@ -85,6 +79,11 @@ public abstract class HistoryListFragment<B extends ViewDataBinding> extends Lis
         }
 
         return this.model;
+    }
+
+    @Override
+    protected int getSearchType() {
+        return Constants.SEARCH_TYPE_HISTORIES;
     }
 
     @Override

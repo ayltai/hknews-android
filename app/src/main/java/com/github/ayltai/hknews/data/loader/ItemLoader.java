@@ -71,7 +71,7 @@ public class ItemLoader extends Loader<List<Item>> {
     }
 
     @Override
-    protected boolean isValid(@Nonnull @NonNull @lombok.NonNull final List<Item> item) {
-        return !item.isEmpty();
+    protected boolean isValid(@Nonnull @NonNull @lombok.NonNull final List<Item> items) {
+        return !items.isEmpty();
     }
 }

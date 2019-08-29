@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.collection.ArraySet;
 import androidx.preference.PreferenceManager;
 
@@ -128,28 +129,28 @@ public final class PreferenceUserConfigurations implements UserConfigurations {
     @Nonnull
     @NonNull
     @Override
-    public Date getLastUpdatedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName) {
-        return new Date(this.preferences.getLong(PreferenceUserConfigurations.KEY_LAST_UPDATED_DATE + categoryName, System.currentTimeMillis()));
+    public Date getLastUpdatedDate(@Nullable final String categoryName) {
+        return new Date(this.preferences.getLong(PreferenceUserConfigurations.KEY_LAST_UPDATED_DATE + (categoryName == null ? "" : categoryName), System.currentTimeMillis()));
     }
 
     @Override
-    public void setLastUpdatedDate(@Nonnull @NonNull @lombok.NonNull final String categoryName, @NonNull @Nonnull @lombok.NonNull final Date date) {
+    public void setLastUpdatedDate(@Nullable final String categoryName, @NonNull @Nonnull @lombok.NonNull final Date date) {
         this.preferences
             .edit()
-            .putLong(PreferenceUserConfigurations.KEY_LAST_UPDATED_DATE + categoryName, date.getTime())
+            .putLong(PreferenceUserConfigurations.KEY_LAST_UPDATED_DATE + (categoryName == null ? "" : categoryName), date.getTime())
             .apply();
     }
 
     @Override
-    public int getPosition(@Nonnull @NonNull @lombok.NonNull final String listName, @Nonnull @NonNull @lombok.NonNull final String categoryName) {
-        return this.preferences.getInt(PreferenceUserConfigurations.KEY_POSITION + listName + categoryName, 0);
+    public int getPosition(@Nonnull @NonNull @lombok.NonNull final String listName, @Nullable final String categoryName) {
+        return this.preferences.getInt(PreferenceUserConfigurations.KEY_POSITION + listName + (categoryName == null ? "" : categoryName), 0);
     }
 
     @Override
-    public void setPosition(@Nonnull @NonNull @lombok.NonNull final String listName, @Nonnull @NonNull @lombok.NonNull final String categoryName, final int position) {
+    public void setPosition(@Nonnull @NonNull @lombok.NonNull final String listName, @Nullable final String categoryName, final int position) {
         this.preferences
             .edit()
-            .putInt(PreferenceUserConfigurations.KEY_POSITION + listName + categoryName, position)
+            .putInt(PreferenceUserConfigurations.KEY_POSITION + listName + (categoryName == null ? "" : categoryName), position)
             .apply();
     }
 }

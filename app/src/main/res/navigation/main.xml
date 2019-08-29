@@ -20,6 +20,18 @@
                 app:argType="string"
                 app:nullable="false" />
         </action>
+        <action
+            android:id="@+id/searchAction"
+            app:destination="@+id/action_search_cozy"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="searchType"
+                app:argType="integer"
+                app:nullable="false" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/action_news_compact"
@@ -36,6 +48,18 @@
             <argument
                 android:name="itemUrl"
                 app:argType="string"
+                app:nullable="false" />
+        </action>
+        <action
+            android:id="@+id/searchAction"
+            app:destination="@+id/action_search_compact"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="searchType"
+                app:argType="integer"
                 app:nullable="false" />
         </action>
     </fragment>
@@ -56,6 +80,18 @@
                 app:argType="string"
                 app:nullable="false" />
         </action>
+        <action
+            android:id="@+id/searchAction"
+            app:destination="@+id/action_search_cozy"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="searchType"
+                app:argType="integer"
+                app:nullable="false" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/action_histories_compact"
@@ -72,6 +108,18 @@
             <argument
                 android:name="itemUrl"
                 app:argType="string"
+                app:nullable="false" />
+        </action>
+        <action
+            android:id="@+id/searchAction"
+            app:destination="@+id/action_search_compact"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="searchType"
+                app:argType="integer"
                 app:nullable="false" />
         </action>
     </fragment>
@@ -92,6 +140,18 @@
                 app:argType="string"
                 app:nullable="false" />
         </action>
+        <action
+            android:id="@+id/searchAction"
+            app:destination="@+id/action_search_cozy"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="searchType"
+                app:argType="integer"
+                app:nullable="false" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/action_bookmarks_compact"
@@ -110,6 +170,18 @@
                 app:argType="string"
                 app:nullable="false" />
         </action>
+        <action
+            android:id="@+id/searchAction"
+            app:destination="@+id/action_search_compact"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="searchType"
+                app:argType="integer"
+                app:nullable="false" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -119,6 +191,26 @@
         <argument
             android:name="itemUrl"
             app:argType="string"
+            app:nullable="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/action_search_cozy"
+        android:name="com.github.ayltai.hknews.app.SearchFragment$Cozy"
+        android:label="action_search"
+        tools:layout="@layout/fragment_list_search">
+        <argument
+            android:name="searchType"
+            app:argType="integer"
+            app:nullable="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/action_search_compact"
+        android:name="com.github.ayltai.hknews.app.SearchFragment$Compact"
+        android:label="action_search"
+        tools:layout="@layout/fragment_list_search">
+        <argument
+            android:name="searchType"
+            app:argType="integer"
             app:nullable="false" />
     </fragment>
     <fragment

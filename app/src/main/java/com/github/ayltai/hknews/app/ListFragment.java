@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.TextView;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.IdRes;
@@ -25,11 +26,13 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.collection.ArrayMap;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -37,6 +40,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import io.reactivex.disposables.CompositeDisposable;
 import io.supercharge.shimmerlayout.ShimmerLayout;
 
+import com.github.ayltai.hknews.BR;
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.Constants;
 import com.github.ayltai.hknews.R;
@@ -53,9 +57,10 @@ import com.github.ayltai.hknews.widget.BackdropBehavior;
 import com.github.ayltai.hknews.widget.CompactListAdapter;
 import com.github.ayltai.hknews.widget.CozyListAdapter;
 import com.github.ayltai.hknews.widget.ListAdapter;
+import com.google.android.material.navigation.NavigationView;
 
-public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragment {
-    public static final class Cozy extends ListFragment<ViewItemCozyBinding> {
+public abstract class ListFragment<P extends ViewDataBinding, C extends ViewDataBinding> extends BaseFragment {
+    public static final class Cozy extends ListFragment<FragmentListBinding, ViewItemCozyBinding> {
         @Nonnull
         @NonNull
         @Override
@@ -64,7 +69,7 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         }
     }
 
-    public static final class Compact extends ListFragment<ViewItemCompactBinding> {
+    public static final class Compact extends ListFragment<FragmentListBinding, ViewItemCompactBinding> {
         @Nonnull
         @NonNull
         @Override
@@ -82,10 +87,10 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
 
     //region Variables
 
-    protected FragmentListBinding binding;
-    protected ListViewModel       model;
-    protected SwipeRefreshLayout  swipeRefreshLayout;
-    protected String              category;
+    protected P                  binding;
+    protected ListViewModel      model;
+    protected SwipeRefreshLayout swipeRefreshLayout;
+    protected String             category;
 
     private BackdropBehavior    behavior;
     private RecyclerView        recyclerView;
@@ -124,7 +129,8 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
 
         final View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        this.behavior = (BackdropBehavior)((CoordinatorLayout.LayoutParams)view.findViewById(R.id.cardView).getLayoutParams()).getBehavior();
+        final CardView cardView = view.findViewById(R.id.cardView);
+        if (cardView != null) this.behavior = (BackdropBehavior)((CoordinatorLayout.LayoutParams)cardView.getLayoutParams()).getBehavior();
 
         this.recyclerView = view.findViewById(this.getRecyclerViewId());
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -216,7 +222,7 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
 
     @Nonnull
     @NonNull
-    protected abstract ListAdapter<B> getListAdapter(@Nonnull @NonNull List<Item> items);
+    protected abstract ListAdapter<C> getListAdapter(@Nonnull @NonNull List<Item> items);
 
     @Nonnull
     @NonNull
@@ -233,6 +239,10 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         return this.model;
     }
 
+    protected int getSearchType() {
+        return Constants.SEARCH_TYPE_NEWS;
+    }
+
     @CallSuper
     @Override
     protected void init() {
@@ -240,7 +250,7 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
 
         this.binding = DataBindingUtil.bind(this.view);
 
-        this.behavior.collapse();
+        if (this.behavior != null) this.behavior.collapse();
 
         this.setUpCategoryView();
         this.setUpEmptyView();
@@ -251,6 +261,8 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
     @CallSuper
     @Override
     protected void setUpMenuItems() {
+        if (this.getMenu() == 0) return;
+
         this.toolbar.inflateMenu(this.getMenu());
 
         final Menu     menu             = this.toolbar.getMenu();
@@ -258,6 +270,13 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         final MenuItem refreshMenuItem  = menu.findItem(R.id.action_refresh);
         final MenuItem clearMenuItem    = menu.findItem(R.id.action_clear);
         final MenuItem settingsMenuItem = menu.findItem(R.id.action_settings);
+
+        if (searchMenuItem != null) searchMenuItem.setOnMenuItemClickListener(item -> {
+            final Activity activity = ViewUtils.getActivity(this.getContext());
+            if (activity != null) Navigation.findNavController(activity, R.id.navHostFragment).navigate(ListFragment$CompactDirections.searchAction(this.getSearchType()));
+
+            return true;
+        });
 
         if (refreshMenuItem != null) refreshMenuItem.setOnMenuItemClickListener(item -> {
             this.resetPosition();
@@ -286,15 +305,15 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         model.setDescription(R.string.empty_news_description);
         model.setAction(R.string.empty_news_action);
 
-        this.binding.setModel(model);
+        this.binding.setVariable(BR.model, model);
 
-        this.binding.emptyAction.setOnClickListener(view -> {
+        this.binding.getRoot().findViewById(R.id.empty_action).setOnClickListener(view -> {
             if (this.getContext() != null) SettingsActivity.show(this.getContext());
         });
     }
 
     private void setUpPlaceholder(final boolean isCompactStyle) {
-        final ViewStub viewStub = this.binding.container.findViewById(R.id.placeholder);
+        final ViewStub viewStub = this.binding.getRoot().findViewById(R.id.container).findViewById(R.id.placeholder);
         viewStub.setLayoutResource(isCompactStyle ? R.layout.view_list_compact_placeholder : R.layout.view_list_cozy_placeholder);
 
         this.shimmerLayout = viewStub.inflate().findViewById(R.id.shimmerLayout);
@@ -320,19 +339,22 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
         actions.put(R.id.action_category_supplement, categories.get(i++));
         actions.put(R.id.action_category_education, categories.get(i));
 
-        final Menu menu = this.binding.categoryView.getMenu();
-        for (final Map.Entry<Integer, String> action : actions.entrySet()) menu.findItem(action.getKey()).setVisible(categories.contains(action.getValue()));
+        final NavigationView categoryView = this.binding.getRoot().findViewById(R.id.category_view);
+        if (categoryView != null) {
+            final Menu menu = categoryView.getMenu();
+            for (final Map.Entry<Integer, String> action : actions.entrySet()) menu.findItem(action.getKey()).setVisible(categories.contains(action.getValue()));
 
-        this.binding.categoryView.setNavigationItemSelectedListener(item -> {
-            this.behavior.collapse();
+            categoryView.setNavigationItemSelectedListener(item -> {
+                this.behavior.collapse();
 
-            this.category = actions.get(item.getItemId());
+                this.category = actions.get(item.getItemId());
 
-            this.resetPosition();
-            this.onRefresh();
+                this.resetPosition();
+                this.onRefresh();
 
-            return true;
-        });
+                return true;
+            });
+        }
     }
 
     @CallSuper
@@ -390,6 +412,6 @@ public abstract class ListFragment<B extends ViewDataBinding> extends BaseFragme
     }
 
     protected void updateSubheader() {
-        if (this.binding != null) this.binding.subheader.setText(this.getContext() == null ? this.category : this.getString(R.string.last_updated, this.category, DateUtils.getHumanReadableDate(this.getContext(), Components.getInstance().getConfigComponent().userConfigurations().getLastUpdatedDate(this.category))));
+        if (this.binding != null) ((TextView)this.binding.getRoot().findViewById(R.id.subheader)).setText(this.getContext() == null ? this.category : this.getString(R.string.last_updated, this.category, DateUtils.getHumanReadableDate(this.getContext(), Components.getInstance().getConfigComponent().userConfigurations().getLastUpdatedDate(this.category))));
     }
 }

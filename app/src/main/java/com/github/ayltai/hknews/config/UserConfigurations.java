@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public interface UserConfigurations {
     boolean isDarkTheme();
@@ -30,11 +31,11 @@ public interface UserConfigurations {
 
     @Nonnull
     @NonNull
-    Date getLastUpdatedDate(@Nonnull @NonNull @lombok.NonNull String categoryName);
+    Date getLastUpdatedDate(@Nullable String categoryName);
 
-    void setLastUpdatedDate(@Nonnull @NonNull @lombok.NonNull String categoryName, @Nonnull @NonNull @lombok.NonNull Date date);
+    void setLastUpdatedDate(@Nullable String categoryName, @Nonnull @NonNull @lombok.NonNull Date date);
 
-    int getPosition(@Nonnull @NonNull @lombok.NonNull String listName, @Nonnull @NonNull @lombok.NonNull String categoryName);
+    int getPosition(@Nonnull @NonNull @lombok.NonNull String listName, @Nullable String categoryName);
 
-    void setPosition(@Nonnull @NonNull @lombok.NonNull String listName, @Nonnull @NonNull @lombok.NonNull String categoryName, int position);
+    void setPosition(@Nonnull @NonNull @lombok.NonNull String listName, @Nullable String categoryName, int position);
 }
