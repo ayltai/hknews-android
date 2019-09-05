@@ -45,6 +45,9 @@ Serves aggregated news from 10+ local news publishers in Hong Kong. Made with ‚ù
 ## HK News Backend
 [hknews-backend](https://github.com/ayltai/hknews-backend)
 
+## HK News Infrastructure
+[hknews-infrastructure](https://github.com/ayltai/hknews-infrastructure)
+
 ## Requirements
 This app supports Android 4.4 Jelly Bean (API 19) or later.
 
