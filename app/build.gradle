@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'realm-android'
     id 'androidx.navigation.safeargs'
-    id 'com.akaita.android.easylauncher'
     id 'com.google.firebase.firebase-perf'
     id 'io.fabric'
     id 'checkstyle'
