@@ -157,7 +157,7 @@ dependencies {
 
     // Android Support libraries
     implementation 'androidx.browser:browser:1.2.0-alpha07'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta03'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta04'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
     implementation 'com.google.android.material:material:1.1.0-alpha10'
     implementation 'com.takisoft.preferencex:preferencex:1.1.0-alpha05'
