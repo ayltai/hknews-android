@@ -88,7 +88,7 @@
                                         android:layout_margin="@dimen/space16"
                                         android:layout_gravity="center_horizontal|bottom"
                                         android:tint="?attr/placeholderTextColor"
-                                        android:src="@{model.icon}"
+                                        app:srcCompat="@{model.icon}"
                                         tools:srcCompat="@drawable/ic_empty_news_black_24dp" />
                                 </FrameLayout>
                                 <LinearLayout

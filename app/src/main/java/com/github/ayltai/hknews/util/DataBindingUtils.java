@@ -8,8 +8,11 @@ import android.net.Uri;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
@@ -50,6 +53,11 @@ public final class DataBindingUtils {
             view.setVisibility(View.VISIBLE);
             view.showImage(Uri.parse(imageUrl));
         }
+    }
+
+    @BindingAdapter("srcCompat")
+    public static void setImageSource(@Nonnull @NonNull @lombok.NonNull final ImageView view, @DrawableRes final int resId) {
+        view.setImageResource(resId);
     }
 
     @BindingAdapter("publishDate")
