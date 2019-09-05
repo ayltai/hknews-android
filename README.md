@@ -12,7 +12,9 @@ HK News Android
 
 Serves aggregated news from 10+ local news publishers in Hong Kong. Made with ❤
 
-![Screenshot 1](design/screenshot-1.png "Screenshot 1") ![Screenshot 2](design/screenshot-2.png "Screenshot 2") ![Screenshot 3](design/screenshot-3.png "Screenshot 3")
+![Screenshot 1](design/screenshot-1.png "Screenshot 1") ![Screenshot 2](design/screenshot-2.png "Screenshot 2")
+
+![Screenshot 3](design/screenshot-3.png "Screenshot 3") ![Screenshot 4](design/screenshot-4.png "Screenshot 4")
 
 ## Features
 * Read news from 10 local news publishers
