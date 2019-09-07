@@ -331,7 +331,7 @@ task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
     group       = 'Reporting'
 
     classDirectories = fileTree(
-        dir      : 'build/intermediates/javac/debug/compileDebugJavaWithJavac',
+        dir      : 'build/intermediates/javac/debug/classes',
         excludes : [
             '**/R.class',
             '**/R$*.class',
