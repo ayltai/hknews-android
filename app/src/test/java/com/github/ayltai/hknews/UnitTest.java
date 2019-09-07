@@ -13,7 +13,7 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.modules.junit4.rule.PowerMockRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.multidex.ShadowMultiDex;
+import org.robolectric.shadows.multidex.ShadowAndroidXMultiDex;
 
 import io.reactivex.android.plugins.RxAndroidPlugins;
 import io.reactivex.plugins.RxJavaPlugins;
@@ -21,9 +21,10 @@ import io.reactivex.schedulers.Schedulers;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
-    sdk       = Build.VERSION_CODES.Q,
-    shadows   = {
-        ShadowMultiDex.class
+    minSdk  = Build.VERSION_CODES.KITKAT,
+    maxSdk  = Build.VERSION_CODES.Q,
+    shadows = {
+        ShadowAndroidXMultiDex.class
     }
 )
 @PowerMockIgnore({

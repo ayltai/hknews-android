@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 
 import androidx.annotation.NonNull;
 
+import com.github.ayltai.hknews.util.DevUtils;
 import com.google.firebase.perf.FirebasePerformance;
 import com.google.firebase.perf.metrics.Trace;
 
@@ -12,7 +13,7 @@ public final class FirebasePerformanceTrace extends PerformanceTrace {
 
     @Override
     public void start(@Nonnull @NonNull @lombok.NonNull final String name) {
-        if (this.trace == null) {
+        if (!DevUtils.isRunningTests() && this.trace == null) {
             this.trace = FirebasePerformance.getInstance().newTrace(name);
             this.trace.start();
         }

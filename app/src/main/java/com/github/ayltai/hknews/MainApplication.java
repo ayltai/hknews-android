@@ -47,7 +47,7 @@ public final class MainApplication extends BaseApplication {
         this.initBigImageViewer();
         this.initCalligraphy();
 
-        FirebasePerformance.getInstance()
+        if (!DevUtils.isRunningTests()) FirebasePerformance.getInstance()
             .setPerformanceCollectionEnabled(Components.getInstance()
                 .getConfigComponent()
                 .remoteConfigurations()

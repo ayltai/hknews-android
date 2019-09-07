@@ -15,19 +15,21 @@ public final class FirebaseRemoteConfigurations implements RemoteConfigurations 
     private static FirebaseRemoteConfig config;
 
     public static void init() {
-        FirebaseRemoteConfigurations.config = FirebaseRemoteConfig.getInstance();
+        if (!DevUtils.isRunningTests()) {
+            FirebaseRemoteConfigurations.config = FirebaseRemoteConfig.getInstance();
 
-        FirebaseRemoteConfigurations.config.setConfigSettingsAsync(new FirebaseRemoteConfigSettings.Builder()
-            .setMinimumFetchIntervalInSeconds(Constants.MIN_FETCH_TIME)
-            .build());
+            FirebaseRemoteConfigurations.config.setConfigSettingsAsync(new FirebaseRemoteConfigSettings.Builder()
+                .setMinimumFetchIntervalInSeconds(Constants.MIN_FETCH_TIME)
+                .build());
 
-        FirebaseRemoteConfigurations.config.setDefaultsAsync(R.xml.configs);
+            FirebaseRemoteConfigurations.config.setDefaultsAsync(R.xml.configs);
 
-        FirebaseRemoteConfigurations.config
-            .fetchAndActivate()
-            .addOnFailureListener(e -> {
-                if (DevUtils.isLoggable()) Log.w(FirebaseRemoteConfigurations.class.getSimpleName(), e.getMessage(), e);
-            });
+            FirebaseRemoteConfigurations.config
+                .fetchAndActivate()
+                .addOnFailureListener(e -> {
+                    if (DevUtils.isLoggable()) Log.w(FirebaseRemoteConfigurations.class.getSimpleName(), e.getMessage(), e);
+                });
+        }
     }
 
     @Override
