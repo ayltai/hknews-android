@@ -127,8 +127,14 @@ ext {
     espressoVersion       = '3.3.0-alpha02'
 }
 
+repositories {
+    flatDir {
+        dirs './aars'
+    }
+}
+
 dependencies {
-    androidTestImplementation files('aars/cloudtestingscreenshotter_lib.aar')
+    androidTestImplementation fileTree(dir : 'aars', include : [ '*.aar' ])
 
     // Multi-dex support
     debugImplementation       "androidx.multidex:multidex:$multiDexVersion"
