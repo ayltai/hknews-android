@@ -117,20 +117,17 @@ jobs:
       - *decode_gservices_key
       - run:
           name: Check code quality
-          command: ./gradlew check
+          command: ./gradlew check lint checkstyle dependencyCheckAnalyze
       - *save_cache
       - store_artifacts:
           path: app/build/reports/checkstyle
           destination: /check/
       - store_artifacts:
           path: app/build/reports/lint-results.html
-          destination: /check/
-      - store_artifacts:
-          path: app/build/reports/lint-results.xml
-          destination: /check/
+          destination: /check/lint-results.html
       - store_artifacts:
           path: app/build/reports/dependency-check-report.html
-          destination: /check/
+          destination: /check/dependency-check-report.html
 
   distribute:
     <<: *config

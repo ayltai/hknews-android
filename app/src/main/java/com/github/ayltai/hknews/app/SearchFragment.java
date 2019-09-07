@@ -136,6 +136,7 @@ public abstract class SearchFragment<C extends ViewDataBinding> extends LocalLis
                     break;
 
                 case Constants.SEARCH_TYPE_UNDEFINED:
+                default:
                     throw new IllegalArgumentException("Unrecognized search type");
             }
 

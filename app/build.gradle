@@ -150,9 +150,6 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion") {
         exclude group : 'com.android.support'
     }
-    annotationProcessor ("androidx.lifecycle:lifecycle-compiler:$lifecycleVersion") {
-        exclude group : 'com.android.support'
-    }
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
 
     // Android Support libraries
@@ -267,7 +264,7 @@ configurations.all {
 //region Checkstyle configurations
 
 checkstyle {
-    toolVersion    '8.23'
+    toolVersion    '8.24'
     configFile     rootProject.file('./checkstyle.xml')
     ignoreFailures true
     showViolations true
