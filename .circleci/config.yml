@@ -76,7 +76,7 @@ jobs:
           command: ./gradlew assembleDebug
       - *save_cache
       - store_artifacts:
-          path: build/outputs/apk/debug
+          path: app/build/outputs/apk/debug
           destination: /apk/
 
   test:
@@ -89,15 +89,17 @@ jobs:
       - run:
           name: Execute unit tests
           command: ./gradlew testDebugUnitTest
+      - store_test_results:
+          path: app/build/test-results
       - store_artifacts:
-          path: build/reports/tests/testDebugUnitTest
+          path: app/build/reports/tests/testDebugUnitTest
           destination: /test/
       - *save_cache
       - run:
           name: Generate coverage report
           command: ./gradlew jacocoTestReport
       - store_artifacts:
-          path: build/reports/jacoco/jacocoTestReport
+          path: app/build/reports/jacoco/jacocoTestReport
           destination: /coverage/
       - run:
           name: Upload coverage report to Codacy
@@ -118,16 +120,16 @@ jobs:
           command: ./gradlew check
       - *save_cache
       - store_artifacts:
-          path: build/reports/checkstyle
+          path: app/build/reports/checkstyle
           destination: /check/
       - store_artifacts:
-          path: build/reports/lint-results.html
+          path: app/build/reports/lint-results.html
           destination: /check/
       - store_artifacts:
-          path: build/reports/lint-results.xml
+          path: app/build/reports/lint-results.xml
           destination: /check/
       - store_artifacts:
-          path: build/reports/dependency-check-report.html
+          path: app/build/reports/dependency-check-report.html
           destination: /check/
 
   distribute:
@@ -146,10 +148,10 @@ jobs:
           command: ./gradlew assembleRelease
       - *save_cache
       - store_artifacts:
-          path: build/outputs/apk/release
+          path: app/build/outputs/apk/release
           destination: /apk/
       - store_artifacts:
-          path: build/outputs/mapping/release
+          path: app/build/outputs/mapping/release
           destination: /mapping/
 
 workflows:
