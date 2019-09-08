@@ -366,7 +366,7 @@ public abstract class ListFragment<P extends ViewDataBinding, C extends ViewData
         this.shimmerLayout.setVisibility(View.VISIBLE);
 
         this.disposables.add(this.getListViewModel()
-            .getItems(this.category)
+            .getItems(this.getClass().getSimpleName(), this.category)
             .compose(RxUtils.applySingleBackgroundToMainSchedulers())
             .subscribe(
                 items -> {

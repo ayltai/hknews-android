@@ -42,12 +42,13 @@ public class ListViewModel extends AndroidViewModel {
 
     @Nonnull
     @NonNull
-    public Single<List<Item>> getItems(@Nullable final String category) {
+    public Single<List<Item>> getItems(@Nonnull @NonNull @lombok.NonNull final String listName, @Nullable final String category) {
         final UserConfigurations configs = Components.getInstance()
             .getConfigComponent()
             .userConfigurations();
 
         this.isForcedRefresh = this.keywords == null && (this.isForcedRefresh || System.currentTimeMillis() - configs.getLastUpdatedDate(category).getTime() > Constants.AUTO_REFRESH_TIME);
+        if (this.isForcedRefresh) configs.setPosition(listName, category, 0);
 
         this.loader.setCategoryNames(Collections.singletonList(category));
         this.loader.setKeywords(this.keywords);

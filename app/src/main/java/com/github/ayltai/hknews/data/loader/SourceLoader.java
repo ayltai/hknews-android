@@ -12,6 +12,7 @@ import io.reactivex.Single;
 import io.reactivex.functions.Consumer;
 
 import com.github.ayltai.hknews.Components;
+import com.github.ayltai.hknews.data.model.Page;
 import com.github.ayltai.hknews.data.model.Source;
 import com.github.ayltai.hknews.data.repository.ItemRepository;
 import com.github.ayltai.hknews.data.repository.SourceRepository;
@@ -34,7 +35,8 @@ public final class SourceLoader extends Loader<List<Source>> {
         return Components.getInstance()
             .getNetComponent()
             .apiService()
-            .sources();
+            .sources()
+            .map(Page::getContent);
     }
 
     @Nonnull

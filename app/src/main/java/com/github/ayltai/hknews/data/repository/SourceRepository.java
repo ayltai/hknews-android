@@ -13,6 +13,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 import com.github.ayltai.hknews.Components;
+import com.github.ayltai.hknews.data.model.Page;
 import com.github.ayltai.hknews.data.model.Source;
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.util.RxUtils;
@@ -50,6 +51,7 @@ public final class SourceRepository extends Repository {
                     .getNetComponent()
                     .apiService()
                     .sources()
+                    .map(Page::getContent)
                     .doOnSuccess(this::put);
 
                 return Single.just(records);

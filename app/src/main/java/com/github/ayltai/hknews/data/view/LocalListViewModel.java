@@ -24,7 +24,7 @@ public class LocalListViewModel extends ListViewModel {
     @Nonnull
     @NonNull
     @Override
-    public Single<List<Item>> getItems(@Nullable final String category) {
+    public Single<List<Item>> getItems(@Nonnull @NonNull @lombok.NonNull final String listName, @Nullable final String category) {
         this.loader.setCategoryNames(category == null ? Collections.emptyList() : Collections.singletonList(category));
         this.loader.setKeywords(this.getKeywords());
         this.loader.setForcedRefresh(false);

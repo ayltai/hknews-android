@@ -15,6 +15,7 @@ import io.reactivex.functions.Consumer;
 
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Item;
+import com.github.ayltai.hknews.data.model.Page;
 import com.github.ayltai.hknews.data.repository.ItemRepository;
 import com.github.ayltai.hknews.data.repository.Repository;
 import com.github.ayltai.hknews.util.RxUtils;
@@ -57,7 +58,8 @@ public class ItemLoader extends Loader<List<Item>> {
         return Components.getInstance()
             .getNetComponent()
             .apiService()
-            .query(StringUtils.join(this.sourceNames, ItemLoader.DELIMITER), StringUtils.join(this.categoryNames, ItemLoader.DELIMITER), this.days);
+            .query(StringUtils.join(this.sourceNames, ItemLoader.DELIMITER), StringUtils.join(this.categoryNames, ItemLoader.DELIMITER), this.days)
+            .map(Page::getContent);
     }
 
     @Nonnull
