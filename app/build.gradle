@@ -250,7 +250,7 @@ dependencies {
     }
     androidTestUtil           'androidx.test:orchestrator:1.3.0-alpha02'
 
-    codacy 'com.codacy:codacy-coverage-reporter:6.0.4'
+    codacy 'com.codacy:codacy-coverage-reporter:6.0.5'
 }
 
 configurations.all {
