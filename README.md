@@ -47,6 +47,9 @@ Serves aggregated news from 10+ local news publishers in Hong Kong. Made with ‚ù
 ## HK News Backend
 [hknews-backend](https://github.com/ayltai/hknews-backend)
 
+## HK News Web
+[hknews-web](https://github.com/ayltai/hknews-web)
+
 ## HK News Infrastructure
 [hknews-infrastructure](https://github.com/ayltai/hknews-infrastructure)
 
