@@ -86,6 +86,8 @@ jobs:
       - *restore_cache
       - *export_gservices_key
       - *decode_gservices_key
+      - *export_fabric_key
+      - *decode_fabric_key
       - run:
           name: Execute unit tests
           command: ./gradlew testDebugUnitTest
