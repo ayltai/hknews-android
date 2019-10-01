@@ -94,4 +94,5 @@ This app is made with the support of open source projects:
 * [Firebase Performance Monitoring](https://firebase.google.com/docs/perf-mon)
 * [Google Analytics for Firebase](https://firebase.google.com/docs/analytics)
 * [CircleCI](https://circleci.com)
+* [SonarCloud](https://sonarcloud.io): Online service for code quality and security
 * [Fabric Crashlytics](https://fabric.io/kits/android/crashlytics)
