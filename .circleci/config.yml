@@ -109,9 +109,6 @@ jobs:
       - run:
           name: Upload coverage report to CodeCov
           command: bash <(curl -s https://codecov.io/bash)
-      - run:
-          name: Upload coverage report to SonarCloud
-          command: ./gradlew sonarqube -Dsonar.projectKey=ayltai_hknews-android -Dsonar.organization=ayltai -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
 
   check:
     <<: *config
