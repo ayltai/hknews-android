@@ -29,6 +29,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.R;
 import com.github.ayltai.hknews.data.model.Image;
+import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.data.model.Video;
 import com.github.ayltai.hknews.data.repository.Repository;
 import com.github.ayltai.hknews.data.view.DetailsViewModel;
@@ -98,50 +99,7 @@ public final class DetailsFragment extends BaseFragment {
                         .setPosition(HistoryListFragment.class.getSimpleName(), item.getCategory().getName(), 0))
                     .compose(RxUtils.applySingleBackgroundToMainSchedulers())
                     .subscribe(
-                        item -> {
-                            this.title        = item.getTitle();
-                            this.isBookmarked = Boolean.TRUE.equals(item.getIsBookmarked());
-
-                            final MenuItem bookmarkMenuItem = this.toolbar.getMenu().findItem(R.id.action_bookmark);
-                            if (bookmarkMenuItem != null) bookmarkMenuItem.setIcon(this.isBookmarked ? R.drawable.ic_bookmark_filled_white_24dp : R.drawable.ic_bookmark_white_24dp);
-
-                            this.binding.setItem(item);
-
-                            if (!item.getVideos().isEmpty()) {
-                                for (final Video video : item.getVideos()) {
-                                    final ViewVideoBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this.getContext()), R.layout.view_video, this.binding.videosContainer, false);
-                                    final View             view    = binding.getRoot();
-
-                                    view.findViewById(R.id.image).setOnClickListener(v -> VideoActivity.show(this.getContext(), video.getVideoUrl()));
-
-                                    this.binding.videosContainer.addView(view);
-
-                                    binding.setModel(video);
-                                }
-                            }
-
-                            if (!item.getImages().isEmpty()) {
-                                final List<String> urls = new ArrayList<>();
-                                for (final Image image : item.getImages()) urls.add(image.getImageUrl());
-
-                                for (final Image image : item.getImages()) {
-                                    final ViewImageBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this.getContext()), R.layout.view_image, this.binding.imagesContainer, false);
-                                    final View             view    = binding.getRoot();
-
-                                    final View.OnClickListener listener = v -> new ImageViewer.Builder<>(this.getContext(), urls)
-                                        .allowSwipeToDismiss(false)
-                                        .setStartPosition(urls.indexOf(image.getImageUrl()))
-                                        .show();
-
-                                    view.findViewById(R.id.image).setOnClickListener(listener);
-                                    view.findViewById(R.id.description).setOnClickListener(listener);
-
-                                    this.binding.imagesContainer.addView(view);
-
-                                    binding.setModel(image);
-                                }
-                            }
-                        },
+                        this::bindItem,
                         RxUtils::handleError
                     ));
             }
@@ -218,5 +176,50 @@ public final class DetailsFragment extends BaseFragment {
 
             return true;
         });
+    }
+
+    private void bindItem(@Nonnull @NonNull @lombok.NonNull final Item item) {
+        this.title        = item.getTitle();
+        this.isBookmarked = Boolean.TRUE.equals(item.getIsBookmarked());
+
+        final MenuItem bookmarkMenuItem = this.toolbar.getMenu().findItem(R.id.action_bookmark);
+        if (bookmarkMenuItem != null) bookmarkMenuItem.setIcon(this.isBookmarked ? R.drawable.ic_bookmark_filled_white_24dp : R.drawable.ic_bookmark_white_24dp);
+
+        this.binding.setItem(item);
+
+        if (!item.getVideos().isEmpty()) {
+            for (final Video video : item.getVideos()) {
+                final ViewVideoBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this.getContext()), R.layout.view_video, this.binding.videosContainer, false);
+                final View             view    = binding.getRoot();
+
+                view.findViewById(R.id.image).setOnClickListener(v -> VideoActivity.show(this.getContext(), video.getVideoUrl()));
+
+                this.binding.videosContainer.addView(view);
+
+                binding.setModel(video);
+            }
+        }
+
+        if (!item.getImages().isEmpty()) {
+            final List<String> urls = new ArrayList<>();
+            for (final Image image : item.getImages()) urls.add(image.getImageUrl());
+
+            for (final Image image : item.getImages()) {
+                final ViewImageBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this.getContext()), R.layout.view_image, this.binding.imagesContainer, false);
+                final View             view    = binding.getRoot();
+
+                final View.OnClickListener listener = v -> new ImageViewer.Builder<>(this.getContext(), urls)
+                    .allowSwipeToDismiss(false)
+                    .setStartPosition(urls.indexOf(image.getImageUrl()))
+                    .show();
+
+                view.findViewById(R.id.image).setOnClickListener(listener);
+                view.findViewById(R.id.description).setOnClickListener(listener);
+
+                this.binding.imagesContainer.addView(view);
+
+                binding.setModel(image);
+            }
+        }
     }
 }
