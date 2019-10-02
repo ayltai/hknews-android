@@ -31,10 +31,6 @@ references:
 
   # Google Services
 
-  export_gservices_key: &export_gservices_key
-    run:
-      name: Export Google Services key environment variable
-      command: echo 'export GOOGLE_SERVICES_KEY="$GOOGLE_SERVICES_KEY"' >> $BASH_ENV
   decode_gservices_key: &decode_gservices_key
     run:
       name: Decode Google Services key
@@ -42,10 +38,6 @@ references:
 
   # Android Key Store
 
-  export_android_key: &export_android_key
-    run:
-      name: Export Android key store environment variable
-      command: echo 'export ANDROID_KEY_STORE="$ANDROID_KEY_STORE"' >> $BASH_ENV
   decode_android_key: &decode_android_key
     run:
       name: Decode Android key store
@@ -53,10 +45,6 @@ references:
 
   # Fabric
 
-  export_fabric_key: &export_fabric_key
-    run:
-      name: Export Fabric key
-      command: echo 'export FABRIC_KEY="$FABRIC_KEY"' >> $BASH_ENV
   decode_fabric_key: &decode_fabric_key
     run:
       name: Decode Fabric key
@@ -69,7 +57,6 @@ jobs:
     steps:
       - checkout
       - *restore_cache
-      - *export_gservices_key
       - *decode_gservices_key
       - run:
           name: Compile
@@ -84,8 +71,8 @@ jobs:
     steps:
       - checkout
       - *restore_cache
-      - *export_gservices_key
       - *decode_gservices_key
+      - *decode_fabric_key
       - run:
           name: Execute unit tests
           command: ./gradlew testDebugUnitTest
@@ -107,13 +94,15 @@ jobs:
       - run:
           name: Upload coverage report to CodeCov
           command: bash <(curl -s https://codecov.io/bash)
+      - run:
+          name: Upload coverage report to SonarCloud
+          command: ./gradlew sonarqube -Dsonar.projectKey=ayltai_hknews-android -Dsonar.organization=ayltai -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
 
   check:
     <<: *config
     steps:
       - checkout
       - *restore_cache
-      - *export_gservices_key
       - *decode_gservices_key
       - run:
           name: Check code quality
@@ -134,11 +123,8 @@ jobs:
     steps:
       - checkout
       - *restore_cache
-      - *export_gservices_key
       - *decode_gservices_key
-      - *export_android_key
       - *decode_android_key
-      - *export_fabric_key
       - *decode_fabric_key
       - run:
           name: Generate artifact
