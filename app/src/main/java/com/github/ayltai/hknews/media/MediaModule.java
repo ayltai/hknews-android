@@ -9,6 +9,9 @@ import dagger.Provides;
 
 @Module
 final class MediaModule {
+    private MediaModule() {
+    }
+
     @Singleton
     @Provides
     static ImageLoader provideImageLoader() {

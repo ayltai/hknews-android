@@ -28,7 +28,7 @@ public class ItemRepository extends Repository {
         return Single.defer(() -> Single.just(ItemRepository.create(Components.getInstance()
             .getDataComponent(context)
             .realm()))
-            .compose(RxUtils.applySingleSchedulers(ItemRepository.SCHEDULER)));
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER)));
     }
 
     @Nonnull

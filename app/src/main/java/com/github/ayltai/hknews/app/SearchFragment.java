@@ -116,6 +116,7 @@ public abstract class SearchFragment<C extends ViewDataBinding> extends LocalLis
 
     @Nonnull
     @NonNull
+    @Override
     protected ListViewModel getListViewModel() {
         if (this.model == null) {
             final Activity activity = ViewUtils.getActivity(this.getContext());

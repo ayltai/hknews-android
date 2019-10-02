@@ -19,7 +19,7 @@ import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.util.RxUtils;
 
-public final class HistoryItemRepository extends ItemRepository {
+public final class HistoryItemRepository extends DeletableItemRepository {
     @Nonnull
     @NonNull
     public static Single<ItemRepository> create(@Nonnull @NonNull @lombok.NonNull final Context context) {
@@ -43,20 +43,7 @@ public final class HistoryItemRepository extends ItemRepository {
     @NonNull
     @Override
     public Single<Irrelevant> deleteAll(@Nonnull @NonNull @lombok.NonNull final List<String> sourceNames, @Nonnull @NonNull @lombok.NonNull final List<String> categoryNames) {
-        return Single.defer(
-            () -> {
-                RealmQuery<Item> query = this.getRealm()
-                    .where(Item.class)
-                    .isNotNull(Item.FIELD_LAST_ACCESSED);
-
-                if (!sourceNames.isEmpty()) query = query.in(Item.FIELD_SOURCE, sourceNames.toArray(new String[0]));
-                if (!categoryNames.isEmpty()) query = query.in(Item.FIELD_CATEGORY, categoryNames.toArray(new String[0]));
-
-                query.findAll().deleteAllFromRealm();
-
-                return Single.just(Irrelevant.INSTANCE);
-            })
-            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER));
+        return this.deleteAll(this.getRealm().where(Item.class).isNotNull(Item.FIELD_LAST_ACCESSED), sourceNames, categoryNames);
     }
 
     @Nonnull

@@ -26,14 +26,12 @@ import com.github.ayltai.hknews.data.model.Source;
 public final class PreferenceUserConfigurations implements UserConfigurations {
     //region Constants
 
-    private static final String KEY_IS_DARK_THEME        = "IS_DARK_THEME";
-    private static final String KEY_IS_COMPACT_STYLE     = "IS_COMPACT_STYLE";
-    private static final String KEY_SOURCE_NAMES         = "SOURCE_NAMES";
-    private static final String KEY_CATEGORY_NAMES       = "CATEGORY_NAMES";
-    private static final String KEY_LAST_UPDATED_DATE    = "LAST_UPDATED_DATE_";
-    private static final String KEY_LAST_ACCESSED_DATE   = "LAST_ACCESSED_DATE_";
-    private static final String KEY_LAST_BOOKMARKED_DATE = "LAST_BOOKMARKED_DATE_";
-    private static final String KEY_POSITION             = "POSITION_";
+    private static final String KEY_IS_DARK_THEME     = "IS_DARK_THEME";
+    private static final String KEY_IS_COMPACT_STYLE  = "IS_COMPACT_STYLE";
+    private static final String KEY_SOURCE_NAMES      = "SOURCE_NAMES";
+    private static final String KEY_CATEGORY_NAMES    = "CATEGORY_NAMES";
+    private static final String KEY_LAST_UPDATED_DATE = "LAST_UPDATED_DATE_";
+    private static final String KEY_POSITION          = "POSITION_";
 
     //endregion
 

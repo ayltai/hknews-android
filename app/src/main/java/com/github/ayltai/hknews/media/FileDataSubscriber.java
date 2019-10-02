@@ -38,13 +38,7 @@ abstract class FileDataSubscriber extends BaseDataSubscriber<CloseableReference<
             } else {
                 final File file = new File(this.context.getCacheDir(), UUID.randomUUID().toString() + ".tmp");
 
-                PooledByteBufferInputStream inputStream  = null;
-                FileOutputStream            outputStream = null;
-
-                try {
-                    inputStream  = new PooledByteBufferInputStream(reference.get());
-                    outputStream = new FileOutputStream(file);
-
+                try (final PooledByteBufferInputStream inputStream = new PooledByteBufferInputStream(reference.get()); final FileOutputStream outputStream = new FileOutputStream(file)) {
                     IOUtils.copy(inputStream, outputStream);
 
                     this.isFinished = true;
@@ -52,9 +46,6 @@ abstract class FileDataSubscriber extends BaseDataSubscriber<CloseableReference<
                     this.onSuccess(file);
                 } catch (final IOException e) {
                     this.onFailure(e);
-                } finally {
-                    IOUtils.closeQuietly(inputStream);
-                    IOUtils.closeQuietly(outputStream);
                 }
             }
         }

@@ -19,6 +19,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 final class NetModule {
+    private NetModule() {
+    }
+
     @Singleton
     @Nonnull
     @NonNull

@@ -11,14 +11,13 @@ import androidx.annotation.Nullable;
 
 import io.reactivex.Single;
 import io.realm.Realm;
-import io.realm.RealmQuery;
 
 import com.github.ayltai.hknews.Components;
 import com.github.ayltai.hknews.data.model.Item;
 import com.github.ayltai.hknews.util.Irrelevant;
 import com.github.ayltai.hknews.util.RxUtils;
 
-public final class BookmarkItemRepository extends ItemRepository {
+public final class BookmarkItemRepository extends DeletableItemRepository {
     @Nonnull
     @NonNull
     public static Single<ItemRepository> create(@Nonnull @NonNull @lombok.NonNull final Context context) {
@@ -42,20 +41,7 @@ public final class BookmarkItemRepository extends ItemRepository {
     @NonNull
     @Override
     public Single<Irrelevant> deleteAll(@Nonnull @NonNull @lombok.NonNull final List<String> sourceNames, @Nonnull @NonNull @lombok.NonNull final List<String> categoryNames) {
-        return Single.defer(
-            () -> {
-                RealmQuery<Item> query = this.getRealm()
-                    .where(Item.class)
-                    .equalTo(Item.FIELD_IS_BOOKMARKED, true);
-
-                if (!sourceNames.isEmpty()) query = query.in(Item.FIELD_SOURCE, sourceNames.toArray(new String[0]));
-                if (!categoryNames.isEmpty()) query = query.in(Item.FIELD_CATEGORY, categoryNames.toArray(new String[0]));
-
-                query.findAll().deleteAllFromRealm();
-
-                return Single.just(Irrelevant.INSTANCE);
-            })
-            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER));
+        return this.deleteAll(this.getRealm().where(Item.class).equalTo(Item.FIELD_IS_BOOKMARKED, true), sourceNames, categoryNames);
     }
 
     @Nonnull

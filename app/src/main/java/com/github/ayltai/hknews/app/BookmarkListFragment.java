@@ -67,6 +67,7 @@ public abstract class BookmarkListFragment<C extends ViewDataBinding> extends Lo
 
     @Nonnull
     @NonNull
+    @Override
     protected ListViewModel getListViewModel() {
         if (this.model == null) {
             final Activity activity = ViewUtils.getActivity(this.getContext());

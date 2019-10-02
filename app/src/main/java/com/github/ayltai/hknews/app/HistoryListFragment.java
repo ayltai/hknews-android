@@ -68,6 +68,7 @@ public abstract class HistoryListFragment<C extends ViewDataBinding> extends Loc
 
     @Nonnull
     @NonNull
+    @Override
     protected ListViewModel getListViewModel() {
         if (this.model == null) {
             final Activity activity = ViewUtils.getActivity(this.getContext());

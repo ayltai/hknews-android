@@ -44,7 +44,6 @@ public final class BackdropBehavior extends CoordinatorLayout.Behavior<View> {
     private @BackdropBehavior.State int targetState = BackdropBehavior.STATE_COLLAPSED;
 
     private boolean isInitialized;
-    private int     height;
 
     //region Components
 
@@ -102,7 +101,7 @@ public final class BackdropBehavior extends CoordinatorLayout.Behavior<View> {
         if (!this.isInitialized) {
             this.isInitialized = true;
 
-            this.height = this.backLayer.getHeight();
+            final int height = this.backLayer.getHeight();
 
             this.frontLayer.setY(this.getFrontLayerTop());
 

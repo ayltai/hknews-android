@@ -30,7 +30,7 @@ public class MathUtils {
             sum       += softMax[i];
         }
 
-        for (int i = 0; i < array.length; i++) softMax[i] /= sum;
+        if (sum > 0) for (int i = 0; i < array.length; i++) softMax[i] /= sum;
 
         return softMax;
     }

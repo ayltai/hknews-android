@@ -31,6 +31,7 @@ import com.github.ayltai.hknews.media.FrescoImageLoader;
 import com.github.ayltai.hknews.net.NetworkStateListener;
 import com.github.ayltai.hknews.net.NetworkStateReceiver;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 public final class MainActivity extends ThemedActivity implements NetworkStateListener {
@@ -142,7 +143,7 @@ public final class MainActivity extends ThemedActivity implements NetworkStateLi
                 this.snackbar = null;
             }
         } else {
-            if (this.snackbar == null) (this.snackbar = Snackbar.make(this.findViewById(android.R.id.content), R.string.error_network, Snackbar.LENGTH_INDEFINITE)).show();
+            if (this.snackbar == null) (this.snackbar = Snackbar.make(this.findViewById(android.R.id.content), R.string.error_network, BaseTransientBottomBar.LENGTH_INDEFINITE)).show();
         }
     }
 

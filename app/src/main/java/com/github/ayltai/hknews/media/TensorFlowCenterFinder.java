@@ -83,15 +83,13 @@ public final class TensorFlowCenterFinder implements CenterFinder {
     }
 
     private void runInterpreter(@Nonnull @NonNull @lombok.NonNull final ByteBuffer buffer, @Nonnull @NonNull @lombok.NonNull final float[][][][] tensor) throws IOException {
-        final AssetFileDescriptor descriptor = TensorFlowCenterFinder.application
-            .getAssets()
-            .openFd("model.tflite");
-
-        final Interpreter interpreter = new Interpreter(new FileInputStream(descriptor.getFileDescriptor()).getChannel().map(FileChannel.MapMode.READ_ONLY, descriptor.getStartOffset(), descriptor.getDeclaredLength()), null);
-        interpreter.run(buffer, tensor);
-        interpreter.close();
-
-        descriptor.close();
+        try (final AssetFileDescriptor descriptor = TensorFlowCenterFinder.application.getAssets().openFd("model.tflite")) {
+            try (final FileInputStream inputStream = new FileInputStream(descriptor.getFileDescriptor())) {
+                final Interpreter interpreter = new Interpreter(inputStream.getChannel().map(FileChannel.MapMode.READ_ONLY, descriptor.getStartOffset(), descriptor.getDeclaredLength()), null);
+                interpreter.run(buffer, tensor);
+                interpreter.close();
+            }
+        }
     }
 
     private static PointF findLargestFocusArea(@Nonnull @NonNull @lombok.NonNull final float[][] heatMap, final float lowerBound) {

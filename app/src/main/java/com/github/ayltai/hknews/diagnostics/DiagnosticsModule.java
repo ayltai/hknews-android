@@ -9,6 +9,9 @@ import dagger.Provides;
 
 @Module
 final class DiagnosticsModule {
+    private DiagnosticsModule() {
+    }
+
     @Nonnull
     @NonNull
     @Provides

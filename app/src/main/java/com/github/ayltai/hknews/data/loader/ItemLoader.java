@@ -68,7 +68,7 @@ public class ItemLoader extends Loader<List<Item>> {
     protected Consumer<? super List<Item>> onLoadRemotely(@Nonnull @NonNull @lombok.NonNull final Context context) {
         return items -> ItemRepository.create(context)
             .flatMap(repository -> repository.set(items))
-            .compose(RxUtils.applySingleSchedulers(ItemRepository.SCHEDULER))
+            .compose(RxUtils.applySingleSchedulers(Repository.SCHEDULER))
             .subscribe();
     }
 

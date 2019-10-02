@@ -8,7 +8,7 @@ import com.github.ayltai.hknews.util.DevUtils;
 import com.google.firebase.perf.FirebasePerformance;
 import com.google.firebase.perf.metrics.Trace;
 
-public final class FirebasePerformanceTrace extends PerformanceTrace {
+public final class FirebasePerformanceTrace implements PerformanceTrace {
     private Trace trace;
 
     @Override
