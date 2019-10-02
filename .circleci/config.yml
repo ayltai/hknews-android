@@ -83,6 +83,12 @@ jobs:
           destination: /test/
       - *save_cache
       - run:
+          name: Check code quality
+          command: ./gradlew lint
+      - store_artifacts:
+          path: app/build/reports/lint-results.html
+          destination: /check/lint-results.html
+      - run:
           name: Generate coverage report
           command: ./gradlew jacocoTestReport
       - store_artifacts:
@@ -106,14 +112,11 @@ jobs:
       - *decode_gservices_key
       - run:
           name: Check code quality
-          command: ./gradlew check lint checkstyle dependencyCheckAnalyze
+          command: ./gradlew check checkstyle dependencyCheckAnalyze
       - *save_cache
       - store_artifacts:
           path: app/build/reports/checkstyle
           destination: /check/
-      - store_artifacts:
-          path: app/build/reports/lint-results.html
-          destination: /check/lint-results.html
       - store_artifacts:
           path: app/build/reports/dependency-check-report.html
           destination: /check/dependency-check-report.html
