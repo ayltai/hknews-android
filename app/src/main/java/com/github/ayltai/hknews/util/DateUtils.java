@@ -44,9 +44,9 @@ public class DateUtils {
 
         final long days = Math.round(diff / (double)DateUtils.DAY_MILLIS);
 
-        if (days < DateUtils.DAY_DAYS) return context.getString(R.string.time_ago_days);
+        if (days < DateUtils.DAY_DAYS) return String.format(context.getString(R.string.time_ago_days), String.valueOf(days));
         if (days < DateUtils.MONTH_DAYS) return context.getString(R.string.time_ago_month);
-        if (days < DateUtils.YEAR_DAYS) return context.getString(R.string.time_ago_months);
+        if (days < DateUtils.YEAR_DAYS) return String.format(context.getString(R.string.time_ago_months), String.valueOf(Math.round(days / (double)DateUtils.DAY_DAYS)));
         if (days < DateUtils.YEARS_DAYS) return context.getString(R.string.time_ago_year);
 
         return String.format(context.getString(R.string.time_ago_years), String.valueOf(Math.round(days / (double)DateUtils.YEAR_DAYS)));

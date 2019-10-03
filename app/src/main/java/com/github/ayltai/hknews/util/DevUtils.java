@@ -80,13 +80,15 @@ public class DevUtils {
     public StrictMode.VmPolicy newVmPolicy() {
         final StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder()
             .detectActivityLeaks()
+            .detectFileUriExposure()
             .detectLeakedClosableObjects()
             .detectLeakedRegistrationObjects()
             .detectLeakedSqlLiteObjects()
             .penaltyLog();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) builder.detectFileUriExposure();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) builder.detectContentUriWithoutPermission();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) builder.detectNonSdkApiUsage();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) builder.detectImplicitDirectBoot();
 
         return builder.build();
     }

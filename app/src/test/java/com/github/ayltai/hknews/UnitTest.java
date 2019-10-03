@@ -29,14 +29,15 @@ import io.reactivex.schedulers.Schedulers;
 )
 @PowerMockIgnore({
     "javax.*",
-    "com.davemorrissey.*",
-    "com.github.piasy.*",
-    "com.facebook.*",
-    "com.sun.*",
+    "android.*",
+    "androidx.*",
     "org.mockito.*",
     "org.robolectric.*",
-    "android.*",
-    "androidx.*"
+    "com.android.*",
+    "com.davemorrissey.*",
+    "com.facebook.*",
+    "com.github.piasy.*",
+    "com.sun.*"
 })
 public abstract class UnitTest {
     @Rule

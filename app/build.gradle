@@ -229,6 +229,7 @@ dependencies {
     testImplementation    "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // Unit testing
+    testImplementation 'androidx.test:core:1.2.0'
     testImplementation 'org.mockito:mockito-core:3.1.1'
     testImplementation "org.powermock:powermock-module-junit4:$powerMockVersion"
     testImplementation "org.powermock:powermock-module-junit4-rule:$powerMockVersion"

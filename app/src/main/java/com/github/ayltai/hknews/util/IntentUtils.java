@@ -24,7 +24,7 @@ public class IntentUtils {
             .putExtra(Intent.EXTRA_SUBJECT, title));
     }
 
-    public void launchIntent(@Nullable final Activity activity, @Nonnull @NonNull @lombok.NonNull final Intent intent) {
+    private void launchIntent(@Nullable final Activity activity, @Nonnull @NonNull @lombok.NonNull final Intent intent) {
         if (activity != null && intent.resolveActivity(activity.getPackageManager()) != null) activity.startActivity(intent);
     }
 }
