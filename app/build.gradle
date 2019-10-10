@@ -187,7 +187,7 @@ dependencies {
     implementation "com.facebook.fresco:imagepipeline-okhttp3:$frescoVersion"
     implementation "com.github.piasy:BigImageViewer:$bigImageViewerVersion"
     implementation 'com.github.stfalcon:frescoimageviewer:0.5.0'
-    implementation 'androidx.exifinterface:exifinterface:1.1.0-beta01'
+    implementation 'androidx.exifinterface:exifinterface:1.1.0-rc01'
 
     // Video processing
     implementation ("com.google.android.exoplayer:exoplayer-core:$exoPlayerVersion") {
