@@ -120,7 +120,7 @@ ext {
     frescoVersion         = '2.0.0'
     bigImageViewerVersion = '1.5.7'
     exoPlayerVersion      = '2.10.5'
-    autoValueVersion      = '1.6.6'
+    autoValueVersion      = '1.7'
     lombokVersion         = '1.18.10'
     leakCanaryVersion     = '1.6.3'
     robolectricVersion    = '4.3'
@@ -322,7 +322,7 @@ def coverageSourceDirs = [
 ]
 
 jacoco {
-    toolVersion '0.8.4'
+    toolVersion '0.8.5'
 }
 
 task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
