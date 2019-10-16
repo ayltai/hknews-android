@@ -25,7 +25,7 @@ references:
       - image: circleci/android:api-29
     environment:
       TERM: dumb
-      _JAVA_OPTIONS: "-Dfile.encoding=UTF8 -Xverify:none -Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+      _JAVA_OPTIONS: "-Dfile.encoding=UTF8 -Xverify:none -Xmx1536m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
 
   ## Keys
 
