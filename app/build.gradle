@@ -163,7 +163,7 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-core:17.2.0'
     implementation 'com.google.firebase:firebase-perf:19.0.0'
-    implementation 'com.google.firebase:firebase-config:19.0.2'
+    implementation 'com.google.firebase:firebase-config:19.0.3'
 
     // Reactive programming
     implementation 'io.reactivex.rxjava2:rxjava:2.2.13'
