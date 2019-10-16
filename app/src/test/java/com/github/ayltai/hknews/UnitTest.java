@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers;
 @RunWith(RobolectricTestRunner.class)
 @Config(
     minSdk  = Build.VERSION_CODES.KITKAT,
-    maxSdk  = Build.VERSION_CODES.Q,
+    maxSdk  = Build.VERSION_CODES.P,
     shadows = {
         ShadowAndroidXMultiDex.class
     }
