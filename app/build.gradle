@@ -122,13 +122,13 @@ ext {
     okHttpVersion         = '3.12.5'
     retrofitVersion       = '2.6.2'
     frescoVersion         = '2.0.0'
-    bigImageViewerVersion = '1.5.7'
-    exoPlayerVersion      = '2.10.5'
+    bigImageViewerVersion = '1.6.0'
+    exoPlayerVersion      = '2.10.6'
     autoValueVersion      = '1.7'
     lombokVersion         = '1.18.10'
     leakCanaryVersion     = '1.6.3'
     robolectricVersion    = '4.3.1'
-    powerMockVersion      = '2.0.2'
+    powerMockVersion      = '2.0.4'
     espressoVersion       = '3.3.0-alpha02'
 }
 
@@ -166,7 +166,7 @@ dependencies {
 
     // Firebase
     implementation 'com.google.firebase:firebase-core:17.2.0'
-    implementation 'com.google.firebase:firebase-perf:19.0.0'
+    implementation 'com.google.firebase:firebase-perf:19.0.1'
     implementation 'com.google.firebase:firebase-config:19.0.3'
 
     // Reactive programming
