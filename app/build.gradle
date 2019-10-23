@@ -115,7 +115,7 @@ configurations {
 ext {
     multiDexVersion       = '2.0.1'
     supportLibraryVersion = '28.0.0'
-    jetPackVersion        = '2.2.0-beta01'
+    jetPackVersion        = '2.2.0-rc01'
     navigationVersion     = '2.2.0-beta01'
     lifecycleVersion      = '2.2.0-beta01'
     daggerVersion         = '2.24'
