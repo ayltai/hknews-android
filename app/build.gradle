@@ -334,7 +334,7 @@ task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
     description = 'Generate JaCoCo coverage reports'
     group       = 'Reporting'
 
-    classDirectories = fileTree(
+    classDirectories.from = fileTree(
         dir      : 'build/intermediates/javac/debug/classes',
         excludes : [
             '**/R.class',
@@ -354,8 +354,8 @@ task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
         ]
     )
 
-    sourceDirectories = files(coverageSourceDirs)
-    executionData     = fileTree(
+    sourceDirectories.from = files(coverageSourceDirs)
+    executionData.from     = fileTree(
         dir     : "$buildDir",
         include : [ 'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec' ]
     )
