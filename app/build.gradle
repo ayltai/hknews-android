@@ -120,7 +120,7 @@ ext {
     lifecycleVersion      = '2.2.0-beta01'
     daggerVersion         = '2.25.2'
     okHttpVersion         = '3.12.5'
-    retrofitVersion       = '2.6.2'
+    retrofitVersion       = '2.7.0'
     frescoVersion         = '2.1.0'
     bigImageViewerVersion = '1.6.1'
     exoPlayerVersion      = '2.10.8'
