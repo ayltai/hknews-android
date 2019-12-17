@@ -118,7 +118,7 @@ ext {
     jetPackVersion        = '2.2.0-rc03'
     navigationVersion     = '2.2.0-beta01'
     lifecycleVersion      = '2.2.0-beta01'
-    daggerVersion         = '2.25.2'
+    daggerVersion         = '2.25.3'
     okHttpVersion         = '3.12.5'
     retrofitVersion       = '2.7.0'
     frescoVersion         = '2.1.0'
