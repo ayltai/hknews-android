@@ -53,7 +53,7 @@ public class ItemRepository extends Repository {
         return Single.defer(
             () -> {
                 if (!this.getRealm().isInTransaction()) this.getRealm().beginTransaction();
-                this.getRealm().copyToRealm(items);
+                this.getRealm().copyToRealmOrUpdate(items);
                 if (this.getRealm().isInTransaction()) this.getRealm().commitTransaction();
 
                 return Single.just(items);
