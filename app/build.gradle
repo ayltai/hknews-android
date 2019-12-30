@@ -9,7 +9,7 @@ plugins {
     id 'org.sonarqube'                 version '2.8'
     id 'jacoco'
     id 'com.getkeepsafe.dexcount'
-    id 'org.owasp.dependencycheck'     version '5.2.4'
+    id 'org.owasp.dependencycheck'     version '5.3.0'
     id 'com.github.ben-manes.versions' version '0.27.0'
 }
 
@@ -118,9 +118,9 @@ ext {
     jetPackVersion        = '2.2.0-rc04'
     navigationVersion     = '2.2.0-beta01'
     lifecycleVersion      = '2.2.0-rc03'
-    daggerVersion         = '2.25.3'
-    okHttpVersion         = '3.12.5'
-    retrofitVersion       = '2.7.0'
+    daggerVersion         = '2.25.4'
+    okHttpVersion         = '3.12.7'
+    retrofitVersion       = '2.7.1'
     frescoVersion         = '2.1.0'
     bigImageViewerVersion = '1.6.1'
     exoPlayerVersion      = '2.11.1'
@@ -161,16 +161,16 @@ dependencies {
     implementation 'androidx.browser:browser:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03'
-    implementation 'com.google.android.material:material:1.2.0-alpha03'
+    implementation 'com.google.android.material:material:1.2.0-alpha04'
     implementation 'com.takisoft.preferencex:preferencex:1.1.0'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-core:17.2.1'
-    implementation 'com.google.firebase:firebase-perf:19.0.4'
+    implementation 'com.google.firebase:firebase-core:17.2.2'
+    implementation 'com.google.firebase:firebase-perf:19.0.5'
     implementation 'com.google.firebase:firebase-config:19.1.0'
 
     // Reactive programming
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.16'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.17'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     // Dependency injection
@@ -185,7 +185,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     // Database
-    implementation 'io.realm:android-adapters:3.1.0'
+    implementation 'io.realm:android-adapters:4.0.0'
 
     // Image processing
     implementation "com.facebook.fresco:fresco:$frescoVersion"
@@ -237,7 +237,7 @@ dependencies {
 
     // Unit testing
     testImplementation 'androidx.test:core:1.2.0'
-    testImplementation 'org.mockito:mockito-core:3.2.4'
+    testImplementation 'org.mockito:mockito-core:3.2.8'
     testImplementation "org.powermock:powermock-module-junit4:$powerMockVersion"
     testImplementation "org.powermock:powermock-module-junit4-rule:$powerMockVersion"
     testImplementation "org.powermock:powermock-api-mockito2:$powerMockVersion"
@@ -258,7 +258,7 @@ dependencies {
     }
     androidTestUtil           'androidx.test:orchestrator:1.3.0-alpha03'
 
-    codacy 'com.codacy:codacy-coverage-reporter:6.1.4'
+    codacy 'com.codacy:codacy-coverage-reporter:6.2.0'
 }
 
 configurations.all {
@@ -272,7 +272,7 @@ configurations.all {
 //region Checkstyle configurations
 
 checkstyle {
-    toolVersion    '8.24'
+    toolVersion    '8.28'
     configFile     rootProject.file('./checkstyle.xml')
     ignoreFailures true
     showViolations true
