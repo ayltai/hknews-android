@@ -40,3 +40,7 @@
 
 ## Retrofit
 -dontwarn retrofit2.**
+
+## Calligraphy
+-keep class io.github.inflationx.calligraphy3.* { *; }
+-keep class io.github.inflationx.calligraphy3.*$* { *; }
