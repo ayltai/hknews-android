@@ -118,9 +118,9 @@ ext {
     jetPackVersion        = '2.2.0-rc04'
     navigationVersion     = '2.2.0-beta01'
     lifecycleVersion      = '2.2.0-rc03'
-    daggerVersion         = '2.25.3'
-    okHttpVersion         = '3.12.5'
-    retrofitVersion       = '2.7.0'
+    daggerVersion         = '2.25.4'
+    okHttpVersion         = '3.12.7'
+    retrofitVersion       = '2.7.1'
     frescoVersion         = '2.1.0'
     bigImageViewerVersion = '1.6.1'
     exoPlayerVersion      = '2.11.1'
@@ -170,7 +170,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-config:19.1.0'
 
     // Reactive programming
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.16'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.17'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     // Dependency injection
@@ -237,7 +237,7 @@ dependencies {
 
     // Unit testing
     testImplementation 'androidx.test:core:1.2.0'
-    testImplementation 'org.mockito:mockito-core:3.2.4'
+    testImplementation 'org.mockito:mockito-core:3.2.7'
     testImplementation "org.powermock:powermock-module-junit4:$powerMockVersion"
     testImplementation "org.powermock:powermock-module-junit4-rule:$powerMockVersion"
     testImplementation "org.powermock:powermock-api-mockito2:$powerMockVersion"
