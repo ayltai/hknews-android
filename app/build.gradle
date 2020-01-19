@@ -185,7 +185,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     // Database
-    implementation 'io.realm:android-adapters:3.1.0'
+    implementation 'io.realm:android-adapters:4.0.0'
 
     // Image processing
     implementation "com.facebook.fresco:fresco:$frescoVersion"
