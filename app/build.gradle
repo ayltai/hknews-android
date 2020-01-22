@@ -117,7 +117,7 @@ ext {
     supportLibraryVersion = '28.0.0'
     jetPackVersion        = '2.2.0-rc04'
     navigationVersion     = '2.2.0-beta01'
-    lifecycleVersion      = '2.2.0-rc03'
+    lifecycleVersion      = '2.2.0'
     daggerVersion         = '2.25.4'
     okHttpVersion         = '3.12.7'
     retrofitVersion       = '2.7.1'
