@@ -125,7 +125,7 @@ ext {
     bigImageViewerVersion = '1.6.1'
     exoPlayerVersion      = '2.11.1'
     autoValueVersion      = '1.7'
-    lombokVersion         = '1.18.10'
+    lombokVersion         = '1.18.12'
     leakCanaryVersion     = '1.6.3'
     robolectricVersion    = '4.3.1'
     powerMockVersion      = '2.0.5'
