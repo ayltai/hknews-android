@@ -123,7 +123,7 @@ ext {
     retrofitVersion       = '2.7.1'
     frescoVersion         = '2.1.0'
     bigImageViewerVersion = '1.6.1'
-    exoPlayerVersion      = '2.11.2'
+    exoPlayerVersion      = '2.11.3'
     autoValueVersion      = '1.7'
     lombokVersion         = '1.18.12'
     leakCanaryVersion     = '1.6.3'
