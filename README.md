@@ -95,4 +95,4 @@ This app is made with the support of open source projects:
 * [Google Analytics for Firebase](https://firebase.google.com/docs/analytics)
 * [CircleCI](https://circleci.com)
 * [SonarCloud](https://sonarcloud.io)
-* [Fabric Crashlytics](https://fabric.io/kits/android/crashlytics)
+* [Firebase Crashlytics](https://firebase.google.com/docs/crashlytics)

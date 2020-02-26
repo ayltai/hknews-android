@@ -6,15 +6,11 @@ import android.os.StrictMode;
 
 import androidx.annotation.CallSuper;
 
-import io.fabric.sdk.android.Fabric;
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
 
 import com.akaita.java.rxjava2debug.RxJava2Debug;
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.core.CrashlyticsCore;
 import com.facebook.common.logging.FLog;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
@@ -27,6 +23,7 @@ import com.github.ayltai.hknews.media.FrescoImageLoader;
 import com.github.ayltai.hknews.media.TensorFlowCenterFinder;
 import com.github.ayltai.hknews.util.DevUtils;
 import com.github.piasy.biv.BigImageViewer;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.perf.FirebasePerformance;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -42,7 +39,8 @@ public final class MainApplication extends BaseApplication {
 
         ConfigModule.init(this);
 
-        this.initFabric();
+        if (!DevUtils.isLoggable() && !DevUtils.isRunningTests()) FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
+
         this.initFresco();
         this.initBigImageViewer();
         this.initCalligraphy();
@@ -63,17 +61,6 @@ public final class MainApplication extends BaseApplication {
 
             if (!LeakCanary.isInAnalyzerProcess(this) && !DevUtils.isRunningTests()) LeakCanary.install(this);
         }
-    }
-
-    private void initFabric() {
-        if (!DevUtils.isLoggable() && !DevUtils.isRunningTests()) Fabric.with(
-            this,
-            new Answers(),
-            new Crashlytics.Builder()
-                .core(new CrashlyticsCore.Builder()
-                    .disabled(DevUtils.isLoggable())
-                    .build())
-                .build());
     }
 
     private void initFresco() {
