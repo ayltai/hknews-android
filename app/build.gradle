@@ -167,7 +167,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.2.2'
     implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta01'
     implementation 'com.google.firebase:firebase-perf:19.0.5'
-    implementation 'com.google.firebase:firebase-config:19.1.1'
+    implementation 'com.google.firebase:firebase-config:19.1.2'
 
     // Reactive programming
     implementation 'io.reactivex.rxjava2:rxjava:2.2.18'
