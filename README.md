@@ -12,6 +12,8 @@ HK News Android
 
 Serves aggregated news from 10+ local news publishers in Hong Kong. Made with ❤
 
+[![Buy me a coffee](https://img.shields.io/static/v1?label=Buy%20me%20a&message=coffee&color=important&style=for-the-badge&logo=buy-me-a-coffee&logoColor=white)](https://buymeacoff.ee/ayltai)
+
 ![Screenshot 1](design/screenshot-1.png "Screenshot 1") ![Screenshot 2](design/screenshot-2.png "Screenshot 2")
 
 ![Screenshot 3](design/screenshot-3.png "Screenshot 3") ![Screenshot 4](design/screenshot-4.png "Screenshot 4")
