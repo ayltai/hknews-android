@@ -127,7 +127,7 @@ ext {
     lombokVersion         = '1.18.12'
     leakCanaryVersion     = '1.6.3'
     robolectricVersion    = '4.3.1'
-    powerMockVersion      = '2.0.5'
+    powerMockVersion      = '2.0.6'
     espressoVersion       = '3.3.0-alpha05'
 }
 
