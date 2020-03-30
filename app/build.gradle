@@ -214,7 +214,7 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
 
     // Utilities
-    implementation 'net.sourceforge.streamsupport:android-retrostreams:1.7.1'
+    implementation 'net.sourceforge.streamsupport:android-retrostreams:1.7.2'
     implementation 'org.apache.commons:commons-lang3:3.10'
 
     // Code generation tools
