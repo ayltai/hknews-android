@@ -164,7 +164,7 @@ dependencies {
     implementation 'com.takisoft.preferencex:preferencex:1.1.0'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-core:17.2.3'
+    implementation 'com.google.firebase:firebase-core:17.3.0'
     implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta02'
     implementation 'com.google.firebase:firebase-perf:19.0.5'
     implementation 'com.google.firebase:firebase-config:19.1.3'
