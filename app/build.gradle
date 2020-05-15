@@ -222,7 +222,7 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
     compileOnly         "com.google.auto.value:auto-value-annotations:$autoValueVersion"
     annotationProcessor "com.google.auto.value:auto-value:$autoValueVersion"
-    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc6'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc7'
 
     // Debugging
     implementation        'com.akaita.java:rxjava2-debug:1.4.0'
