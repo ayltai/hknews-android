@@ -120,7 +120,7 @@ ext {
     daggerVersion         = '2.28.1'
     okHttpVersion         = '3.12.7'
     retrofitVersion       = '2.9.0'
-    frescoVersion         = '2.2.0'
+    frescoVersion         = '2.3.0'
     bigImageViewerVersion = '1.6.1'
     exoPlayerVersion      = '2.11.7'
     autoValueVersion      = '1.7.3'
