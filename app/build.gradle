@@ -215,7 +215,7 @@ dependencies {
 
     // Utilities
     implementation 'net.sourceforge.streamsupport:android-retrostreams:1.7.2'
-    implementation 'org.apache.commons:commons-lang3:3.10'
+    implementation 'org.apache.commons:commons-lang3:3.11'
 
     // Code generation tools
     compileOnly         "org.projectlombok:lombok:$lombokVersion"
